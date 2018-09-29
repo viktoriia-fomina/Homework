@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <iostream>
-
-using namespace std;
 
 void quickSort(int const size, int* array);
 int arrayPartition(int const size, int* array);
