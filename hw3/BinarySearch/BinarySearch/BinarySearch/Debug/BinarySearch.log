@@ -1,0 +1,5 @@
+﻿  Source.cpp
+  main.cpp
+d:\github\homework\hw3\binarysearch\binarysearch\binarysearch\main.cpp(5): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода...
+  BinarySearch.vcxproj -> D:\GitHub\Homework\hw3\BinarySearch\BinarySearch\Debug\BinarySearch.exe
