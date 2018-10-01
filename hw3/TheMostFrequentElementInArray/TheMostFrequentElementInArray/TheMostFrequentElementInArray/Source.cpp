@@ -1,6 +1,16 @@
 #include "Header.h"
 
-int mostFrequentElement(int size, int* array)
+void quickSort(int const size, int* array);
+int arrayPartition(int const size, int* array);
+int pivotIndex(int const first, int const last, int const * const array);
+int middleOfThreeIndex(int const first, int const last, int const * const array);
+int indexOfMaxOfTwo(int const index1, int const index2, int const * const array);
+int indexOfMinOfTwo(int const index1, int const index2, int const * const array);
+void insertionSort(int const size, int* array);
+void siftLeft(int const position, int* array);
+void swap(int & a, int & b);
+
+int mostFrequentElement(int const size, int* array)
 {
 	int* arrayCopy = new int[size];
 	for (int i = 0; i < size; ++i)
@@ -50,11 +60,11 @@ int mostFrequentElement(int size, int* array)
 
 void quickSort(int const size, int* array)
 {
-	int first = 0;
-	int last = size - 1;
-	int pivotAdress = arrayPartition(size, array);
+	int const first = 0;
+	int const last = size - 1;
 	if (last - first > 8)
 	{
+		int const pivotAdress = arrayPartition(size, array);
 		quickSort(pivotAdress, array);
 		quickSort(size - pivotAdress - 1, array + pivotAdress + 1);
 	}
@@ -66,10 +76,10 @@ void quickSort(int const size, int* array)
 
 int arrayPartition(int const size, int* array)
 {
-	int first = 0;
-	int last = size - 1;
+	int const first = 0;
+	int const last = size - 1;
 	int pivotAdress = pivotIndex(first, last, array);
-	int pivot = array[pivotAdress];
+	int const pivot = array[pivotAdress];
 	swap(array[pivotAdress], array[first]);
 	pivotAdress = first;
 	for (int i = first + 1; i < last + 1; ++i)
@@ -79,14 +89,13 @@ int arrayPartition(int const size, int* array)
 			if (pivotAdress - i == 1)
 			{
 				swap(array[i], array[pivotAdress]);
-				pivotAdress++;
 			}
 			else
 			{
 				swap(array[i], array[pivotAdress + 1]);
 				swap(array[pivotAdress], array[pivotAdress + 1]);
-				pivotAdress++;
 			}
+			pivotAdress++;
 		}
 	}
 	return pivotAdress;
@@ -160,49 +169,7 @@ void siftLeft(int const position, int* array)
 
 void swap(int & a, int & b)
 {
-	int c = a;
+	int const c = a;
 	a = b;
 	b = c;
-}
-
-void mostFrequentElementTests()
-{
-	// 3 массива для трех тестов
-	int const size1 = 4;
-	int array1[size1] = { 1, 3, 3, 4 };
-	int const size2 = 7;
-	int array2[size2] = { 4, 5, 7, 0,-7 ,8 ,5 };
-	int const size3 = 9;
-	int array3[size3] = { 6, 6, 9, 0, 3, 9, 4, 9, 9 };
-
-	int result1 = mostFrequentElement(size1, array1);
-	if (result1 == 3)
-	{
-		printf("Test 1 passed\n");
-	}
-	else
-	{
-		printf("Test 1 failed with result %i\n", result1);
-	}
-
-	int result2 = mostFrequentElement(size2, array2);
-	if (result2 == 5)
-	{
-		printf("Test 2 passed\n");
-	}
-	else
-	{
-		printf("Test 2 failed with result %i\n", result2);
-
-	}
-
-	int result3 = mostFrequentElement(size3, array3);
-	if (result3 == 9)
-	{
-		printf("Test 3 passed\n");
-	}
-	else
-	{
-		printf("Test 3 failed\n with result %i\n", result3);
-	}
 }
