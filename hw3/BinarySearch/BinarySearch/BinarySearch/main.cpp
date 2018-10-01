@@ -12,7 +12,7 @@ int main()
 	int* array = new int[n];
 	for (int i = 0; i < n; ++i)
 	{
-		array[i] = rand() % 1000000000;
+		array[i] = rand() % rand();
 	}
 	printf("Array is\n");
 	for (int i = 0; i < n; ++i)
