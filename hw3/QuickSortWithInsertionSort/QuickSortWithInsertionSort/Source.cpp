@@ -40,14 +40,13 @@ int arrayPartition(int const size, int* array)
 			if (pivotAdress - i == 1)
 			{
 				swap(array[i], array[pivotAdress]);
-				pivotAdress++;
 			}
 			else
 			{
 				swap(array[i], array[pivotAdress + 1]);
 				swap(array[pivotAdress], array[pivotAdress + 1]);
-				pivotAdress++;
 			}
+			pivotAdress++;
 		}
 	}
 	return pivotAdress;
@@ -121,7 +120,7 @@ void siftLeft(int const position, int* array)
 
 void swap(int & a, int & b)
 {
-	int c = a;
+	int const c = a;
 	a = b;
 	b = c;
 }
