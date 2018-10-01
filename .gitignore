@@ -34,4 +34,4 @@
 # Another things (VS)
 *.vs
 *vsxproj.user
-*Debug
+Debug
