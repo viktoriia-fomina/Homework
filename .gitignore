@@ -32,6 +32,6 @@
 *.app
 
 # Another things (VS)
-*.vs
+**/.vs
 *.vcxproj.user
-Debug
+**/Debug
