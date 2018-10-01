@@ -33,5 +33,5 @@
 
 # Another things (VS)
 *.vs
-*vcxproj.user
+*.vcxproj.user
 Debug
