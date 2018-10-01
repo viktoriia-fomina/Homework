@@ -22,7 +22,7 @@ int main()
 	int* numbersWeLookForInArray = new int[k];
 	for (int i = 0; i < k; ++i)
 	{
-		numbersWeLookForInArray[i] = rand() % 1000000000;
+		numbersWeLookForInArray[i] = rand() * rand();
 	}
 	printf("\nElements is\n");
 	for (int i = 0; i < k; ++i)
@@ -32,7 +32,7 @@ int main()
 	printf("\n");
 	for (int i = 0; i < k; ++i)
 	{
-		if (ifElementIsInArray(numbersWeLookForInArray[i], n, array) == true)
+		if (ifElementIsInArray(numbersWeLookForInArray[i], n, array))
 		{
 			printf("true\n");
 		}
