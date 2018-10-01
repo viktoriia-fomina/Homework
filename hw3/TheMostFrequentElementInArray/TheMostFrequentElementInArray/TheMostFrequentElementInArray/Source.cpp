@@ -24,16 +24,6 @@ int mostFrequentElement(int const size, int* array)
 	int countTemporary = 0;
 	for (int i = 0; i < size; ++i)
 	{
-		if (arrayCopy[i] == temporary && i == size - 1)
-		{
-			countTemporary++;
-			if (countTemporary > count)
-			{
-				count = countTemporary;
-				mostFrequent = temporary;
-			}
-			break;
-		}
 		if (arrayCopy[i] == temporary)
 		{
 			countTemporary++;
@@ -52,6 +42,15 @@ int mostFrequentElement(int const size, int* array)
 				temporary = arrayCopy[i];
 				countTemporary = 1;
 			}
+		}
+	}
+	if (arrayCopy[size - 1] == temporary)
+	{
+		countTemporary++;
+		if (countTemporary > count)
+		{
+			count = countTemporary;
+			mostFrequent = temporary;
 		}
 	}
 	delete[] arrayCopy;
