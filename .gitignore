@@ -30,3 +30,8 @@
 *.exe 
 *.out 
 *.app
+
+# Another things (VS)
+*.vs
+*vsxproj.user
+*Debug
