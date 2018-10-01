@@ -1,5 +1,0 @@
-﻿  Source.cpp
-d:\github\homework\hw3\quicksortwithinsertionsort\quicksortwithinsertionsort\source.cpp(123): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  main.cpp
-  Создание кода...
-  QuickSortWithInsertionSort.vcxproj -> D:\GitHub\Homework\hw3\QuickSortWithInsertionSort\Debug\QuickSortWithInsertionSort.exe
