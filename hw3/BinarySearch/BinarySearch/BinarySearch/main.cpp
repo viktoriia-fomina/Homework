@@ -12,7 +12,7 @@ int main()
 	int* array = new int[n];
 	for (int i = 0; i < n; ++i)
 	{
-		array[i] = rand() % rand();
+		array[i] = rand()  * rand();
 	}
 	printf("Array is\n");
 	for (int i = 0; i < n; ++i)
@@ -30,9 +30,10 @@ int main()
 		printf("%i ", numbersWeLookForInArray[i]);
 	}
 	printf("\n");
+	quickSort(n, array);
 	for (int i = 0; i < k; ++i)
 	{
-		if (ifElementIsInArray(numbersWeLookForInArray[i], n, array))
+		if (binarySearch(numbersWeLookForInArray[i], n, array))
 		{
 			printf("true\n");
 		}

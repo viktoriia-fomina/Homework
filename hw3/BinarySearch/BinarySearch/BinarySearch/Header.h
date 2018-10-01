@@ -4,4 +4,5 @@
 #include <stdlib.h>
 #include <time.h>
 
-bool ifElementIsInArray(int const number, int const size, int const * const array);
+bool binarySearch(int const number, int size, int const * const array);
+void quickSort(int const size, int* array);

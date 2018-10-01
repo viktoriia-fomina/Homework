@@ -39,7 +39,7 @@ bool binarySearch(int const number, int const size, int const * const array)
 		}
 		else
 		{
-			return ifElementIsInArray(number, middle, array);
+			return binarySearch(number, middle, array);
 		}
 	}
 	else
@@ -50,22 +50,9 @@ bool binarySearch(int const number, int const size, int const * const array)
 		}
 		else
 		{
-			return ifElementIsInArray(number, right - middle, array + middle + 1);
+			return binarySearch(number, right - middle, array + middle + 1);
 		}
 	}
-}
-
-bool ifElementIsInArray(int const number, int const size, int const * const array)
-{
-	int* arrayCopy = new int[size];
-	for (int i = 0; i < size; ++i)
-	{
-		arrayCopy[i] = array[i];
-	}
-	quickSort(size, arrayCopy);
-	bool flagIfElementIsInArray = binarySearch(number, size, arrayCopy);
-	delete[] arrayCopy;
-	return flagIfElementIsInArray;
 }
 
 void quickSort(int const size, int* array)
