@@ -30,7 +30,7 @@ int mostFrequentElement(int const size, int* array)
 		}
 		else
 		{
-			if (countTemporary > count)
+			if (countTemporary >= count)
 			{
 				count = countTemporary;
 				mostFrequent = temporary;
