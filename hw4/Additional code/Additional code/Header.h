@@ -1,6 +1,7 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <math.h>
 
 struct additionalCode
 {
@@ -14,6 +15,8 @@ struct additionalCode
 private:
 	int & operator[] (int const number);
 	int & operator[] (int const number) const;
+	int toDecimalSystem() const;
+	int toDecimalSystemPositiveNumber() const;
 	int getSize() const;
 	int* toAdditionalCode();
 	int* data; // число в дополнительном коде

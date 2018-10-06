@@ -62,7 +62,7 @@ void additionalCode::print() const
 
 void additionalCode::printInDecimalSystem() const
 {
-	printf("%i", this->number);
+	printf("%i", this->toDecimalSystem());
 }
 
 additionalCode operator+(additionalCode & number1, additionalCode & number2)
@@ -113,6 +113,49 @@ int & additionalCode::operator[] (int const number)
 int & additionalCode::operator[] (int const number) const
 {
 	return data[number];
+}
+
+int additionalCode::toDecimalSystem() const
+{
+	int ifNumberIsNegative = false;
+	for (int i = 0; i < 16; ++i)
+	{
+		if ((*this)[i] == 1)
+		{
+			ifNumberIsNegative = true;
+			break;
+		}
+	}
+	int const size = getSize();
+	int number = 0;
+	if (ifNumberIsNegative)
+	{
+		// из числа -4 получим 4, то есть из дополнительного кода элемента получим код
+		// элемента обратного ему по сложению (эту операцию применяем только к отрицательным числам)
+		auto temp = additionalCode(number - 1);
+		for (int i = 0; i < size; ++i)
+		{
+			temp[i] == 0 ? temp[i] = 1 : temp[i] = 0;
+		}
+		number = toDecimalSystemPositiveNumber();
+		number *= 1;
+	}
+	else
+	{
+		number = toDecimalSystemPositiveNumber();
+	}
+	return number;
+}
+
+int additionalCode::toDecimalSystemPositiveNumber() const
+{
+	int const size = getSize();
+	int number = 0;
+	for (int i = 0; i < size; ++i)
+	{
+		number += (int)((*this)[size - i - 1] * pow(2, i));
+	}
+	return number;
 }
 
 int additionalCode::getSize() const
