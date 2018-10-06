@@ -5,9 +5,8 @@
 
 #include "Header.h"
 #include "locale.h"
-#include <iostream>
 
-using namespace std;
+#include <iostream>
 
 int main()
 {
@@ -30,7 +29,7 @@ int main()
 	printf("Сумма в дополнительном коде\n");
 	sum.print();
 	printf("\n");
-	printf("Сумма в десятичное системе\n");
+	printf("Сумма в десятичной системе\n");
 	sum.printInDecimalSystem();
 	printf("\n");
 

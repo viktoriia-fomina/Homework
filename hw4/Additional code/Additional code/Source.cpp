@@ -9,7 +9,7 @@ additionalCode::additionalCode(int number)
 additionalCode::additionalCode(additionalCode const & number)
 {
 	this->number = number.number;
-	this->data = toAdditionalCode(); // ???
+	this->data = toAdditionalCode();
 }
 
 additionalCode::~additionalCode()
@@ -22,7 +22,7 @@ additionalCode & additionalCode::operator=(additionalCode const & number)
 {
 	delete[] this->data;
 	this->number = number.number;
-	this->data = toAdditionalCode(); // ???
+	this->data = toAdditionalCode();
 	return *this;
 }
 
@@ -112,37 +112,10 @@ int* additionalCode::toAdditionalCode()
 	int const size = getSize();
 	int num = number;
 	int* numberToAdditionalCode = new int[size];
-	// запишем число в двоичной системе в массив
 	for (int i = 0; i < size; ++i)
 	{
 		numberToAdditionalCode[size - i - 1] = num & 1;
 		num >>= 1;
-	}
-	// если число отрицательное, то переведем его в обратный код, а затем в дополнительный
-	if (number < 0)
-	{
-		// перевод в обратный код
-		for (int i = 0; i < size; ++i)
-		{
-			numberToAdditionalCode[i] == 0 ? numberToAdditionalCode[i] = 1 : numberToAdditionalCode[i] = 0;
-		}
-		// перевод в дополнительный код
-		int temp = 1;
-		for (int i = 0; i < size; ++i)
-		{
-			while (temp == 1)
-			{
-				if (numberToAdditionalCode[size - i - 1] == 1)
-				{
-					numberToAdditionalCode[size - i - 1] = 0;
-				}
-				else
-				{
-					numberToAdditionalCode[size - i - 1] = 1;
-					temp = 0;
-				}
-			}
-		}
 	}
 	return numberToAdditionalCode;
 }
