@@ -1,8 +1,3 @@
-// ¬вести два числа, перевести в двоичное представление в дополнительном коде и напечатать, 
-// сложить в столбик в двоичном представлении, вывести сумму, перевести в дес€тичное, 
-// вывести сумму в дес€тичном виде.¬се сообщени€ писать по - русски(рекомендуетс€ использовать 
-// функцию setlocale, чтобы сообщени€ выводились по - русски и под Windows тоже).
-
 #include "Header.h"
 
 additionalCode::additionalCode(int number)
@@ -33,12 +28,13 @@ additionalCode & additionalCode::operator=(additionalCode const & number)
 
 void additionalCode::print() const
 {
+	int const size = getSize();
 	bool ifFirstIsZero = false;
 	if (data[0] == 0)
 	{
 		ifFirstIsZero = true;
 	}
-	for (int i = 0; i < getSize(); ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		while (ifFirstIsZero)
 		{
@@ -46,6 +42,14 @@ void additionalCode::print() const
 			if (data[i] != 0)
 			{
 				ifFirstIsZero = false;
+				break;
+			}
+			if (i == size - 1)
+			{
+				for (int j = 0; j < size; ++j)
+				{
+					data[j] = 0;
+				}
 				break;
 			}
 		}
