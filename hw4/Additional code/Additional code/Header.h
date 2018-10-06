@@ -12,6 +12,8 @@ struct additionalCode
 	void printInDecimalSystem() const;
 	friend additionalCode operator+(additionalCode & number1, additionalCode & number2);
 private:
+	int & operator[] (int const number);
+	int & operator[] (int const number) const;
 	int getSize() const;
 	int* toAdditionalCode();
 	int* data; // число в дополнительном коде

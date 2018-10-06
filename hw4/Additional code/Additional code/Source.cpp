@@ -30,7 +30,7 @@ void additionalCode::print() const
 {
 	int const size = getSize();
 	bool ifFirstIsZero = false;
-	if (data[0] == 0)
+	if ((*this)[0] == 0)
 	{
 		ifFirstIsZero = true;
 	}
@@ -39,7 +39,7 @@ void additionalCode::print() const
 		while (ifFirstIsZero)
 		{
 			i++;
-			if (data[i] != 0)
+			if ((*this)[i] != 0)
 			{
 				ifFirstIsZero = false;
 				break;
@@ -48,12 +48,12 @@ void additionalCode::print() const
 			{
 				for (int j = 0; j < size; ++j)
 				{
-					data[j] = 0;
+					(*this)[j] = 0;
 				}
 				break;
 			}
 		}
-		printf("%i", data[i]);
+		printf("%i", (*this)[i]);
 	}
 }
 
@@ -73,15 +73,15 @@ additionalCode operator+(additionalCode & number1, additionalCode & number2)
 		{
 			if (temp == 1)
 			{
-				sum.data[size - i - 1] = 1;
+				sum[size - i - 1] = 1;
 			}
 			else
 			{
-				sum.data[size - i - 1] = 0;
+				sum[size - i - 1] = 0;
 				temp = 1;
 			}
 		}
-		else if ((number1.data[size - i - 1] == 1 || number2.data[size - i - 1] == 1) && temp == 1)
+		else if ((number1[size - i - 1] == 1 || number2[size - i - 1] == 1) && temp == 1)
 		{
 			sum.data[size - i - 1] = 0;
 		}
@@ -89,17 +89,27 @@ additionalCode operator+(additionalCode & number1, additionalCode & number2)
 		{
 			if (temp == 1)
 			{
-				sum.data[size - i - 1] = 1;
+				sum[size - i - 1] = 1;
 				temp = 0;
 			}
 			else
 			{
-				sum.data[size - i - 1] = number1.data[size - i - 1] + number2.data[size - i - 1];
+				sum[size - i - 1] = number1[size - i - 1] + number2[size - i - 1];
 			}
 		}
 	}
 	sum.number = number1.number + number2.number;
 	return sum;
+}
+
+int & additionalCode::operator[] (int const number)
+{
+	return data[number];
+}
+
+int & additionalCode::operator[] (int const number) const
+{
+	return data[number];
 }
 
 int additionalCode::getSize() const
