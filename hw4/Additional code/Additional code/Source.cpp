@@ -20,9 +20,12 @@ additionalCode::~additionalCode()
 
 additionalCode & additionalCode::operator=(additionalCode const & number)
 {
-	delete[] this->data;
-	this->number = number.number;
-	this->data = toAdditionalCode();
+	if (this != &number)
+	{
+		delete[] this->data;
+		this->number = number.number;
+		this->data = toAdditionalCode();
+	}
 	return *this;
 }
 
