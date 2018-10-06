@@ -8,9 +8,11 @@ struct additionalCode
 	additionalCode(additionalCode const & number);
 	~additionalCode();
 	additionalCode & operator=(additionalCode const & number);
-	void print();
+	void print() const;
+	void printInDecimalSystem() const;
 	friend additionalCode operator+(additionalCode & number1, additionalCode & number2);
 private:
+	int getSize() const;
 	int* toAdditionalCode();
 	int* data; // число в дополнительном коде
 	int number;
