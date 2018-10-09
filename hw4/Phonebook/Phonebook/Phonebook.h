@@ -11,11 +11,24 @@
 
 #pragma once
 #include <stdio.h>
-#include "Subscriber.h"
+#include <string.h>
+
+struct Subscriber
+{
+	explicit Subscriber(char* name, char* number);
+	Subscriber();
+	Subscriber(Subscriber const & s);
+	~Subscriber();
+	void getName();
+	void getNumber();
+private:
+	char* name;
+	char* number;
+};
 
 struct Phonebook
 {
-	explicit Phonebook();
+	Phonebook();
 	~Phonebook();
 	void addNote(Subscriber const & s); // 1
 	void printAllNotes() const; // 2

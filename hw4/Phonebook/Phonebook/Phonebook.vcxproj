@@ -117,11 +117,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Phonebook.cpp" />
-    <ClCompile Include="Subscriber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Phonebook.h" />
-    <ClInclude Include="Subscriber.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
