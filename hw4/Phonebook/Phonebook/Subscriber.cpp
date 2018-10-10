@@ -1,44 +1,85 @@
 #include "Subscriber.h"
+#include <stdio.h>
+#include <string.h>
 
-Subscriber::Subscriber(char* name, int* number, int sizeOfNumber)
+// конструктор - оператор копирования - деструктор
+
+Subscriber::Subscriber(char const * name, char const * number)
 {
-	int nameSize = strlen(name);
-	this->name = new char[nameSize + 1];
-	for (int i = 0; i < nameSize; ++i)
-	{
-		this->name[i] = name[i];
-	}
-	this->name[nameSize] = '\0';
-	this->number = new int[sizeOfNumber];
-	for (int i = 0; i < sizeOfNumber; ++i)
-	{
-		this->number[i] = number[i];
-	}
-	this->sizeOfNumber = sizeOfNumber;
+	setName(name);
+	setNumber(number);
 }
 
-Subscriber::Subscriber(){}
+Subscriber::Subscriber() {}
 
 Subscriber::Subscriber(Subscriber const & s)
 {
-	int nameSize = strlen(s.name);
-	this->name = new char[nameSize + 1];
-	for (int i = 0; i < nameSize; ++i)
+	setName(s.name);
+	setNumber(s.number);
+}
+
+Subscriber & Subscriber::operator=(Subscriber const & s)
+{
+	if (this != &s)
 	{
-		this->name[i] = s.name[i];
+		setName(s.name);
+		setNumber(s.number);
 	}
-	this->name[nameSize] = '\0';
-	this->sizeOfNumber = s.sizeOfNumber;
-	int* number = new int[sizeOfNumber];
-	for (int i = 0; i < sizeOfNumber; ++i)
-	{
-		this->number[i] = s.number[i];
-	}
+	return *this;
 }
 
 Subscriber::~Subscriber()
 {
 	delete[] name;
 	delete[] number;
-	sizeOfNumber = 0;
+}
+
+// getter - setter
+
+char const * Subscriber::getName()
+{
+	return name;
+}
+
+void Subscriber::setName(char const * name)
+{
+	if (name != nullptr)
+	{
+		delete[] this->name;
+	}
+	int const size = strlen(name);
+	this->name = new char[size + 1];
+	for (int i = 0; i < size; ++i)
+	{
+		this->name[i] = name[i];
+	}
+	this->name[size] = '\0';
+}
+
+char const * Subscriber::getNumber()
+{
+	return number;
+}
+
+void Subscriber::setNumber(char const * number)
+{
+	if (number != nullptr)
+	{
+		delete[] this->number;
+	}
+	int const size = strlen(number);
+	this->number = new char[size + 1];
+	for (int i = 0; i < size; ++i)
+	{
+		this->number[i] = number[i];
+	}
+	this->number[size] = '\0';
+}
+
+// остальные методы
+
+void Subscriber::print()
+{
+	printf("%s  ", getName());
+	printf("%s", getNumber());
 }
