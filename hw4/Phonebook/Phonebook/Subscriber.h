@@ -10,9 +10,9 @@ struct Subscriber
 	~Subscriber();
 
 	// getter - setter
-	char const * getName();
+	char const * getName() const;
 	void setName(char const * name);
-	char const * getNumber();
+	char const * getNumber() const;
 	void setNumber(char const * number);
 
 	// остальные методы

@@ -6,11 +6,17 @@
 
 Subscriber::Subscriber(char const * name, char const * number)
 {
+	this->name = nullptr;
+	this->number = nullptr;
 	setName(name);
 	setNumber(number);
 }
 
-Subscriber::Subscriber() {}
+Subscriber::Subscriber() 
+{
+	this->name = nullptr;
+	this->number = nullptr;
+}
 
 Subscriber::Subscriber(Subscriber const & s)
 {
@@ -36,14 +42,14 @@ Subscriber::~Subscriber()
 
 // getter - setter
 
-char const * Subscriber::getName()
+char const * Subscriber::getName() const
 {
 	return name;
 }
 
 void Subscriber::setName(char const * name)
 {
-	if (name != nullptr)
+	if (this->name != nullptr)
 	{
 		delete[] this->name;
 	}
@@ -56,14 +62,14 @@ void Subscriber::setName(char const * name)
 	this->name[size] = '\0';
 }
 
-char const * Subscriber::getNumber()
+char const * Subscriber::getNumber() const
 {
 	return number;
 }
 
 void Subscriber::setNumber(char const * number)
 {
-	if (number != nullptr)
+	if (this->number != nullptr)
 	{
 		delete[] this->number;
 	}

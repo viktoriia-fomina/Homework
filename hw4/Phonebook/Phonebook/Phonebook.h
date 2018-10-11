@@ -17,18 +17,23 @@ struct Phonebook
 {
 	// конструкторы - оператор присваивания - деструктор
 	Phonebook();
-	Phonebook(Phonebook const & p);
 	Phonebook & operator=(Phonebook const & p);
 	~Phonebook();
 
 	// getter - setter
+	Subscriber operator[](int number) const;
+	Subscriber & operator[](int number);
+	int size() const;
 
-	void addNote(Subscriber const & s); // 1
+	// остальные методы
+	void addNote(Subscriber const & note); // 1
 	void printAllNotes() const; // 2
 	void findNumberByName(char const * name) const; // 3
-	void findNameByNumber(int const * number, int sizeOfNumber) const; // 4
+	void findNameByNumber(char const * number) const; // 4
 	void saveToFile() const; // 5
 private:
+	Phonebook(Phonebook const & p); // конструктор копирования
+
 	Subscriber* base;
 	int numberOfNotes;
 };

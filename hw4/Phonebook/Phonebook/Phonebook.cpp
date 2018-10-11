@@ -6,22 +6,13 @@
 Phonebook::Phonebook()
 {
 	int const size = 100;
-	Subscriber* base = new Subscriber[size];
+	base = new Subscriber[size];
 	numberOfNotes = 0;
 }
 
-Phonebook::Phonebook(Phonebook const & p)
-{
-	int const size = 100;
-	Subscriber* base = new Subscriber[size];
-	numberOfNotes = p.numberOfNotes;
-	for (int i = 0; i < numberOfNotes; ++i)
-	{
-		base[i] = p.base[i];
-	}
-}
+Phonebook::Phonebook(Phonebook const & p) {}
 
-Phonebook & Phonebook::operator=(Phonebook const & p)
+Phonebook & Phonebook::operator=(Phonebook const & p) 
 {
 	return *this;
 }
@@ -32,25 +23,60 @@ Phonebook::~Phonebook()
 	numberOfNotes = 0;
 }
 
-void Phonebook::addNote(Subscriber const & s) // 1
+// getter - setter
+
+Subscriber Phonebook::operator[](int number) const
 {
-	auto temp = s;
-	base[numberOfNotes] = temp;
+	return base[number];
+}
+
+Subscriber & Phonebook::operator[](int number)
+{
+	return base[number];
+}
+
+int Phonebook::size() const
+{
+	return numberOfNotes;
+}
+
+// остальные методы
+
+void Phonebook::addNote(Subscriber const & note) // 1
+{
+	(*this)[numberOfNotes] = note;
 	++numberOfNotes;
 }
 
 void Phonebook::printAllNotes() const // 2
 {
-	
+	int const size = this->size();
+	for (int i = 0; i < size; ++i)
+	{
+		(*this)[i].print();
+		printf("\n");
+	}
 }
 
 void Phonebook::findNumberByName(char const * name) const // 3
 {
-
+	for (int i = 0; i < size(); ++i)
+	{
+		if ((*this)[i].getName() == name)
+		{
+			(*this)[i].print();
+		}
+	}
 }
-void Phonebook::findNameByNumber(int const * number, int sizeOfNumber) const // 4
+void Phonebook::findNameByNumber(char const * number) const // 4
 {
-
+	for (int i = 0; i < size(); ++i)
+	{
+		if ((*this)[i].getNumber() == number)
+		{
+			(*this)[i].print();
+		}
+	}
 }
 
 void Phonebook::saveToFile() const // 5
