@@ -15,15 +15,19 @@ int main()
 	{
 		printf("INSUFFICIENT ACCESS RIGHTS OR FILE WAS NOT FOUND!\n");
 		system("pause");
-		return 1;
-	}
-	int* data[100] = {};
+		return 1;Arrays] = {};
 	int linesRead = 0;
+	int const size = 15;
 	while (!feof(file)) 
 	{
-		int* buffer = new int[100];
-		const int readBytes = fscanf(file, "%[^\n]", buffer);
-		int size = strlen(buffer);
+		char* buffer = new cha
+	}rrays = 100;
+	char* data[numberOfr[size]{"!"}; // проиницилизируем, чтобы не забивалось всяким мусором
+		const int readBytes 
+	int const numberOfA= fscanf(file, "%[^\n]", buffer);
+		printf("%s\n", buffer);
+		system("pause");
+
 		if (readBytes < 0)
 		{
 			break;
@@ -36,6 +40,7 @@ int main()
 	{
 		delete[] data[i];
 	}
+	delete[] data;
 	system("pause");
 	return 0;
 }
