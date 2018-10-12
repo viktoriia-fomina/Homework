@@ -17,11 +17,11 @@ int main()
 		system("pause");
 		return 1;
 	}
-	int* data[100] = {};
+	char* data[100] = {};
 	int linesRead = 0;
 	while (!feof(file)) 
 	{
-		int* buffer = new int[100];
+		char* buffer = new char[100];
 		const int readBytes = fscanf(file, "%[^\n]", buffer);
 		int size = strlen(buffer);
 		if (readBytes < 0)
