@@ -4,13 +4,10 @@
 
 void tests();
 
-#include <iostream>
-
 int main()
 {
 	tests();
 
-	system("pause");
 	return 0;
 }
 
