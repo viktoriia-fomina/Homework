@@ -1,6 +1,4 @@
 #include "Subscriber.h"
-#include <stdio.h>
-#include <string.h>
 
 // конструктор - оператор копирования - деструктор
 
@@ -20,6 +18,8 @@ Subscriber::Subscriber()
 
 Subscriber::Subscriber(Subscriber const & s)
 {
+	this->name = nullptr;
+	this->number = nullptr;
 	setName(s.name);
 	setNumber(s.number);
 }
@@ -88,4 +88,5 @@ void Subscriber::print()
 {
 	printf("%s  ", getName());
 	printf("%s", getNumber());
+	printf("\n");
 }

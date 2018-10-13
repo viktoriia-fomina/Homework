@@ -10,8 +10,10 @@
 //Размер базы ограничен сотней записей.
 
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include "Subscriber.h"
 #include <stdio.h>
+#include <string.h>
 
 struct Phonebook
 {
@@ -37,3 +39,5 @@ private:
 	Subscriber* base;
 	int numberOfNotes;
 };
+
+bool compareStr(char const * name1, char const * name2);

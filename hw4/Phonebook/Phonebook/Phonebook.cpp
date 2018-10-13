@@ -1,5 +1,4 @@
 #include "Phonebook.h"
-#include "Subscriber.h"
 
 // конструкторы - оператор присваивания - деструктор
 
@@ -54,25 +53,42 @@ void Phonebook::printAllNotes() const // 2
 	for (int i = 0; i < size; ++i)
 	{
 		(*this)[i].print();
-		printf("\n");
 	}
+}
+
+bool compareStr(char const * name1, char const * name2)
+{
+	if (strlen(name1) != strlen(name2))
+	{
+		return false;
+	}
+	int const length = (int)strlen(name1);
+	for (int i = 0; i < length; ++i)
+	{
+		if (name1[i] != name2[i])
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void Phonebook::findNumberByName(char const * name) const // 3
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if ((*this)[i].getName() == name)
+		if (compareStr((*this)[i].getName(), name))
 		{
 			(*this)[i].print();
 		}
 	}
 }
+
 void Phonebook::findNameByNumber(char const * number) const // 4
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if ((*this)[i].getNumber() == number)
+		if (compareStr((*this)[i].getNumber(), number))
 		{
 			(*this)[i].print();
 		}
@@ -81,5 +97,20 @@ void Phonebook::findNameByNumber(char const * number) const // 4
 
 void Phonebook::saveToFile() const // 5
 {
-
+	FILE* file = fopen("phonebook.txt", "w");
+	if (!file)
+	{
+		printf("FILE WAS NOT FOUND\n!");
+	}
+	else
+	{
+		for (int i = 0; i < numberOfNotes; ++i)
+		{
+			fwrite((*this)[i].getName(), sizeof(char), strlen((*this)[i].getName()), file);
+			fwrite(" ", sizeof(char), 1, file);
+			fwrite((*this)[i].getNumber(), sizeof(char), strlen((*this)[i].getNumber()), file);
+			fwrite("\n", sizeof(char), 1, file);
+		}
+	}
+	fclose(file);
 }
