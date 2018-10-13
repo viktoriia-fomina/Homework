@@ -34,6 +34,7 @@ struct Phonebook
 	void findNameByNumber(char const * number) const; // 4
 	void saveToFile() const; // 5
 private:
+	void readInfoFromFile(); // вспомогательный метод к конструктору
 	Phonebook(Phonebook const & p); // конструктор копирования
 
 	Subscriber* base;

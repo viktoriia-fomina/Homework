@@ -7,6 +7,49 @@ Phonebook::Phonebook()
 	int const size = 100;
 	base = new Subscriber[size];
 	numberOfNotes = 0;
+	readInfoFromFile();
+}
+
+void Phonebook::readInfoFromFile()
+{
+	FILE* file = fopen("phonebook.txt", "r");
+	int const sizeData = 100;
+	int const sizeBuffer = 20;
+	if (file)
+	{
+		char* data[sizeData] = {};
+		int linesRead = 0;
+		while (!feof(file))
+		{
+			char* buffer = new char[sizeBuffer];
+			const int readBytes = fscanf(file, "%s", buffer);
+			if (readBytes < 0)
+			{
+				break;
+			}
+			data[linesRead] = buffer;
+			printf("%s", data[linesRead]);
+			++linesRead;
+		}
+		numberOfNotes = linesRead / 2;
+		for (int i = 0; i < linesRead; ++i)
+		{
+			Subscriber* s = new Subscriber;
+			s->setName(data[i]);
+			s->setNumber(data[i + 1]);
+			(*this)[i / 2] = *s;
+			++i;
+			if (i == linesRead - 1)
+			{
+				delete s;
+			}
+		}
+		for (int i = 0; i < linesRead; ++i)
+		{
+			delete[] data[i];
+		}
+	}
+	fclose(file);
 }
 
 Phonebook::Phonebook(Phonebook const & p) {}
