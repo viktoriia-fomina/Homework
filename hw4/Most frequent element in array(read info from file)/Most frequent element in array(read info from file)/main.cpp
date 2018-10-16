@@ -8,11 +8,24 @@
 // Переделать задачу 3 из прошлого задания так, чтобы сортировка была в отдельном модуле 
 // и читала входные данные из файла.
 
+void mostFrequentElementFromFile(FILE* file);
 int parser(int* numbers, char const * string);
+void tests();
 
 int main()
 {
-	FILE* file = fopen("tests.txt", "r");
+	FILE* file = fopen("arrays.txt", "r");
+	mostFrequentElementFromFile(file);
+	fclose(file);
+
+	tests();
+
+	system("pause");
+	return 0;
+}
+
+void mostFrequentElementFromFile(FILE* file)
+{
 	if (file == nullptr)
 	{
 		perror("ERROR OPENING FILE\n");
@@ -31,13 +44,12 @@ int main()
 				printf("%i ", numbers[i]);
 			}
 			printf("\n");
+			printf("Most frequent element in array is %i", mostFrequentElement(sizeOfArray, numbers));
+			printf("\n");
 			delete[] numbers;
 		}
 		delete[] string;
 	}
-
-	system("pause");
-	return 0;
 }
 
 int parser(int* numbers, char const * string)
@@ -70,4 +82,15 @@ int parser(int* numbers, char const * string)
 	}
 	delete[] temp;
 	return size;
+}
+
+void tests()
+{
+	printf("TESTS\n");
+	FILE* file = fopen("tests.txt", "r");
+	mostFrequentElementFromFile(file);
+	fclose(file);
+	printf("Test 1 passed if result is 0\n");
+	printf("Test 2 passed if result is 1 or 2 or 3 or 4 or 5\n");
+	printf("Test 3 passed if result is -34\n");
 }
