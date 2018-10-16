@@ -8,34 +8,66 @@
 // Переделать задачу 3 из прошлого задания так, чтобы сортировка была в отдельном модуле 
 // и читала входные данные из файла.
 
+int parser(int* numbers, char const * string);
+
 int main()
 {
-	FILE *file = fopen("tests.txt", "r");
-	if (!file) 
+	FILE* file = fopen("tests.txt", "r");
+	if (file == nullptr)
 	{
-		printf("INSUFFICIENT ACCESS RIGHTS OR FILE WAS NOT FOUND!\n");
-		system("pause");
-		return 1;
+		perror("ERROR OPENING FILE\n");
 	}
-	char* data[100] = {};
-	int linesRead = 0;
-	while (!feof(file)) 
+	else
 	{
-		char* buffer = new char[100];
-		const int readBytes = fscanf(file, "%[^\n]", buffer);
-		int size = strlen(buffer);
-		if (readBytes < 0)
+		int const size = 100;
+		char* string = new char[size];
+		while (!feof(file))
 		{
-			break;
+			fgets(string, size, file);
+			int* numbers = new int[size];
+			int sizeOfArray = parser(numbers, string);
+			for (int i = 0; i < sizeOfArray; ++i)
+			{
+				printf("%i ", numbers[i]);
+			}
+			printf("\n");
+			delete[] numbers;
 		}
-		data[linesRead] = buffer;
-		++linesRead;
+		delete[] string;
 	}
-	fclose(file);
-	for (int i = 0; i < linesRead; ++i)
-	{
-		delete[] data[i];
-	}
+
 	system("pause");
 	return 0;
+}
+
+int parser(int* numbers, char const * string)
+{
+	int const sizeOfTemp = 100;
+	char* temp = new char[sizeOfTemp];
+	int size = 0;
+	int iterator = 0;
+	while (string[iterator] != '\0')
+	{
+		int j = 0;
+		bool flag = false;
+		while (string[iterator] != ' ' && string[iterator] != '\n' && string[iterator] != '\0')
+		{
+			temp[j] = string[iterator];
+			++j;
+			++iterator;
+			flag = true;
+		}
+		if (flag)
+		{
+			temp[j] = '\0';
+			numbers[size] = atoi(temp);
+			++size;
+		}
+		else
+		{
+			++iterator;
+		}
+	}
+	delete[] temp;
+	return size;
 }
