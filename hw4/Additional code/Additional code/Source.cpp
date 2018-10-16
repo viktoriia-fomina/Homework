@@ -147,6 +147,9 @@ int additionalCode::toDecimalSystem() const
 	return number;
 }
 
+// у меня было поле number, можно было не делать такой перевод в десятичную систему, но я решила
+// придерживаться условия
+
 int additionalCode::toDecimalSystemPositiveNumber() const
 {
 	int const size = getSize();
