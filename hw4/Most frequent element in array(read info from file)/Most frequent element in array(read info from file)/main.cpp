@@ -10,7 +10,7 @@
 
 void mostFrequentElementFromFile(FILE* file);
 int parser(int* numbers, char const * string);
-void tests();
+void tests(); // а тесты к этому алгоритму делала в прошлой дзшке, не стала их сюда вставлять
 
 int main()
 {
