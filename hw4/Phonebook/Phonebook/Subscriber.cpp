@@ -53,7 +53,7 @@ void Subscriber::setName(char const * name)
 	{
 		delete[] this->name;
 	}
-	int const size = strlen(name);
+	int const size = (int)strlen(name);
 	this->name = new char[size + 1];
 	for (int i = 0; i < size; ++i)
 	{
@@ -73,7 +73,7 @@ void Subscriber::setNumber(char const * number)
 	{
 		delete[] this->number;
 	}
-	int const size = strlen(number);
+	int const size = (int)strlen(number);
 	this->number = new char[size + 1];
 	for (int i = 0; i < size; ++i)
 	{
