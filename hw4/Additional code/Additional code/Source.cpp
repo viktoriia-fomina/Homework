@@ -65,14 +65,14 @@ void additionalCode::printInDecimalSystem() const
 	printf("%i", this->toDecimalSystem());
 }
 
-additionalCode operator+(additionalCode & number1, additionalCode & number2)
+additionalCode operator+(additionalCode const & number1, additionalCode const & number2)
 {
 	auto sum = additionalCode();
 	int temp = 0;
 	int const size = number1.getSize();
 	for (int i = 0; i < size; ++i)
 	{
-		if (number1.data[size - i - 1] == 1 && number2.data[size - i - 1] == 1)
+		if (number1[size - i - 1] == 1 && number2[size - i - 1] == 1)
 		{
 			if (temp == 1)
 			{
@@ -86,7 +86,7 @@ additionalCode operator+(additionalCode & number1, additionalCode & number2)
 		}
 		else if ((number1[size - i - 1] == 1 || number2[size - i - 1] == 1) && temp == 1)
 		{
-			sum.data[size - i - 1] = 0;
+			sum[size - i - 1] = 0;
 		}
 		else
 		{
@@ -105,12 +105,12 @@ additionalCode operator+(additionalCode & number1, additionalCode & number2)
 	return sum;
 }
 
-int & additionalCode::operator[] (int const number)
+int & additionalCode::operator[] (int const number) const
 {
 	return data[number];
 }
 
-int & additionalCode::operator[] (int const number) const
+int & additionalCode::operator[] (int const number)
 {
 	return data[number];
 }
@@ -147,7 +147,7 @@ int additionalCode::toDecimalSystem() const
 	return number;
 }
 
-// у меня было поле number, можно было не делать такой перевод в десятичную систему, но я решила
+// у меня было поле number, можно было не делать такой перевод (он здесь смотрится ужасно) в десятичную систему, но я решила
 // придерживаться условия
 
 int additionalCode::toDecimalSystemPositiveNumber() const

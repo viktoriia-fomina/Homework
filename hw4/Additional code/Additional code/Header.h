@@ -11,11 +11,11 @@ struct additionalCode
 	additionalCode & operator=(additionalCode const & number);
 	void print() const;
 	void printInDecimalSystem() const;
-	friend additionalCode operator+(additionalCode & number1, additionalCode & number2);
+	int toDecimalSystem() const;
+	friend additionalCode operator+(additionalCode const & number1, additionalCode const & number2);
+	int & operator[] (int const number) const;
 private:
 	int & operator[] (int const number);
-	int & operator[] (int const number) const;
-	int toDecimalSystem() const;
 	int toDecimalSystemPositiveNumber() const;
 	int getSize() const;
 	int* toAdditionalCode();
