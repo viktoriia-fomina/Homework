@@ -28,7 +28,6 @@ void Phonebook::readInfoFromFile()
 				break;
 			}
 			data[linesRead] = buffer;
-			printf("%s", data[linesRead]);
 			++linesRead;
 		}
 		numberOfNotes = linesRead / 2;
