@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "List.h"
-
+#include "Node.h"
 using namespace std;
 
 int main()
@@ -24,6 +24,9 @@ int main()
 	l.deleteNode(0);
 	l.deleteNode(2);
 	cout << l << endl;
+
+	Node n;
+	cout << n.data << endl;
 
 	system("pause");
 	return 0;
