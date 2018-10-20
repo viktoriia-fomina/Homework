@@ -59,12 +59,11 @@ void List::deleteNode(int data) // 2
 	}
 	else
 	{
-		// удаляем head
 		if (temp == head)
 		{
 			deleteHead(data, temp);
 		}
-		else // все остальные случаи
+		else
 		{
 			deleteElementThatIsNotHead(data, temp);
 		}

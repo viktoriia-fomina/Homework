@@ -24,10 +24,6 @@ int main()
 	l.deleteNode(0);
 	l.deleteNode(2);
 	cout << l << endl;
-	
-
-	// auto* temp = l.getHeadPtr();
-
 
 	system("pause");
 	return 0;
