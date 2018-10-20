@@ -62,39 +62,49 @@ void List::deleteNode(int data) // 2
 		// удаляем head
 		if (temp == head)
 		{
-			if (head->next != nullptr)
-			{
-				head = head->next;
-				head->previous = nullptr;
-				temp->next = nullptr;
-				delete temp;
-				temp = nullptr;
-			}
-			else
-			{
-				List::~List();
-			}
+			deleteHead(data, temp);
 		}
 		else // все остальные случаи
 		{
-			if (temp->next != nullptr)
-			{
-				temp->previous->next = temp->next;
-				temp->next->previous = temp->previous;
-				temp->previous = nullptr;
-				temp->next = nullptr;
-				delete temp;
-				temp = nullptr;
-			}
-			else
-			{
-				temp->previous->next = nullptr;
-				temp->previous = nullptr;
-				delete temp;
-				temp = nullptr;
-			}
+			deleteElementThatIsNotHead(data, temp);
 		}
 
+	}
+}
+
+void List::deleteElementThatIsNotHead(int data, Node* temp)
+{
+	if (temp->next != nullptr)
+	{
+		temp->previous->next = temp->next;
+		temp->next->previous = temp->previous;
+		temp->previous = nullptr;
+		temp->next = nullptr;
+		delete temp;
+		temp = nullptr;
+	}
+	else
+	{
+		temp->previous->next = nullptr;
+		temp->previous = nullptr;
+		delete temp;
+		temp = nullptr;
+	}
+}
+
+void List::deleteHead(int data, Node* temp)
+{
+	if (head->next != nullptr)
+	{
+		head = head->next;
+		head->previous = nullptr;
+		temp->next = nullptr;
+		delete temp;
+		temp = nullptr;
+	}
+	else
+	{
+		List::~List();
 	}
 }
 
