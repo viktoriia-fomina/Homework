@@ -74,6 +74,7 @@ ostream & operator<<(ostream & os, List const & list)
 				cout << temp->data << " ";
 				temp = temp->next;
 			}
+			cout << temp->data;
 		}
 	}
 	return os;
