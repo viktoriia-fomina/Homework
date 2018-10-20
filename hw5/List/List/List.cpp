@@ -1,6 +1,8 @@
 #include "List.h"
 #include "Node.h"
 
+// конструкторы - деструкторы, добавление - удаление
+
 List::List()
 {
 	head = nullptr;
@@ -42,17 +44,6 @@ void List::addNode(int data) // 1
 	{
 		head = new Node(data);
 	}
-}
-
-ostream & operator<<(ostream & os, List const & list) // 3
-{
-	auto* temp = list.head;
-	while (temp != nullptr)
-	{
-		os << (int)temp->data << " ";
-		temp = temp->next;
-	}
-	return os;
 }
 
 void List::deleteNode(int data) // 2
@@ -105,6 +96,19 @@ void List::deleteNode(int data) // 2
 		}
 
 	}
+}
+
+// остальное
+
+ostream & operator<<(ostream & os, List const & list) // 3
+{
+	auto* temp = list.head;
+	while (temp != nullptr)
+	{
+		os << (int)temp->data << " ";
+		temp = temp->next;
+	}
+	return os;
 }
 
 void List::swap(Node* a, Node* b)
