@@ -59,7 +59,22 @@ void List::deleteNode(int data)
 
 ostream & operator<<(ostream & os, List const & list)
 {
-	
+	if (list.head != nullptr)
+	{
+		if (list.head->next == list.head)
+		{
+			os << list.head->data;
+		}
+		else
+		{
+			auto* temp = list.head;
+			while (temp->next != list.head)
+			{
+				cout << temp->data << " ";
+			}
+		}
+	}
+	return os;
 }
 
 void List::swap(Node* a, Node* b)
