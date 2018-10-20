@@ -111,7 +111,7 @@ ostream & operator<<(ostream & os, List const & list) // 3
 	auto* temp = list.head;
 	while (temp != nullptr)
 	{
-		os << (int)temp->data << " ";
+		os << temp->data << " ";
 		temp = temp->next;
 	}
 	return os;
