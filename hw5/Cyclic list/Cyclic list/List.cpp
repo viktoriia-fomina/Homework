@@ -49,6 +49,7 @@ void List::addNode(int data)
 	else
 	{
 		head = newElement;
+		head->next = head;
 	}
 }
 
@@ -71,6 +72,7 @@ ostream & operator<<(ostream & os, List const & list)
 			while (temp->next != list.head)
 			{
 				cout << temp->data << " ";
+				temp = temp->next;
 			}
 		}
 	}
