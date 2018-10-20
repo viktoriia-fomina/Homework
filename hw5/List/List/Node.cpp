@@ -17,13 +17,3 @@ Node::~Node()
 {
 
 }
-
-int Node::getData() const
-{
-	return data;
-}
-
-void Node::setData(int data)
-{
-	this->data = data;
-}
