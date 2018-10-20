@@ -10,17 +10,14 @@ List::List()
 
 List::~List()
 {
-	if (head != nullptr)
+	while (head != nullptr)
 	{
-		while (head != nullptr)
-		{
-			auto* temp = head;
-			head = head->next;
-			temp->next = nullptr;
-			temp->previous = nullptr;
-			delete temp;
-			temp = nullptr;
-		}
+		auto* temp = head;
+		head = head->next;
+		temp->next = nullptr;
+		temp->previous = nullptr;
+		delete temp;
+		temp = nullptr;
 	}
 }
 
