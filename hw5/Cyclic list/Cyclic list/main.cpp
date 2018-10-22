@@ -21,7 +21,7 @@ int main()
 	int m = 0;
 	cout << "Input number\n";
 	cin >> m;
-	cout << "result " << josephusProblem(m, n) << endl;
+	cout << "Survivor has number " << josephusProblem(m, n) << endl;
 
 	system("pause");
 	return 0;
