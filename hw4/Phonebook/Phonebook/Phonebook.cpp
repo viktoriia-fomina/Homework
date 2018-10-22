@@ -98,16 +98,16 @@ void Phonebook::printAllNotes() const // 2
 	}
 }
 
-bool compareStr(char const * name1, char const * name2)
+bool compareStr(char const * str1, char const * str2)
 {
-	if (strlen(name1) != strlen(name2))
+	if (strlen(str1) != strlen(str2))
 	{
 		return false;
 	}
-	int const length = (int)strlen(name1);
+	int const length = (int)strlen(str1);
 	for (int i = 0; i < length; ++i)
 	{
-		if (name1[i] != name2[i])
+		if (str1[i] != str2[i])
 		{
 			return false;
 		}
