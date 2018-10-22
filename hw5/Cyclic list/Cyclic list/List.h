@@ -14,9 +14,9 @@ struct List
 	friend ostream & operator<<(ostream & os, List const & list);
 private:
 	bool isEmpty() const;
-	bool ifTwoElements() const;
-	void deleteElementIfOneElement(int const data);
-	void deleteElementIfMoreThanTwoElements(int const data);
+	bool ifTwoNodes() const;
+	void deleteNodeIfOneNode(int const data);
+	void deleteNodeIfMoreThanOneNode(int const data);
 	void addNodeIfNextIsNotHead(int const data, Node * const newElement);
 	void addNodeIfNextIsHead(int const data, Node * const newElement);
 	void swap(Node * a, Node * b);

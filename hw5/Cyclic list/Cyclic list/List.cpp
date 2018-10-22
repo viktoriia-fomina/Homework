@@ -12,7 +12,7 @@ List::~List()
 	{ 
 		while (head != head->next)
 		{
-			bool flagIfTwoElements = ifTwoElements();
+			bool flagIfTwoElements = ifTwoNodes();
 			auto* temp = head;
 			auto* prevBeforeHead = head;
 			while (prevBeforeHead->next != head)
@@ -35,7 +35,7 @@ List::~List()
 	}
 }
 
-bool List::ifTwoElements() const
+bool List::ifTwoNodes() const
 {
 	return head == head->next->next;
 }
@@ -92,21 +92,16 @@ void List::deleteNode(int const data)
 	{
 		if (head->next == head)
 		{
-			deleteElementIfOneElement(data);
-		}
-		if (ifTwoElements())
-		{
-			auto* temp = head;
-			// lalala
+			deleteNodeIfOneNode(data);
 		}
 		else
 		{
-			deleteElementIfMoreThanTwoElements(data);
+			deleteNodeIfMoreThanOneNode(data);
 		}
 	}
 }
 
-void List::deleteElementIfOneElement(int const data)
+void List::deleteNodeIfOneNode(int const data)
 {
 	if (head->data == data)
 	{
@@ -118,29 +113,45 @@ void List::deleteElementIfOneElement(int const data)
 	}
 }
 
-void List::deleteElementIfMoreThanTwoElements(int const data)
+void List::deleteNodeIfMoreThanOneNode(int const data)
 {
-	auto* temp = head;
-	while (temp->data != data || temp->next != head)
+	if (head->data == data)
 	{
-		temp = temp->next;
-	}
-	if (temp->data == data)
-	{
-		auto* elemenToDelete = temp;
-		auto* prevBeforeElementToDelete = temp;
-		while (prevBeforeElementToDelete->next != temp)
+		auto* temp = head;
+		auto* prevBeforeHead = head;
+		while (prevBeforeHead->next != head)
 		{
-			prevBeforeElementToDelete = prevBeforeElementToDelete->next;
+			prevBeforeHead = prevBeforeHead->next;
 		}
-		prevBeforeElementToDelete->next = temp->next;
+		head = head->next;
+		prevBeforeHead->next = head;
 		temp->next = nullptr;
 		delete temp;
 		temp = nullptr;
 	}
 	else
 	{
-		cout << "Node was not found. Node can not be deleted\n";
+		auto* temp = head;
+		while (temp->data != data && temp->next != head)
+		{
+			temp = temp->next;
+		}
+		if (temp->data == data)
+		{
+			auto* prevBeforeElementToDelete = temp;
+			while (prevBeforeElementToDelete->next != temp)
+			{
+				prevBeforeElementToDelete = prevBeforeElementToDelete->next;
+			}
+			prevBeforeElementToDelete->next = temp->next;
+			temp->next = nullptr;
+			delete temp;
+			temp = nullptr;
+		}
+		else
+		{
+			cout << "Node was not found. Node can not be deleted\n";
+		}
 	}
 }
 
