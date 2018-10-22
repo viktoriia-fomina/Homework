@@ -107,41 +107,51 @@ void List::deleteNodeIfMoreThanOneNode(int const data)
 {
 	if (head->data == data)
 	{
-		auto* temp = head;
-		auto* prevBeforeHead = head;
-		while (prevBeforeHead->next != head)
+		deleteHeadNodeIfMoreThanOneNode(data);
+	}
+	else
+	{
+		deleteNotHeadNodeIfMoreThanOneNode(data);
+	}
+}
+
+void List::deleteHeadNodeIfMoreThanOneNode(int const data)
+{
+	auto* temp = head;
+	auto* prevBeforeHead = head;
+	while (prevBeforeHead->next != head)
+	{
+		prevBeforeHead = prevBeforeHead->next;
+	}
+	head = head->next;
+	prevBeforeHead->next = head;
+	temp->next = nullptr;
+	delete temp;
+	temp = nullptr;
+}
+
+void List::deleteNotHeadNodeIfMoreThanOneNode(int const data)
+{
+	auto* temp = head;
+	while (temp->data != data && temp->next != head)
+	{
+		temp = temp->next;
+	}
+	if (temp->data == data)
+	{
+		auto* prevBeforeElementToDelete = temp;
+		while (prevBeforeElementToDelete->next != temp)
 		{
-			prevBeforeHead = prevBeforeHead->next;
+			prevBeforeElementToDelete = prevBeforeElementToDelete->next;
 		}
-		head = head->next;
-		prevBeforeHead->next = head;
+		prevBeforeElementToDelete->next = temp->next;
 		temp->next = nullptr;
 		delete temp;
 		temp = nullptr;
 	}
 	else
 	{
-		auto* temp = head;
-		while (temp->data != data && temp->next != head)
-		{
-			temp = temp->next;
-		}
-		if (temp->data == data)
-		{
-			auto* prevBeforeElementToDelete = temp;
-			while (prevBeforeElementToDelete->next != temp)
-			{
-				prevBeforeElementToDelete = prevBeforeElementToDelete->next;
-			}
-			prevBeforeElementToDelete->next = temp->next;
-			temp->next = nullptr;
-			delete temp;
-			temp = nullptr;
-		}
-		else
-		{
-			cout << "Node was not found. Node can not be deleted\n";
-		}
+		cout << "Node was not found. Node can not be deleted\n";
 	}
 }
 
