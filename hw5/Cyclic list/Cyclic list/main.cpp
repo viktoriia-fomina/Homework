@@ -18,10 +18,8 @@ int main()
 	cout << "Input number to be skipped\n";
 	cin >> m;
 	List l;
-	for (int i = m; i >= 1; --i)
-	{
-		l.addNode(i);
-	}
+	int result = l.josephusProblem(n, m);
+	cout << "Result is " << result << endl;
 
 	system("pause");
 	return 0;

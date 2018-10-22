@@ -30,6 +30,25 @@ List::~List()
 	}
 }
 
+int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkipped)
+{
+	for (int i = numberOfWarriors; i >= 1; --i)
+	{
+		addNode(i);
+	}
+	auto* temp = head;
+	while (!ifOneNode())
+	{
+		for (int i = 0; i < numberToBeSkipped; ++i)
+		{
+			temp = temp->next;
+		}
+		int numberOfCurrentWarrior = temp->data;
+		deleteNode(numberOfCurrentWarrior);
+	}
+	return head->data;
+}
+
 void List::addNode(int const data)
 {
 	auto* newElement = new Node(data);
