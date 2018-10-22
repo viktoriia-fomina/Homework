@@ -12,38 +12,40 @@ List::~List()
 	{
 		while (head != head->next)
 		{
+			bool flagIfTwoElements = ifTwoElements();
 			auto* temp = head;
 			head = head->next;
 			temp->next = nullptr;
 			delete temp;
 			temp = nullptr;
+			if (flagIfTwoElements)
+			{
+				head->next = head;
+			}
 		}
+		head->next = nullptr;
+		delete head;
+		head = nullptr;
 	}
 }
 
-void List::addNode(int data)
+bool List::ifTwoElements() const
+{
+	return head == head->next->next;
+}
+
+void List::addNode(int const data)
 {
 	auto* newElement = new Node(data);
-	if (head != nullptr)
+	if (!isEmpty())
 	{
 		if (head != head->next)
 		{
-			auto* temp = head;
-			auto* lastHead = head;
-			while (temp->next != head)
-			{
-				temp = temp->next;
-			}
-			head = newElement;
-			head->next = lastHead;
-			temp->next = head;
+			addNodeIfNextIsNotHead(data, newElement);
 		}
 		else
 		{
-			auto* temp = head;
-			head = newElement;
-			head->next = temp;
-			temp->next = head;
+			addNodeIfNextIsHead(data, newElement);
 		}
 	}
 	else
@@ -53,11 +55,36 @@ void List::addNode(int data)
 	}
 }
 
-void List::deleteNode(int data)
+void List::addNodeIfNextIsNotHead(int const data, Node * const newElement)
 {
-	if (head == nullptr)
+	auto* temp = head;
+	auto* lastHead = head;
+	while (temp->next != head)
 	{
-		cout << "List has no nodes\n";
+		temp = temp->next;
+	}
+	head = newElement;
+	head->next = lastHead;
+	temp->next = head;
+}
+
+void List::addNodeIfNextIsHead(int const data, Node * const newElement)
+{
+	auto* temp = head;
+	head = newElement;
+	head->next = temp;
+	temp->next = head;
+}
+
+void List::deleteNode(int const data)
+{
+	if (isEmpty())
+	{
+		cout << "List has no node\n";
+	}
+	else
+	{
+
 	}
 }
 
@@ -88,7 +115,7 @@ bool List::isEmpty() const
 	return head == nullptr;
 }
 
-void List::swap(Node* a, Node* b)
+void List::swap(Node * a, Node * b)
 {
 	int const c = a->data;
 	a->data = b->data;
