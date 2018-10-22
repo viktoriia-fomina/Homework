@@ -90,7 +90,19 @@ void List::deleteNode(int const data)
 	}
 	else
 	{
-
+		auto* temp = head;
+		if (head->next == head)
+		{
+			if (head->data == data)
+			{
+				this->~List();
+			}
+			else
+			{
+				cout << "Node was not found\n";
+			}
+		}
+		// lallala
 	}
 }
 
