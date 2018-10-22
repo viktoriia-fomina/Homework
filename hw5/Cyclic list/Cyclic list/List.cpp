@@ -8,7 +8,7 @@ List::List()
 
 List::~List()
 {
-	if (head != nullptr)
+	if (!isEmpty())
 	{
 		while (head != head->next)
 		{
@@ -63,7 +63,7 @@ void List::deleteNode(int data)
 
 ostream & operator<<(ostream & os, List const & list)
 {
-	if (list.head != nullptr)
+	if (!list.isEmpty())
 	{
 		if (list.head->next == list.head)
 		{
@@ -81,6 +81,11 @@ ostream & operator<<(ostream & os, List const & list)
 		}
 	}
 	return os;
+}
+
+bool List::isEmpty() const
+{
+	return head == nullptr;
 }
 
 void List::swap(Node* a, Node* b)

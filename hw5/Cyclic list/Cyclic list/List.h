@@ -13,6 +13,7 @@ struct List
 	void deleteNode(int data);
 	friend ostream & operator<<(ostream & os, List const & list);
 private:
+	bool isEmpty() const;
 	void swap(Node* a, Node* b);
 	Node* head;
 };
