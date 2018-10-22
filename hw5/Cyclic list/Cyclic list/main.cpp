@@ -15,7 +15,7 @@ int main()
 	cout << "Input number of warriors\n";
 	cin >> n;
 	int m = 0;
-	cout << "Input number to be skipped\n";
+	cout << "Input number\n";
 	cin >> m;
 	List l;
 	int result = l.josephusProblem(n, m);

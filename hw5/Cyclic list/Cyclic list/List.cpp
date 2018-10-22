@@ -37,13 +37,16 @@ int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkippe
 		addNode(i);
 	}
 	auto* temp = head;
+	auto* nextAfterElementToDelete = temp;
 	while (!ifOneNode())
 	{
-		for (int i = 0; i < numberToBeSkipped; ++i)
+		temp = nextAfterElementToDelete;
+		for (int i = 0; i < numberToBeSkipped - 1; ++i)
 		{
 			temp = temp->next;
 		}
 		int numberOfCurrentWarrior = temp->data;
+		nextAfterElementToDelete = temp->next;
 		deleteNode(numberOfCurrentWarrior);
 	}
 	return head->data;
