@@ -21,7 +21,7 @@ List::~List()
 	}
 }
 
-void List::addNode(int data) // 1
+void List::addNode(int const data) // 1
 {
 	if (!isEmpty())
 	{
@@ -43,7 +43,7 @@ void List::addNode(int data) // 1
 	}
 }
 
-void List::deleteNode(int data) // 2
+void List::deleteNode(int const data) // 2
 {
 	if (isEmpty())
 	{
@@ -75,7 +75,7 @@ void List::deleteNode(int data) // 2
 	}
 }
 
-void List::deleteElementThatIsNotHead(int data, Node* temp)
+void List::deleteElementThatIsNotHead(int const data, Node* temp)
 {
 	if (temp->next != nullptr)
 	{
@@ -95,7 +95,7 @@ void List::deleteElementThatIsNotHead(int data, Node* temp)
 	}
 }
 
-void List::deleteHead(int data, Node* temp)
+void List::deleteHead(int const data, Node* temp)
 {
 	if (head->next != nullptr)
 	{
@@ -124,7 +124,7 @@ ostream & operator<<(ostream & os, List const & list) // 3
 	return os;
 }
 
-bool List::isEmpty()
+bool List::isEmpty() const
 {
 	return head == nullptr;
 }
