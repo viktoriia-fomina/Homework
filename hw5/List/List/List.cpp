@@ -75,6 +75,22 @@ void List::deleteNode(int const data) // 2
 	}
 }
 
+void List::deleteHead(int const data, Node* temp)
+{
+	if (head->next != nullptr)
+	{
+		head = head->next;
+		head->previous = nullptr;
+		temp->next = nullptr;
+		delete temp;
+		temp = nullptr;
+	}
+	else
+	{
+		this->~List();
+	}
+}
+
 void List::deleteElementThatIsNotHead(int const data, Node* temp)
 {
 	if (temp->next != nullptr)
@@ -92,22 +108,6 @@ void List::deleteElementThatIsNotHead(int const data, Node* temp)
 		temp->previous = nullptr;
 		delete temp;
 		temp = nullptr;
-	}
-}
-
-void List::deleteHead(int const data, Node* temp)
-{
-	if (head->next != nullptr)
-	{
-		head = head->next;
-		head->previous = nullptr;
-		temp->next = nullptr;
-		delete temp;
-		temp = nullptr;
-	}
-	else
-	{
-		List::~List();
 	}
 }
 
