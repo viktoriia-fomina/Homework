@@ -4,7 +4,6 @@ struct Node
 {
 	Node(int data);
 	~Node();
-
 	int data;
 	Node* next;
 };

@@ -12,7 +12,6 @@ List::~List()
 	{ 
 		while (head != head->next)
 		{
-			bool flagIfTwoElements = ifTwoNodes();
 			auto* temp = head;
 			auto* prevBeforeHead = head;
 			while (prevBeforeHead->next != head)
@@ -24,20 +23,11 @@ List::~List()
 			temp->next = nullptr;
 			delete temp;
 			temp = nullptr;
-			if (flagIfTwoElements)
-			{
-				head->next = head;
-			}
 		}
 		head->next = nullptr;
 		delete head;
 		head = nullptr;
 	}
-}
-
-bool List::ifTwoNodes() const
-{
-	return head == head->next->next;
 }
 
 void List::addNode(int const data)

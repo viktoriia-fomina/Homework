@@ -13,10 +13,8 @@ int main()
 {
 	List l;
 	l.addNode(1);
-	// l.addNode(2);
-	// l.addNode(3);
-	cout << l << endl;
-	l.deleteNode(1);
+	l.addNode(2);
+	l.addNode(3);
 	cout << l << endl;
 
 	system("pause");
