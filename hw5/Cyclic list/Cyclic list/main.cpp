@@ -11,11 +11,17 @@
 
 int main()
 {
+	int n = 0;
+	cout << "Input number of warriors\n";
+	cin >> n;
+	int m = 0;
+	cout << "Input number to be skipped\n";
+	cin >> m;
 	List l;
-	l.addNode(1);
-	l.addNode(2);
-	l.addNode(3);
-	cout << l << endl;
+	for (int i = m; i >= 1; --i)
+	{
+		l.addNode(i);
+	}
 
 	system("pause");
 	return 0;

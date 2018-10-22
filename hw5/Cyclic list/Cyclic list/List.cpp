@@ -155,6 +155,21 @@ void List::deleteNotHeadNodeIfMoreThanOneNode(int const data)
 	}
 }
 
+bool List::isEmpty() const
+{
+	return head == nullptr;
+}
+
+bool List::ifOneNode() const
+{
+	return head == head->next;
+}
+
+int List::getHead() const
+{
+	return head->data;
+}
+
 ostream & operator<<(ostream & os, List const & list)
 {
 	if (!list.isEmpty())
@@ -175,16 +190,4 @@ ostream & operator<<(ostream & os, List const & list)
 		}
 	}
 	return os;
-}
-
-bool List::isEmpty() const
-{
-	return head == nullptr;
-}
-
-void List::swap(Node * a, Node * b)
-{
-	int const c = a->data;
-	a->data = b->data;
-	b->data = c;
 }
