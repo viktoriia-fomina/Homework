@@ -10,7 +10,7 @@ List::List()
 
 List::~List()
 {
-	while (head != nullptr)
+	while (!isEmpty())
 	{
 		auto* temp = head;
 		head = head->next;
@@ -23,7 +23,7 @@ List::~List()
 
 void List::addNode(int data) // 1
 {
-	if (head != nullptr)
+	if (!isEmpty())
 	{
 		auto* temp = head;
 		head = new Node(data);
@@ -45,26 +45,33 @@ void List::addNode(int data) // 1
 
 void List::deleteNode(int data) // 2
 {
-	auto* temp = head;
-	while (temp != nullptr && temp->data != data)
+	if (isEmpty())
 	{
-		temp = temp->next;
-	}
-	if (temp == nullptr)
-	{
-		cout << "Element was not deleted because was not found\n";
+		cout << "List is empty. Node can not be deleted\n";
 	}
 	else
 	{
-		if (temp == head)
+		auto* temp = head;
+		while (temp != nullptr && temp->data != data)
 		{
-			deleteHead(data, temp);
+			temp = temp->next;
+		}
+		if (temp == nullptr)
+		{
+			cout << "Node was not found. Node can not be deleted\n";
 		}
 		else
 		{
-			deleteElementThatIsNotHead(data, temp);
-		}
+			if (temp == head)
+			{
+				deleteHead(data, temp);
+			}
+			else
+			{
+				deleteElementThatIsNotHead(data, temp);
+			}
 
+		}
 	}
 }
 
@@ -115,6 +122,11 @@ ostream & operator<<(ostream & os, List const & list) // 3
 		temp = temp->next;
 	}
 	return os;
+}
+
+bool List::isEmpty()
+{
+	return head == nullptr;
 }
 
 void List::swap(Node* a, Node* b)

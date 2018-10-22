@@ -16,6 +16,7 @@ struct List
 	// остальное
 	friend ostream & operator<<(ostream & os, List const & list); // 3
 private:
+	bool isEmpty();
 	void deleteHead(int data, Node* temp);
 	void deleteElementThatIsNotHead(int data, Node* temp);
 	void swap(Node * a, Node* b);
