@@ -9,6 +9,8 @@
 // ¬ нашем случае участвует n воинов и убивают каждого m - го.“ребуетс€ определить номер k начальной позиции воина, 
 // который должен будет остатьс€ последним.—читать с помощью циклического списка.
 
+int josephusProblem(int const numberOfWarriors, int const numberToBeSkipped);
+
 int main()
 {
 	int n = 0;
@@ -17,9 +19,7 @@ int main()
 	int m = 0;
 	cout << "Input number\n";
 	cin >> m;
-	List l;
-	int result = l.josephusProblem(n, m);
-	cout << "Result is " << result << endl;
+	cout << "result " << josephusProblem(m, n) << endl;
 
 	system("pause");
 	return 0;
