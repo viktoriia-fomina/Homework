@@ -15,6 +15,8 @@ struct List
 private:
 	bool isEmpty() const;
 	bool ifTwoElements() const;
+	void deleteElementIfOneElement(int const data);
+	void deleteElementIfMoreThanTwoElements(int const data);
 	void addNodeIfNextIsNotHead(int const data, Node * const newElement);
 	void addNodeIfNextIsHead(int const data, Node * const newElement);
 	void swap(Node * a, Node * b);

@@ -14,13 +14,13 @@ List::~List()
 		{
 			bool flagIfTwoElements = ifTwoElements();
 			auto* temp = head;
-			auto* previousBeforeHead = head;
-			while (previousBeforeHead->next != head)
+			auto* prevBeforeHead = head;
+			while (prevBeforeHead->next != head)
 			{
-				previousBeforeHead = previousBeforeHead->next;
+				prevBeforeHead = prevBeforeHead->next;
 			}
 			head = head->next;
-			previousBeforeHead->next = head;
+			prevBeforeHead->next = head;
 			temp->next = nullptr;
 			delete temp;
 			temp = nullptr;
@@ -86,23 +86,61 @@ void List::deleteNode(int const data)
 {
 	if (isEmpty())
 	{
-		cout << "List has no node\n";
+		cout << "List is empty. Node can not be deleted\n";
 	}
 	else
 	{
-		auto* temp = head;
 		if (head->next == head)
 		{
-			if (head->data == data)
-			{
-				this->~List();
-			}
-			else
-			{
-				cout << "Node was not found\n";
-			}
+			deleteElementIfOneElement(data);
 		}
-		// lallala
+		if (ifTwoElements())
+		{
+			auto* temp = head;
+			// lalala
+		}
+		else
+		{
+			deleteElementIfMoreThanTwoElements(data);
+		}
+	}
+}
+
+void List::deleteElementIfOneElement(int const data)
+{
+	if (head->data == data)
+	{
+		this->~List();
+	}
+	else
+	{
+		cout << "Node was not found. Node can not be deleted\n";
+	}
+}
+
+void List::deleteElementIfMoreThanTwoElements(int const data)
+{
+	auto* temp = head;
+	while (temp->data != data || temp->next != head)
+	{
+		temp = temp->next;
+	}
+	if (temp->data == data)
+	{
+		auto* elemenToDelete = temp;
+		auto* prevBeforeElementToDelete = temp;
+		while (prevBeforeElementToDelete->next != temp)
+		{
+			prevBeforeElementToDelete = prevBeforeElementToDelete->next;
+		}
+		prevBeforeElementToDelete->next = temp->next;
+		temp->next = nullptr;
+		delete temp;
+		temp = nullptr;
+	}
+	else
+	{
+		cout << "Node was not found. Node can not be deleted\n";
 	}
 }
 
