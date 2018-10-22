@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int josephusProblem(int const numberOfWarriors, int const numberToBeSkipped);
+int josephusProblem(int const numberOfWarriors, int const murderFrequency);
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
 	cout << "Input number of warriors\n";
 	cin >> n;
 	int m = 0;
-	cout << "Input number\n";
+	cout << "Input murder frequency\n";
 	cin >> m;
 	cout << "Safe position is " << josephusProblem(n, m) << endl;
 

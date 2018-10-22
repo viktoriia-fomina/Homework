@@ -34,7 +34,7 @@ List::~List()
 
 // задача Иосифа
 
-int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkipped)
+int List::josephusProblem(int const numberOfWarriors, int const murderFrequency)
 {
 	for (int i = numberOfWarriors; i >= 1; --i)
 	{
@@ -45,7 +45,7 @@ int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkippe
 	while (!ifOneNode())
 	{
 		temp = nextAfterElementToDelete;
-		for (int i = 0; i < numberToBeSkipped - 1; ++i)
+		for (int i = 0; i < murderFrequency - 1; ++i)
 		{
 			temp = temp->next;
 		}

@@ -9,7 +9,7 @@ struct List
 {
 	List();
 	~List();
-	int josephusProblem(int const numberOfWarriors, int const numberToBeSkipped);
+	int josephusProblem(int const numberOfWarriors, int const murderFrequency);
 	void addNode(int const data);
 	void deleteNode(int const data);
 	bool isEmpty() const;
