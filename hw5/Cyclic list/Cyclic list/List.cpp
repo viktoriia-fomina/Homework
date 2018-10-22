@@ -9,12 +9,18 @@ List::List()
 List::~List()
 {
 	if (!isEmpty())
-	{
+	{ 
 		while (head != head->next)
 		{
 			bool flagIfTwoElements = ifTwoElements();
 			auto* temp = head;
+			auto* previousBeforeHead = head;
+			while (previousBeforeHead->next != head)
+			{
+				previousBeforeHead = previousBeforeHead->next;
+			}
 			head = head->next;
+			previousBeforeHead->next = head;
 			temp->next = nullptr;
 			delete temp;
 			temp = nullptr;
