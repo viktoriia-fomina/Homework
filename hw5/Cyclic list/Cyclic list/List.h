@@ -13,10 +13,9 @@ struct List
 	void addNode(int const data);
 	void deleteNode(int const data);
 	bool isEmpty() const;
-	bool ifOneNode() const;
-	int getHead() const;
 	friend ostream & operator<<(ostream & os, List const & list);
 private:
+	bool ifOneNode() const;
 	void deleteNodeIfOneNode(int const data);
 	void deleteNodeIfMoreThanOneNode(int const data);
 	void deleteHeadNodeIfMoreThanOneNode(int const data);

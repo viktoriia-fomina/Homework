@@ -1,6 +1,8 @@
 #include "List.h"
 #include "Node.h"
 
+// конструктор - деструктор
+
 List::List()
 {
 	head = nullptr;
@@ -10,7 +12,7 @@ List::~List()
 {
 	if (!isEmpty())
 	{ 
-		while (head != head->next)
+		while (!ifOneNode())
 		{
 			auto* temp = head;
 			auto* prevBeforeHead = head;
@@ -29,6 +31,8 @@ List::~List()
 		head = nullptr;
 	}
 }
+
+// задача Иосифа
 
 int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkipped)
 {
@@ -52,12 +56,14 @@ int List::josephusProblem(int const numberOfWarriors, int const numberToBeSkippe
 	return head->data;
 }
 
+// добавление элемента
+
 void List::addNode(int const data)
 {
 	auto* newElement = new Node(data);
 	if (!isEmpty())
 	{
-		if (head != head->next)
+		if (!ifOneNode())
 		{
 			addNodeIfNextIsNotHead(data, newElement);
 		}
@@ -94,6 +100,8 @@ void List::addNodeIfNextIsHead(int const data, Node * const newElement)
 	temp->next = head;
 }
 
+// удаление элемента
+
 void List::deleteNode(int const data)
 {
 	if (isEmpty())
@@ -102,7 +110,7 @@ void List::deleteNode(int const data)
 	}
 	else
 	{
-		if (head->next == head)
+		if (ifOneNode())
 		{
 			deleteNodeIfOneNode(data);
 		}
@@ -177,26 +185,27 @@ void List::deleteNotHeadNodeIfMoreThanOneNode(int const data)
 	}
 }
 
+// проверка является ли список пустым
+
 bool List::isEmpty() const
 {
 	return head == nullptr;
 }
+
+// проверка один ли элемент в списке
 
 bool List::ifOneNode() const
 {
 	return head == head->next;
 }
 
-int List::getHead() const
-{
-	return head->data;
-}
+// оператор вывода
 
 ostream & operator<<(ostream & os, List const & list)
 {
 	if (!list.isEmpty())
 	{
-		if (list.head->next == list.head)
+		if (list.ifOneNode())
 		{
 			os << list.head->data;
 		}
