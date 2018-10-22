@@ -55,7 +55,10 @@ void List::addNode(int data)
 
 void List::deleteNode(int data)
 {
-
+	if (head == nullptr)
+	{
+		cout << "List has no nodes\n";
+	}
 }
 
 ostream & operator<<(ostream & os, List const & list)
