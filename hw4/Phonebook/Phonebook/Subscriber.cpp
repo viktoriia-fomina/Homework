@@ -42,6 +42,28 @@ Subscriber::~Subscriber()
 
 // getter - setter
 
+void Subscriber::setStr(char const * str, char** destination)
+{
+	if (*destination != nullptr)
+	{
+		delete[] *destination;
+	}
+	if (str != nullptr)
+	{
+		int const size = (int)strlen(str);
+		*destination = new char[size + 1];
+		for (int i = 0; i < size; ++i)
+		{
+			(*destination)[i] = str[i];
+		}
+		(*destination)[size] = '\0';
+	}
+	else
+	{
+		*destination = nullptr;
+	}
+}
+
 char const * Subscriber::getName() const
 {
 	return name;
@@ -49,7 +71,7 @@ char const * Subscriber::getName() const
 
 void Subscriber::setName(char const * name)
 {
-	if (this->name != nullptr)
+	/*if (this->name != nullptr)
 	{
 		delete[] this->name;
 	}
@@ -59,7 +81,8 @@ void Subscriber::setName(char const * name)
 	{
 		this->name[i] = name[i];
 	}
-	this->name[size] = '\0';
+	this->name[size] = '\0';*/
+	setStr(name, &(this->name));
 }
 
 char const * Subscriber::getNumber() const
@@ -69,17 +92,25 @@ char const * Subscriber::getNumber() const
 
 void Subscriber::setNumber(char const * number)
 {
-	if (this->number != nullptr)
+	/*if (this->number != nullptr)
 	{
 		delete[] this->number;
 	}
-	int const size = (int)strlen(number);
-	this->number = new char[size + 1];
-	for (int i = 0; i < size; ++i)
+	if (number != nullptr)
 	{
-		this->number[i] = number[i];
+		int const size = (int)strlen(number);
+		this->number = new char[size + 1];
+		for (int i = 0; i < size; ++i)
+		{
+			this->number[i] = number[i];
+		}
+		this->number[size] = '\0';
 	}
-	this->number[size] = '\0';
+	else
+	{
+		this->number = nullptr;
+	}*/
+	setStr(number, &(this->number));
 }
 
 // остальные методы

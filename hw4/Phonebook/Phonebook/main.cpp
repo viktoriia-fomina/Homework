@@ -5,14 +5,14 @@
 #include <iostream>
 
 void tests();
-void forUsers();
+void menu();
 
 int main()
 {
 	// помимо интерактивного режима для пользователя есть тесты
 	// в мейне не стала вызывать функцию тестс - посчитала лишним
 	
-	forUsers();
+	menu();
 
 	system("pause");
 	return 0;
@@ -39,7 +39,7 @@ void tests()
 	printf("Check file \"phonebook\" to finish testing\n");
 }
 
-void forUsers()
+void menu()
 {
 	Phonebook p;
 	int const size = 20;

@@ -20,6 +20,7 @@ struct Subscriber
 	// остальные методы
 	void print() const;
 private:
+	void setStr(char const * str, char** destination);
 	char* name;
 	char* number;
 };

@@ -17,9 +17,8 @@
 
 struct Phonebook
 {
-	// конструкторы - оператор присваивания - деструктор
+	// конструкторы - деструктор
 	Phonebook();
-	Phonebook & operator=(Phonebook const & p);
 	~Phonebook();
 
 	// getter - setter
@@ -36,6 +35,7 @@ struct Phonebook
 private:
 	void readInfoFromFile(); // вспомогательный метод к конструктору
 	Phonebook(Phonebook const & p); // конструктор копирования
+	void operator=(Phonebook const & p); // оператор присваивания
 
 	Subscriber* base;
 	int numberOfNotes;

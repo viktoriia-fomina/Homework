@@ -2,7 +2,7 @@
 
 bool compareStr(char const * str1, char const * str2);
 
-// конструкторы - оператор присваивания - деструктор
+// конструкторы - деструктор
 
 Phonebook::Phonebook()
 {
@@ -11,6 +11,10 @@ Phonebook::Phonebook()
 	numberOfNotes = 0;
 	readInfoFromFile();
 }
+
+Phonebook::Phonebook(Phonebook const & p) {} // конструктор копирования
+
+void Phonebook::operator=(Phonebook const & p) {} // оператор присваивания
 
 void Phonebook::readInfoFromFile()
 {
@@ -51,13 +55,6 @@ void Phonebook::readInfoFromFile()
 		}
 	}
 	fclose(file);
-}
-
-Phonebook::Phonebook(Phonebook const & p) {}
-
-Phonebook & Phonebook::operator=(Phonebook const & p) 
-{
-	return *this;
 }
 
 Phonebook::~Phonebook()
