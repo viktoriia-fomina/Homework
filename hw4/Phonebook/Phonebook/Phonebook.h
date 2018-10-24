@@ -41,4 +41,4 @@ private:
 	int numberOfNotes;
 };
 
-bool compareStr(char const * name1, char const * name2);
+bool compareStr(char const * str1, char const * str2);
