@@ -84,7 +84,7 @@ void Subscriber::setNumber(char const * number)
 
 // остальные методы
 
-void Subscriber::print()
+void Subscriber::print() const
 {
 	printf("%s  ", getName());
 	printf("%s", getNumber());

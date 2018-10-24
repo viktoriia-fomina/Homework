@@ -18,7 +18,7 @@ struct Subscriber
 	void setNumber(char const * number);
 
 	// остальные методы
-	void print();
+	void print() const;
 private:
 	char* name;
 	char* number;
