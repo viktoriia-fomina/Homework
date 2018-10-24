@@ -1,5 +1,7 @@
 #include "Phonebook.h"
 
+bool compareStr(char const * str1, char const * str2);
+
 // конструкторы - оператор присваивания - деструктор
 
 Phonebook::Phonebook()

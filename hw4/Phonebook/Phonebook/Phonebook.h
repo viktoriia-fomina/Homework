@@ -40,5 +40,3 @@ private:
 	Subscriber* base;
 	int numberOfNotes;
 };
-
-bool compareStr(char const * str1, char const * str2);
