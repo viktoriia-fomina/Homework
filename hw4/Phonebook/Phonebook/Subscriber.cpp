@@ -71,17 +71,6 @@ char const * Subscriber::getName() const
 
 void Subscriber::setName(char const * name)
 {
-	/*if (this->name != nullptr)
-	{
-		delete[] this->name;
-	}
-	int const size = (int)strlen(name);
-	this->name = new char[size + 1];
-	for (int i = 0; i < size; ++i)
-	{
-		this->name[i] = name[i];
-	}
-	this->name[size] = '\0';*/
 	setStr(name, &(this->name));
 }
 
@@ -92,24 +81,6 @@ char const * Subscriber::getNumber() const
 
 void Subscriber::setNumber(char const * number)
 {
-	/*if (this->number != nullptr)
-	{
-		delete[] this->number;
-	}
-	if (number != nullptr)
-	{
-		int const size = (int)strlen(number);
-		this->number = new char[size + 1];
-		for (int i = 0; i < size; ++i)
-		{
-			this->number[i] = number[i];
-		}
-		this->number[size] = '\0';
-	}
-	else
-	{
-		this->number = nullptr;
-	}*/
 	setStr(number, &(this->number));
 }
 

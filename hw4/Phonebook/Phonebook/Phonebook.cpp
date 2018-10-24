@@ -127,9 +127,21 @@ void Phonebook::findNumberByName(char const * name) const // 3
 
 void Phonebook::findNameByNumber(char const * number) const // 4
 {
-	for (int i = 0; i < size(); ++i)
+	/*for (int i = 0; i < size(); ++i)
 	{
 		if (compareStr((*this)[i].getNumber(), number))
+		{
+			(*this)[i].print();
+		}
+	}*/
+	
+}
+
+void Phonebook::finder(char* keyWord, char const * str)
+{
+	for (int i = 0; i < size(); ++i)
+	{
+		if (compareStr(keyWord, str))
 		{
 			(*this)[i].print();
 		}
