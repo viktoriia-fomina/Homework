@@ -18,6 +18,8 @@ int parser(int* numbers, char const * string);
 
 int main()
 {
+	// этот закоменченный кусок кода для того, чтобы тестировать самостоятельно
+
 	//int n = 0;
 	//cout << "Input number of warriors\n";
 	//cin >> n;
@@ -44,7 +46,7 @@ void tests()
 	{
 		int const size = 25;
 		char buffer[size] {};
-		int* numbers = new int[size] {};
+		int numbers[size] {};
 		int count = 1;
 		while (!file.eof())
 		{
@@ -65,7 +67,6 @@ void tests()
 				count++;
 			}
 		}
-		delete[] numbers;
 	}
 }
 
@@ -78,15 +79,15 @@ int parser(int* numbers, char const * string)
 	while (string[iterator] != '\0')
 	{
 		int j = 0;
-		bool flag = false;
+		bool ifSpaceOrEndOfLineOrEndOfStr = false;
 		while (string[iterator] != ' ' && string[iterator] != '\n' && string[iterator] != '\0')
 		{
 			temp[j] = string[iterator];
 			++j;
 			++iterator;
-			flag = true;
+			ifSpaceOrEndOfLineOrEndOfStr = true;
 		}
-		if (flag)
+		if (ifSpaceOrEndOfLineOrEndOfStr)
 		{
 			temp[j] = '\0';
 			numbers[size] = atoi(temp);
@@ -100,29 +101,3 @@ int parser(int* numbers, char const * string)
 	delete[] temp;
 	return size;
 }
-//void tests()
-//{
-//	int numberOfTests = 0;
-//	int const cols = 5;
-//	int const rows = 5;
-//	int** array{};
-//	int count = 1;
-//	for (int i = 1; i <= rows; ++i)
-//	{
-//		for (int j = 1; j <= cols; ++j)
-//		{
-//			if (array[i][j] == josephusProblem(i, j))
-//			{
-//				cout << "Test " << count << " passed\n";
-//			}
-//			else
-//			{
-//				cout << "Test " << count << " FAILED\n";
-//				cout << "Input: " << i << ", " << j << endl;
-//				cout << "Output: " << josephusProblem(i, j) << endl;
-//				cout << "Right output: " << array[i][j] << endl << endl;
-//			}
-//			++count;
-//		}
-//	}
-//}
