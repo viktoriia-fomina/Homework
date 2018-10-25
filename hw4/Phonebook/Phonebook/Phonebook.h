@@ -36,7 +36,6 @@ private:
 	void readInfoFromFile(); // вспомогательный метод к конструктору
 	Phonebook(Phonebook const & p); // конструктор копирования
 	void operator=(Phonebook const & p); // оператор присваивания
-	void finder(char* keyWord, char const* str);
 
 	Subscriber* base;
 	int numberOfNotes;

@@ -12,16 +12,16 @@ Phonebook::Phonebook()
 	readInfoFromFile();
 }
 
-Phonebook::Phonebook(Phonebook const & p) {} // конструктор копирования
-
-void Phonebook::operator=(Phonebook const & p) {} // оператор присваивания
-
 void Phonebook::readInfoFromFile()
 {
 	FILE* file = fopen("phonebook.txt", "r");
 	int const sizeData = 100;
 	int const sizeBuffer = 20;
-	if (file)
+	if (!file)
+	{
+		printf("File could not be opened\n");
+	}
+	else
 	{
 		char* data[sizeData] = {};
 		int linesRead = 0;
@@ -36,26 +36,33 @@ void Phonebook::readInfoFromFile()
 			data[linesRead] = buffer;
 			++linesRead;
 		}
-		numberOfNotes = linesRead / 2;
-		for (int i = 0; i < linesRead; ++i)
+		if (linesRead > 0)
 		{
-			Subscriber* s = new Subscriber;
-			s->setName(data[i]);
-			s->setNumber(data[i + 1]);
-			(*this)[i / 2] = *s;
-			++i;
-			if (i == linesRead - 1)
+			numberOfNotes = linesRead / 2;
+			for (int i = 0; i < linesRead; ++i)
 			{
-				delete s;
+				Subscriber* s = new Subscriber;
+				s->setName(data[i]);
+				s->setNumber(data[i + 1]);
+				(*this)[i / 2] = *s;
+				++i;
+				if (i == linesRead - 1)
+				{
+					delete s;
+				}
 			}
-		}
-		for (int i = 0; i < linesRead; ++i)
-		{
-			delete[] data[i];
+			for (int i = 0; i < linesRead; ++i)
+			{
+				delete[] data[i];
+			}
 		}
 	}
 	fclose(file);
 }
+
+Phonebook::Phonebook(Phonebook const & p) {} // конструктор копирования
+
+void Phonebook::operator=(Phonebook const & p) {} // оператор присваивания
 
 Phonebook::~Phonebook()
 {
@@ -127,25 +134,13 @@ void Phonebook::findNumberByName(char const * name) const // 3
 
 void Phonebook::findNameByNumber(char const * number) const // 4
 {
-	/*for (int i = 0; i < size(); ++i)
+	for (int i = 0; i < size(); ++i)
 	{
 		if (compareStr((*this)[i].getNumber(), number))
 		{
 			(*this)[i].print();
 		}
-	}*/
-	
-}
-
-void Phonebook::finder(char* keyWord, char const * str)
-{
-	for (int i = 0; i < size(); ++i)
-	{
-		if (compareStr(keyWord, str))
-		{
-			(*this)[i].print();
-		}
-	}
+	}	
 }
 
 void Phonebook::saveToFile() const // 5
