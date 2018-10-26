@@ -14,7 +14,8 @@ int readComments();
 
 int main()
 {	
-	system("pause");
+	readComments();
+
 	return 0;
 }
 
