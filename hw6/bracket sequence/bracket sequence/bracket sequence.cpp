@@ -2,8 +2,8 @@
 
 bool isBracket(char const symbol);
 bool ifClosingBracket(char const symbol);
-bool ifOpeningBracket(Stack & s, char const symbol);
-bool ifPairOfBrackets(Stack & s, char const closingBracket);
+bool ifOpeningBracket(char const symbol);
+bool ifPairOfBrackets(char const openingBracket, char const closingBracket);
 
 bool ifBracketSequenceIsCorrect(string const & str)
 {
@@ -14,7 +14,11 @@ bool ifBracketSequenceIsCorrect(string const & str)
 		{
 			if (s.isEmpty())
 			{
-				if (!ifOpeningBracket(s, str[i]))
+				if (ifOpeningBracket(str[i]))
+				{
+					s.push(str[i]);
+				}
+				else
 				{
 					return false;
 				}
@@ -27,7 +31,11 @@ bool ifBracketSequenceIsCorrect(string const & str)
 					{
 						return false;
 					}
-					if (!ifPairOfBrackets(s, str[i]))
+					if (ifPairOfBrackets(s.peek(), str[i]))
+					{
+						s.pop();
+					}
+					else
 					{
 						return false;
 					}
@@ -57,11 +65,10 @@ bool ifClosingBracket(char const symbol)
 	return (symbol == ')' || symbol == ']' || symbol == '}');
 }
 
-bool ifOpeningBracket(Stack & s, char const symbol)
+bool ifOpeningBracket(char const symbol)
 {
 	if (symbol == '(' || symbol == '[' || symbol == '{')
 	{
-		s.push(symbol);
 		return true;
 	}
 	else
@@ -70,21 +77,18 @@ bool ifOpeningBracket(Stack & s, char const symbol)
 	}
 }
 
-bool ifPairOfBrackets(Stack & s, char const closingBracket)
+bool ifPairOfBrackets(char const openingBracket, char const closingBracket)
 {
-	if (s.peek() == '(' && closingBracket == ')')
+	if (openingBracket == '(' && closingBracket == ')')
 	{
-		s.pop();
 		return true;
 	}
-	if (s.peek() == '[' && closingBracket == ']')
+	if (openingBracket == '[' && closingBracket == ']')
 	{
-		s.pop();
 		return true;
 	}
-	if (s.peek() == '{' && closingBracket == '}')
+	if (openingBracket == '{' && closingBracket == '}')
 	{
-		s.pop();
 		return true;
 	}
 	return false;
