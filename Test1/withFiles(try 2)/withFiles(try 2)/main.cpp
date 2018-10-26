@@ -10,9 +10,15 @@ using namespace std;
 // До комментария в строке может быть значимый текст, его выводить не надо. 
 // Пустые строки выводить не надо.
 
-void tests();
+int readComments();
 
 int main()
+{	
+	system("pause");
+	return 0;
+}
+
+int readComments()
 {
 	ifstream file("test.txt", ios::in);
 	if (!file.is_open())
@@ -23,7 +29,7 @@ int main()
 	else
 	{
 		int const size = 100;
-		char buffer[size];
+		char buffer[size]{};
 		bool flagIfSymbol = false;
 		while (!file.eof())
 		{
@@ -49,11 +55,5 @@ int main()
 		}
 		file.close();
 	}
-	system("pause");
 	return 0;
-}
-
-void tests()
-{
-
 }
