@@ -10,6 +10,8 @@ using namespace std;
 // До комментария в строке может быть значимый текст, его выводить не надо. 
 // Пустые строки выводить не надо.
 
+void tests();
+
 int main()
 {
 	ifstream file("test.txt", ios::in);
@@ -45,9 +47,13 @@ int main()
 			}
 			flagIfSymbol = false;
 		}
+		file.close();
 	}
-
-
 	system("pause");
 	return 0;
+}
+
+void tests()
+{
+
 }
