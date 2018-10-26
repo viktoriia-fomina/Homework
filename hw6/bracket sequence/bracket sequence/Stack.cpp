@@ -55,6 +55,7 @@ char Stack::peek()
 	else
 	{
 		cout << "Stack is empty\n";
+		return '\0';
 	}
 }
 
