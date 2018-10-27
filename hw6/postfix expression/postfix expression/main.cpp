@@ -9,7 +9,7 @@ int main()
 	string str;
 	cout << "Input string" << endl;
 	cin >> str;
-	cout << "res is " << fromPostfixToResult(str) << endl;
+	cout << "result is " << fromPostfixToResult(str) << endl;
 
 
 	system("pause");
