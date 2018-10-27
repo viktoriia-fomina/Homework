@@ -21,10 +21,11 @@ int fromPostfixToResult(string const & str)
 			auto temp1 = s.peek();
 			int num1 = atoi(&temp1);
 			s.pop();
-			performOperation(str[i], num1, num2);
+			int resultOfOperation = performOperation(str[i], num1, num2);
+			s.push(resultOfOperation);
 		}
 	}
-	return 0;
+	return str[str.size() - 1];
 }
 
 bool isOperator(char symbol)
