@@ -7,7 +7,8 @@ int performOperation(char symbol, int firstNum, int secondNum);
 int fromPostfixToResult(string const & str)
 {
 	Stack s;
-	for (int i = 0; i < str.size(); ++i)
+	int sizeOfStr = (int)str.size();
+	for (int i = 0; i < sizeOfStr; ++i)
 	{
 		if (!isOperator(str[i]))
 		{
@@ -22,10 +23,13 @@ int fromPostfixToResult(string const & str)
 			int num1 = atoi(&temp1);
 			s.pop();
 			int resultOfOperation = performOperation(str[i], num1, num2);
-			s.push(resultOfOperation);
+			char resOperation = resultOfOperation + '0';
+			s.push(resOperation);
 		}
 	}
-	return str[str.size() - 1];
+	auto tempRes = s.peek();
+	int result = atoi(&tempRes);
+	return result;
 }
 
 bool isOperator(char symbol)
