@@ -12,23 +12,21 @@ int fromPostfixToResult(string const & str)
 	{
 		if (!isOperator(str[i]))
 		{
-			s.push(str[i]);
+			char number = str[i];
+			int numberInInt = atoi(&number);
+			s.push(numberInInt);
 		}
 		else
 		{
-			auto temp2 = s.peek();
-			int num2 = atoi(&temp2);
+			int num2 = s.peek();
 			s.pop();
-			auto temp1 = s.peek();
-			int num1 = atoi(&temp1);
+			int num1 = s.peek();
 			s.pop();
 			int resultOfOperation = performOperation(str[i], num1, num2);
-			char resOperation = resultOfOperation + '0';
-			s.push(resOperation);
+			s.push(resultOfOperation);
 		}
 	}
-	auto tempRes = s.peek();
-	int result = atoi(&tempRes);
+	int result = s.peek();
 	return result;
 }
 

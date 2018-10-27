@@ -16,11 +16,11 @@ struct Stack
 	// оператор присваивания
 
 	// добавление элемента в голову
-	void push(char data);
+	void push(int data);
 	// удаление элемента из головы
 	int pop();
 	// посмотреть на головной элемент
-	char peek();
+	int peek();
 	// проверяет является ли стек пустым
 	bool isEmpty();
 private:

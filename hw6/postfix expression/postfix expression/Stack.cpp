@@ -19,7 +19,7 @@ Stack::~Stack()
 	}
 }
 
-void Stack::push(char data)
+void Stack::push(int data)
 {
 	auto* newElement = new Element(data);
 	if (!isEmpty())
@@ -46,7 +46,7 @@ int Stack::pop()
 	}
 }
 
-char Stack::peek()
+int Stack::peek()
 {
 	if (!isEmpty())
 	{
@@ -55,7 +55,7 @@ char Stack::peek()
 	else
 	{
 		cout << "Stack is empty\n";
-		return '\0';
+		return -1;
 	}
 }
 

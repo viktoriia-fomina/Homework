@@ -2,8 +2,8 @@
 
 struct Element
 {
-	Element(char data);
+	Element(int data);
 	~Element();
-	char data;
+	int data;
 	Element* next;
 };
