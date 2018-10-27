@@ -1,12 +1,14 @@
 #include "Infix to postfix.h"
 
 bool isOperator(char const symbol);
-bool ifOperatorHasHigherPriority(char const operatorCheck, char const operatorCompareWith);
+bool ifOperatorHasHigherPriority(char const operatorCheck, char const operatorCompareWith, 
+		bool wasOpeningBrake);
 
 void infixToPostfix(string & infix, string & toPostfix)
 {
 	Stack s;
 	int count = 0;
+	// bool wasOpeningBrake = false;
 	for (int i = 0; i < (int)infix.size(); ++i)
 	{
 		if (!isOperator(infix[i]))
@@ -14,8 +16,20 @@ void infixToPostfix(string & infix, string & toPostfix)
 			toPostfix[count] = infix[i];
 			++count;
 		}
+		else if (infix[i] == '(' || infix[i] == ')')
+		{
+			/*if (infix[i] == '(')
+			{
+				wasOpeningBrake = true;
+			}
+			else
+			{
+				wasOpeningBrake = false;
+			}*/
+		}
 		else
 		{
+			
 			while (!s.isEmpty())
 			{
 				if (ifOperatorHasHigherPriority(infix[i], s.peek()))
@@ -44,21 +58,29 @@ bool isOperator(char const symbol)
 	return (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/');
 }
 
-bool ifOperatorHasHigherPriority(char const operatorCheck, char const operatorCompareWith)
+bool ifOperatorHasHigherPriority(char const operatorCheck, char const operatorCompareWith,
+		bool wasOpeningBrake)
 {
-	if (operatorCheck == '+' || operatorCheck == '-')
+	if (!wasOpeningBrake)
 	{
-		return false;
-	}
-	else
-	{
-		if (operatorCompareWith == '*' || operatorCompareWith == '/')
+		if (operatorCheck == '+' || operatorCheck == '-')
 		{
 			return false;
 		}
 		else
 		{
-			return true;
+			if (operatorCompareWith == '*' || operatorCompareWith == '/')
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
+	}
+	else
+	{
+
 	}
 }
