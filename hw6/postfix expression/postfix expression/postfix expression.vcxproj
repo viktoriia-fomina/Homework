@@ -117,10 +117,12 @@
   <ItemGroup>
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Postfix.cpp" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Element.h" />
+    <ClInclude Include="Postfix.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
