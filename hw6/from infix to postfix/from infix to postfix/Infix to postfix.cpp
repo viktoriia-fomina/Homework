@@ -3,6 +3,7 @@
 bool isOperator(char const symbol);
 bool isRoundBracket(char const symbol);
 void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const currentSymbol);
+int doIfRoundBracket(Stack & s, string & toPostfix, int & currentIndex, char const currentSymbol);
 bool isPlusOrMinus(char const symbol);
 bool isMultOrDiv(char const symbol); 
 
@@ -25,24 +26,10 @@ int infixToPostfix(string const & infix, string & toPostfix)
 			}
 			else
 			{
-				if (infix[i] == ')' && s.isEmpty())
+				if (doIfRoundBracket(s, toPostfix, currentIndex, infix[i]) == -1)
 				{
 					cout << "Infix expression is incorrect" << endl;
 					return -1;
-				}
-				else if (infix[i] == ')' && isOperator(s.peek()))
-				{
-					toPostfix[currentIndex] = s.peek();
-					s.pop();
-					++currentIndex;
-					if (s.peek() == '(')
-					{
-						s.pop();
-					}
-				}
-				else if (infix[i] == '(' && (s.isEmpty() || isOperator(s.peek()) || s.peek() == '('))
-				{
-					s.push(infix[i]);
 				}
 			}
 		}
@@ -55,8 +42,8 @@ int infixToPostfix(string const & infix, string & toPostfix)
 			return -1;
 		}
 		toPostfix[currentIndex] = s.peek();
-		s.pop();
 		++currentIndex;
+		s.pop();
 	}
 	return 0;
 }
@@ -92,11 +79,35 @@ void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const 
 			// текущий символ умнож или дел, последний элемент на стеке - умножить или делить
 			// текущий элемент плюс или минус, последний элемент на стеке - оператор
 			toPostrix[currentIndex] = s.peek();
+			++currentIndex;
 			s.pop();
 			s.push(currentSymbol);
-			++currentIndex;
 		}
 	}
+}
+
+int doIfRoundBracket(Stack & s, string & toPostfix, int & currentIndex, char const currentSymbol)
+{
+	if (currentSymbol == ')' && s.isEmpty())
+	{
+		return -1;
+	}
+	else if (currentSymbol == ')' && isOperator(s.peek()))
+	{
+		toPostfix[currentIndex] = s.peek();
+		++currentIndex;
+		s.pop();
+		if (s.peek() == '(')
+		{
+			s.pop();
+		}
+	}
+	else
+	{
+		// если скобка круглая, то просто кладем ее в стек
+		s.push(currentSymbol);
+	}
+	return 0;
 }
 
 bool isPlusOrMinus(char const symbol)
