@@ -7,50 +7,7 @@ bool ifOperatorHasHigherPriority(char const operatorCheck, char const operatorCo
 void infixToPostfix(string & infix, string & toPostfix)
 {
 	Stack s;
-	int count = 0;
-	// bool wasOpeningBrake = false;
-	for (int i = 0; i < (int)infix.size(); ++i)
-	{
-		if (!isOperator(infix[i]))
-		{
-			toPostfix[count] = infix[i];
-			++count;
-		}
-		else if (infix[i] == '(' || infix[i] == ')')
-		{
-			/*if (infix[i] == '(')
-			{
-				wasOpeningBrake = true;
-			}
-			else
-			{
-				wasOpeningBrake = false;
-			}*/
-		}
-		else
-		{
-			
-			while (!s.isEmpty())
-			{
-				if (ifOperatorHasHigherPriority(infix[i], s.peek()))
-				{
-					break;
-				}
-				else
-				{
-					toPostfix[count] = s.peek();
-					s.pop();
-					++count;
-				}
-			}
-			s.push(infix[i]);
-		}
-	}
-	while (!s.isEmpty())
-	{
-		toPostfix[count] = s.peek();
-		s.pop();
-	}
+	
 }
 
 bool isOperator(char const symbol)
