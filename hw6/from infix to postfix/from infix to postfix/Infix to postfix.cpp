@@ -6,7 +6,7 @@ void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const 
 bool isPlusOrMinus(char const symbol);
 bool isMultOrDiv(char const symbol); 
 
-int infixToPostfix(string & infix, string & toPostfix)
+int infixToPostfix(string const & infix, string & toPostfix)
 {
 	Stack s;
 	int currentIndex = 0;
@@ -35,7 +35,7 @@ int infixToPostfix(string & infix, string & toPostfix)
 					toPostfix[currentIndex] = s.peek();
 					s.pop();
 					++currentIndex;
-					if (infix[i] == ')' && s.peek() == '(')
+					if (s.peek() == '(')
 					{
 						s.pop();
 					}
@@ -49,10 +49,16 @@ int infixToPostfix(string & infix, string & toPostfix)
 	}
 	while (!s.isEmpty())
 	{
+		if (isRoundBracket(s.peek()))
+		{
+			cout << "Infix expression is incorrect" << endl;
+			return -1;
+		}
 		toPostfix[currentIndex] = s.peek();
 		s.pop();
 		++currentIndex;
 	}
+	return 0;
 }
 
 bool isOperator(char const symbol)
