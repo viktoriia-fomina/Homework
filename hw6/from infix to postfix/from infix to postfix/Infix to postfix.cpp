@@ -4,6 +4,7 @@ bool isOperator(char const symbol);
 bool isRoundBracket(char const symbol);
 void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const currentSymbol);
 int doIfRoundBracket(Stack & s, string & toPostfix, int & currentIndex, char const currentSymbol);
+int popAllOperators(Stack & s, string & toPostfix, int & currentIndex);
 bool isPlusOrMinus(char const symbol);
 bool isMultOrDiv(char const symbol); 
 
@@ -36,14 +37,10 @@ int infixToPostfix(string const & infix, string & toPostfix)
 	}
 	while (!s.isEmpty())
 	{
-		if (isRoundBracket(s.peek()))
+		if (popAllOperators(s, toPostfix, currentIndex) == -1)
 		{
-			cout << "Infix expression is incorrect" << endl;
 			return -1;
 		}
-		toPostfix[currentIndex] = s.peek();
-		++currentIndex;
-		s.pop();
 	}
 	return 0;
 }
@@ -107,6 +104,18 @@ int doIfRoundBracket(Stack & s, string & toPostfix, int & currentIndex, char con
 		// если скобка круглая, то просто кладем ее в стек
 		s.push(currentSymbol);
 	}
+	return 0;
+}
+
+int popAllOperators(Stack & s, string & toPostfix, int & currentIndex)
+{
+	if (isRoundBracket(s.peek()))
+	{
+		return -1;
+	}
+	toPostfix[currentIndex] = s.peek();
+	++currentIndex;
+	s.pop();
 	return 0;
 }
 
