@@ -5,4 +5,4 @@
 
 using namespace std;
 
-void infixToPostfix(string & infix, string & toPostfix);
+int infixToPostfix(string & infix, string & toPostfix);
