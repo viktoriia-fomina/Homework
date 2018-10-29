@@ -8,16 +8,15 @@ struct Node;
 
 struct List
 {
-	List();
-	~List();
-	void addNode(int const data);
-	void deleteNode(int const data);
-									 // îñòàëüíîå
-	bool isEmpty() const;
-	friend ostream & operator<<(ostream & os, List const & list); // 3
+	List(); // конструктор
+	~List(); // деструктор
+	void addNode(int const data); // добавить узел
+	void deleteNode(int const data); // удалить узел
+	bool isEmpty() const; // проверить является ли список пустым
+	friend ostream & operator<<(ostream & os, List const & list); // оператор вывода
 private:
-	void deleteHead(int const data, Node* temp);
-	void deleteElementThatIsNotHead(int const data, Node* temp);
-	void swap(Node * a, Node* b);
+	void deleteHead(int const data, Node* temp); // удаление головы
+	void deleteElementThatIsNotHead(int const data, Node* temp); // удаление не головного элемента
+	void swap(Node * a, Node* b); // метод своп
 	Node* head;
 };

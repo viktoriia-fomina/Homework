@@ -2,11 +2,11 @@
 
 struct Node
 {
-	explicit Node(int data);
-	~Node();
+	explicit Node(int data); // конструктор с параметром
+	~Node(); // деструктор
 	int data;
 	Node* previous;
 	Node* next;
 private:
-	Node();
+	Node(); // конструктор без параметров
 };

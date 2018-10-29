@@ -1,8 +1,6 @@
 ﻿#include "List.h"
 #include "Node.h"
 
-// êîíñòðóêòîðû - äåñòðóêòîðû, äîáàâëåíèå - óäàëåíèå
-
 List::List()
 {
 	head = nullptr;
@@ -21,7 +19,7 @@ List::~List()
 	}
 }
 
-void List::addNode(int const data) // 1
+void List::addNode(int const data)
 {
 	if (!isEmpty())
 	{
@@ -43,7 +41,7 @@ void List::addNode(int const data) // 1
 	}
 }
 
-void List::deleteNode(int const data) // 2
+void List::deleteNode(int const data)
 {
 	if (isEmpty())
 	{
@@ -111,9 +109,7 @@ void List::deleteElementThatIsNotHead(int const data, Node* temp)
 	}
 }
 
-// îñòàëüíîå
-
-ostream & operator<<(ostream & os, List const & list) // 3
+ostream & operator<<(ostream & os, List const & list)
 {
 	auto* temp = list.head;
 	while (temp != nullptr)
