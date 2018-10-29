@@ -9,7 +9,7 @@ int main()
 	string infix;
 	cout << "Input infix expression\n";
 	cin >> infix;
-	string postfix = "                 ";
+	string postfix;
  	infixToPostfix(infix, postfix);
 	cout << postfix << endl;
 

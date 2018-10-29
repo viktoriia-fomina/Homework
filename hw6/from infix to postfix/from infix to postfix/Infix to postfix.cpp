@@ -16,7 +16,7 @@ int infixToPostfix(string const & infix, string & toPostfix)
 	{
 		if (!isOperator(infix[i]) && !isRoundBracket(infix[i]))
 		{
-			toPostfix[currentIndex] = infix[i];
+			toPostfix += infix[i];
 			++currentIndex;
 		}
 		else
@@ -55,7 +55,7 @@ bool isRoundBracket(char const symbol)
 	return (symbol == '(' || symbol == ')');
 }
 
-void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const currentSymbol)
+void doIfOperator(Stack & s, string & toPostfix, int & currentIndex, char const currentSymbol)
 {
 	if (s.isEmpty())
 	{
@@ -75,7 +75,7 @@ void doIfOperator(Stack & s, string & toPostrix, int & currentIndex, char const 
 		{
 			// текущий символ умнож или дел, последний элемент на стеке - умножить или делить
 			// текущий элемент плюс или минус, последний элемент на стеке - оператор
-			toPostrix[currentIndex] = s.peek();
+			toPostfix += s.peek();
 			++currentIndex;
 			s.pop();
 			s.push(currentSymbol);
@@ -91,7 +91,7 @@ int doIfRoundBracket(Stack & s, string & toPostfix, int & currentIndex, char con
 	}
 	else if (currentSymbol == ')' && isOperator(s.peek()))
 	{
-		toPostfix[currentIndex] = s.peek();
+		toPostfix += s.peek();
 		++currentIndex;
 		s.pop();
 		if (s.peek() == '(')
@@ -113,7 +113,7 @@ int popAllOperators(Stack & s, string & toPostfix, int & currentIndex)
 	{
 		return -1;
 	}
-	toPostfix[currentIndex] = s.peek();
+	toPostfix += s.peek();
 	++currentIndex;
 	s.pop();
 	return 0;
