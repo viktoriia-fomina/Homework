@@ -1,13 +1,14 @@
 #pragma once
 #include "Compare interface.h"
 
-template<typename dataType, typename indexType, typename sizeType>
+template<typename dataType, typename indexType>
 class Sort
 {
-	virtual sizeType getSize() const = 0;
+	virtual indexType getSize() const = 0;
 	virtual dataType & operator(indexType const i)[] = 0;
-	void mergeSort()
+	void mergeSort(indexType first, indexType last)
 	{
-
+		indexType const size = getSize();
+		
 	}
 };
