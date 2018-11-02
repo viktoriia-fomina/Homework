@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ADT Set (Tree)", "ADT Set (Tree)\ADT Set (Tree).vcxproj", "{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Debug|x64.ActiveCfg = Debug|x64
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Debug|x64.Build.0 = Debug|x64
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Debug|x86.ActiveCfg = Debug|Win32
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Debug|x86.Build.0 = Debug|Win32
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Release|x64.ActiveCfg = Release|x64
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Release|x64.Build.0 = Release|x64
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Release|x86.ActiveCfg = Release|Win32
+		{15D9EEE3-70EF-4E62-90BB-0A16E68A78E0}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF843D09-2033-45F3-A633-325A06CF514D}
+	EndGlobalSection
+EndGlobal
