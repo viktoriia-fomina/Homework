@@ -8,18 +8,21 @@ Set::Set()
 
 Set::~Set()
 {
-	// delete left subtree
-	while (head->leftChild != nullptr)
+	if (!isEmpty())
 	{
-		remove(maximum(head->leftChild)->data);
+		// delete left subtree
+		while (head->leftChild != nullptr)
+		{
+			remove(maximum(head->leftChild));
+		}
+		// delete right subtree
+		while (head->rightChild != nullptr)
+		{
+			remove(maximum(head->rightChild));
+		}
+		delete head;
+		head = nullptr;
 	}
-	// delete right subtree
-	while (head->rightChild != nullptr)
-	{
-		remove(maximum(head->rightChild)->data);
-	}
-	delete head;
-	head = nullptr;
 }
 
 bool Set::add(int const data)
@@ -72,7 +75,7 @@ bool Set::remove(int const data)
 	return true;
 }
 
-void Set::removeRecursion(Node* current, int const data)
+void Set::removeRecursion(Node*& current, int const data)
 {
 	if (current->data > data)
 	{
@@ -91,31 +94,20 @@ void Set::removeRecursion(Node* current, int const data)
 		}
 		else
 		{
-			current->data = maximum(current->leftChild)->data;
+			current->data = maximum(current->leftChild);
 			removeRecursion(current->leftChild, current->data);
 		}
 	}
 }
 
-Node* Set::maximum(Node * const current)
+int Set::maximum(Node const * const current)
 {
 	auto* temp = current;
 	while (temp->rightChild != nullptr)
 	{
 		temp = temp->rightChild;
 	}
-	return temp;
-}
-
-Node* Set::minimum(Node * const current)
-{
-	auto* temp = current;
-	temp = temp->rightChild;
-	while (temp->leftChild != nullptr)
-	{
-		temp = temp->leftChild;
-	}
-	return temp;
+	return temp->data;
 }
 
 void Set::removeIfChildIsNullptr(Node*& current) 
