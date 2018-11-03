@@ -244,41 +244,97 @@ void Set::addExpression(char const * str)
 	
 }
 
-void Set::addExpressionRecursion(char * str, Node* current, int & iterator)
+void Set::addExpressionRecursion(char * str, Node* current, int iterator)
 {
-	if (isOperator)
+	if (str[iterator] == '\0')
+	{
+		return;
+	}
+	if (isOperator(str[iterator]))
 	{
 		addIfOperator(str, current, iterator);
 	}
+	else if (str[iterator] == '(')
+	{
+		addExpressionRecursion(str, current, iterator + 1);
+	}
+	else if (isNumber(str[iterator]))
+	{
+		if (current->leftChild != nullptr)
+		{
+			current->leftChild = new Node(str[iterator]);
+			current->leftChild->parent = current;
+			addExpressionRecursion(str, current->leftChild, iterator + 1);
+		}
+		else
+		{
+			current->rightChild = new Node(str[iterator]);
+			current->rightChild->parent = current;
+			addExpressionRecursion(str, current->leftChild, iterator + 1);
+		}
+	}
 }
 
-void Set::addIfOperator(char* str, Node* current, int & iterator)
+void Set::addIfOperator(char* str, Node* current, int iterator)
 {
+	int position = 0;
 	if (current->leftChild == nullptr)
 	{
 		current->leftChild = new Node(str[iterator]);
 		current->leftChild->parent = current;
-		++iterator;
-		if (str[i])
-		addExpressionRecursion();
-		addExpressionRecursion();
+		if (str[iterator + 1] == '(')
+		{
+			position = getPositionOfClosingBracket(str + iterator);
+			addExpressionRecursion(str, current->leftChild, iterator + 2);
+		}
+		else
+		{
+			addExpressionRecursion(str, current->leftChild, iterator + 2);
+		}
+		addExpressionRecursion(str, current->leftChild, iterator + position + 1);
 	}
 	else
 	{
 		current->rightChild = new Node(str[iterator]);
 		current->leftChild->parent = current;
-		++iterator;
-		addExpressionRecursion();
-		addExpressionRecursion();
+		if (str[iterator + 1] == '(')
+		{
+			position = getPositionOfClosingBracket(str + iterator);
+			addExpressionRecursion(str, current->rightChild, iterator + 2);
+		}
+		else
+		{
+			addExpressionRecursion(str, current->rightChild, iterator + position + 1);
+		}
+		addExpressionRecursion(str, current->rightChild, iterator + position + 1);
 	}
 }
 
-int Set::getPositionOfClosingBrake(char const * str) const
+int Set::getPositionOfClosingBracket(char const * str) const
 {
-
+	int openingBrackets = 1;
+	int count = 1;
+	while (openingBrackets != 0, str[count] != '\0')
+	{
+		if (str[count] == '(')
+		{
+			++openingBrackets;
+		}
+		else if (str[count] == ')')
+		{
+			--openingBrackets;
+		}
+	}
+	return count;
 }
 
 bool Set::isOperator(char const symbol) const
 {
 	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+}
+
+bool Set::isNumber(char const symbol) const
+{
+	return symbol == '0' || symbol == '1' || symbol == '2' || symbol == '3' || symbol == '4' ||
+			symbol == '5' || symbol == '6' || symbol == '7' || symbol == '8' || symbol == '9';
 }

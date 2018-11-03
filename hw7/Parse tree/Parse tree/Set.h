@@ -17,10 +17,13 @@ struct Set
 	void addExpression(char const * str);
 private:
 	int readInfoFromFile();
-	void addExpressionRecursion(char * str, int const size, int & interator);
+	void addExpressionRecursion(char * str, Node* current, int interator);
+	void addIfOperator(char* str, Node* current, int iterator);
 	void addNodeNotToHead(Node* node, char const data);
 	void removeRecursion(Node*& current, char const data);
 	bool isOperator(char const symbol) const;
+	bool isNumber(char const symbol) const;
+	int getPositionOfClosingBracket(char const * str) const;
 	void removeIfChildIsNullptr(Node*& current);
 	int maximum(Node const * const current) const;
 	void treeTraversal(List & l) const;

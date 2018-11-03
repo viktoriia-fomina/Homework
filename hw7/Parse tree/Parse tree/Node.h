@@ -2,9 +2,9 @@
 
 struct Node
 {
-	Node(int const data); // constructor
+	Node(char const data); // constructor
 	~Node(); // destructor
-	int data;
+	char data;
 	Node* leftChild;
 	Node* rightChild;
 	Node* parent;
