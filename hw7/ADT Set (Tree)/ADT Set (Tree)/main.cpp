@@ -1,25 +1,27 @@
 #include <iostream>
 #include "Set.h"
 #include "List.h"
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+	srand(time(nullptr));
 	Set tree;
 	tree.add(1);
 	tree.add(2);
 	tree.add(0);
-	tree.add(1);
-	tree.add(3);
-	tree.add(-2);
 
-	cout << tree.exists(2) << " " << tree.exists(1) << " " << tree.exists(0) << endl;
-	// tree.remove(0);
-	// tree.remove(1);
-	// tree.remove(2);
+	for (int i = 0; i < 10; ++i)
+	{
+		tree.add(rand() % 10 - 20);
+	}
 	cout << "Testing:\n";
 	tree.printInDescendingOrder();
+	cout << endl;
+	tree.printInAscendingOrder();
+	cout << endl;
 
 	return 0;
 }

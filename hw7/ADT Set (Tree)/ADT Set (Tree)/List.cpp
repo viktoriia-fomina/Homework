@@ -109,17 +109,6 @@ void List::deleteElementThatIsNotHead(int const data, Element* temp)
 	}
 }
 
-ostream & operator<<(ostream & os, List const & list)
-{
-	auto* temp = list.head;
-	while (temp != nullptr)
-	{
-		os << temp->data << " ";
-		temp = temp->next;
-	}
-	return os;
-}
-
 void List::printInAscendingOrder()
 {
 	auto* temp = head;
@@ -137,7 +126,7 @@ void List::printInDescendingOrder()
 	{
 		temp = temp->next;
 	}
-	while (temp->previous != nullptr)
+	while (temp != nullptr)
 	{
 		cout << temp->data << " ";
 		temp = temp->previous;

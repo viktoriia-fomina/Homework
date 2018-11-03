@@ -18,7 +18,7 @@ private:
 	void removeRecursion(Node*& current, int const data);
 	void removeIfChildIsNullptr(Node*& current);
 	int maximum(Node const * const current);
-	void treeTraveral(List & l);
-	void treeTraveralRecursion(Node const * current, List & l);
+	void treeTraversal(List & l);
+	void treeTraversalRecursion(Node const * current, List & l);
 	Node* head;
 };

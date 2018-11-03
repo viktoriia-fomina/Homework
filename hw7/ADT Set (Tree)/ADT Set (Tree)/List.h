@@ -17,6 +17,6 @@ struct List
 private:
 	void deleteHead(int const data, Element* temp);
 	void deleteElementThatIsNotHead(int const data, Element* temp);
-	void swap(Element * a, Element* b);
+	void swap(Element* a, Element* b);
 	Element* head;
 };
