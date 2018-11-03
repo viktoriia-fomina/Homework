@@ -109,7 +109,7 @@ void List::deleteElementThatIsNotHead(int const data, Element* temp)
 	}
 }
 
-void List::printInAscendingOrder()
+void List::printInAscendingOrder() const
 {
 	auto* temp = head;
 	while (temp != nullptr)
@@ -119,7 +119,7 @@ void List::printInAscendingOrder()
 	}
 }
 
-void List::printInDescendingOrder()
+void List::printInDescendingOrder() const
 {
 	auto* temp = head;
 	while (temp->next != nullptr)

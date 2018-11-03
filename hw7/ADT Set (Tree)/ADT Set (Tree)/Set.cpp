@@ -101,7 +101,7 @@ void Set::removeRecursion(Node*& current, int const data)
 	}
 }
 
-int Set::maximum(Node const * const current)
+int Set::maximum(Node const * const current) const
 {
 	auto* temp = current;
 	while (temp->rightChild != nullptr)
@@ -129,7 +129,7 @@ void Set::removeIfChildIsNullptr(Node*& current)
 	delete temp;
 }
 
-bool Set::exists(int const data)
+bool Set::exists(int const data) const
 {
 	if (isEmpty())
 	{
@@ -161,12 +161,12 @@ bool Set::exists(int const data)
 	}
 }
 
-bool Set::isEmpty()
+bool Set::isEmpty() const
 {
 	return head == nullptr;
 }
 
-void Set::treeTraversal(List & l)
+void Set::treeTraversal(List & l) const
 {
 	if (!isEmpty())
 	{
@@ -174,7 +174,7 @@ void Set::treeTraversal(List & l)
 	}
 }
 
-void Set::treeTraversalRecursion(Node const * current, List & l)
+void Set::treeTraversalRecursion(Node const * current, List & l) const
 {
 	l.addNode(current->data);
 	if (current->leftChild != nullptr)
@@ -187,7 +187,7 @@ void Set::treeTraversalRecursion(Node const * current, List & l)
 	}
 }
 
-bool Set::printInAscendingOrder()
+bool Set::printInAscendingOrder() const
 {
 	List l;
 	treeTraversal(l);
@@ -199,7 +199,7 @@ bool Set::printInAscendingOrder()
 	return true;
 }
 
-bool Set::printInDescendingOrder()
+bool Set::printInDescendingOrder() const
 {
 	List l;
 	treeTraversal(l);
