@@ -1,6 +1,6 @@
 #include "Node.h"
 
-Node::Node(int const data)
+Node::Node(char const data)
 {
 	this->data = data;
 	this->leftChild = nullptr;
@@ -10,7 +10,7 @@ Node::Node(int const data)
 
 Node::~Node()
 {
-	this->data = 0;
+	this->data = '\0';
 	this->leftChild = nullptr;
 	this->rightChild = nullptr;
 	this->parent = nullptr;

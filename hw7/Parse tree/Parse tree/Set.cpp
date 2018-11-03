@@ -1,6 +1,7 @@
 #include "Set.h"
 #include "Node.h"
 #include "List.h"
+#include <fstream>
 
 Set::Set()
 {
@@ -26,7 +27,7 @@ Set::~Set()
 	}
 }
 
-bool Set::add(int const data)
+bool Set::add(char const data)
 {
 	if (isEmpty())
 	{
@@ -43,7 +44,7 @@ bool Set::add(int const data)
 	return true;
 }
 
-void Set::addNodeNotToHead(Node* node, int const data)
+void Set::addNodeNotToHead(Node* node, char const data)
 {
 	if (node->data > data && node->leftChild != nullptr)
 	{
@@ -68,7 +69,7 @@ void Set::addNodeNotToHead(Node* node, int const data)
 	}
 }
 
-bool Set::remove(int const data)
+bool Set::remove(char const data)
 {
 	if (!exists(data))
 	{
@@ -78,7 +79,7 @@ bool Set::remove(int const data)
 	return true;
 }
 
-void Set::removeRecursion(Node*& current, int const data)
+void Set::removeRecursion(Node*& current, char const data)
 {
 	if (current->data > data)
 	{
@@ -134,7 +135,7 @@ void Set::removeIfChildIsNullptr(Node*& current)
 	delete temp;
 }
 
-bool Set::exists(int const data) const
+bool Set::exists(char const data) const
 {
 	if (isEmpty())
 	{
@@ -214,4 +215,70 @@ bool Set::printInDescendingOrder() const
 	}
 	l.printInDescendingOrder();
 	return true;
+}
+
+int Set::readInfoFromFile()
+{
+	fstream file("data.txt", ios::in);
+	if (!file.is_open())
+	{
+		cout << "File not found" << endl;
+		return -1;
+	}
+	int const size = 100;
+	char* buffer = new char[size] {};
+	while (!file.eof())
+	{
+		file.getline(buffer, size);
+		addExpression(buffer);
+	}
+	file.close();
+	delete[] buffer;
+	return 0;
+}
+
+void Set::addExpression(char const * str)
+{
+	int i = 0;
+	int const size = strlen(str);
+	
+}
+
+void Set::addExpressionRecursion(char * str, Node* current, int & iterator)
+{
+	if (isOperator)
+	{
+		addIfOperator(str, current, iterator);
+	}
+}
+
+void Set::addIfOperator(char* str, Node* current, int & iterator)
+{
+	if (current->leftChild == nullptr)
+	{
+		current->leftChild = new Node(str[iterator]);
+		current->leftChild->parent = current;
+		++iterator;
+		if (str[i])
+		addExpressionRecursion();
+		addExpressionRecursion();
+	}
+	else
+	{
+		current->rightChild = new Node(str[iterator]);
+		current->leftChild->parent = current;
+		++iterator;
+		addExpressionRecursion();
+		addExpressionRecursion();
+	}
+}
+
+int Set::getPositionOfClosingBrake(char const * str) const
+{
+
+}
+
+bool Set::isOperator(char const symbol) const
+{
+	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
 }
