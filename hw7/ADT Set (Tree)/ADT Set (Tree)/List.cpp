@@ -120,6 +120,30 @@ ostream & operator<<(ostream & os, List const & list)
 	return os;
 }
 
+void List::printInAscendingOrder()
+{
+	auto* temp = head;
+	while (temp != nullptr)
+	{
+		cout << temp->data << " ";
+		temp = temp->next;
+	}
+}
+
+void List::printInDescendingOrder()
+{
+	auto* temp = head;
+	while (temp->next != nullptr)
+	{
+		temp = temp->next;
+	}
+	while (temp->previous != nullptr)
+	{
+		cout << temp->data << " ";
+		temp = temp->previous;
+	}
+}
+
 bool List::isEmpty() const
 {
 	return head == nullptr;

@@ -166,40 +166,47 @@ bool Set::isEmpty()
 	return head == nullptr;
 }
 
-void Set::treeTraveral(List & l)
+void Set::treeTraversal(List & l)
 {
 	if (!isEmpty())
 	{
-		treeTraveralRecursion(head, l);
+		treeTraversalRecursion(head, l);
 	}
 }
 
-void Set::treeTraveralRecursion(Node const * current, List & l)
+void Set::treeTraversalRecursion(Node const * current, List & l)
 {
 	l.addNode(current->data);
 	if (current->leftChild != nullptr)
 	{
-		treeTraveralRecursion(current->leftChild, l);
+		treeTraversalRecursion(current->leftChild, l);
 	}
 	if (current->rightChild != nullptr)
 	{
-		treeTraveralRecursion(current->rightChild, l);
+		treeTraversalRecursion(current->rightChild, l);
 	}
 }
 
 bool Set::printInAscendingOrder()
 {
-	return false;
+	List l;
+	treeTraversal(l);
+	if (l.isEmpty())
+	{
+		return false;
+	}
+	l.printInAscendingOrder();
+	return true;
 }
 
 bool Set::printInDescendingOrder()
 {
 	List l;
-	treeTraveral(l);
-	if (head == nullptr)
+	treeTraversal(l);
+	if (l.isEmpty())
 	{
 		return false;
 	}
-	cout << l;
+	l.printInDescendingOrder();
 	return true;
 }
