@@ -1,5 +1,6 @@
 #include "Set.h"
 #include "Node.h"
+#include "List.h"
 
 Set::Set()
 {
@@ -163,4 +164,42 @@ bool Set::exists(int const data)
 bool Set::isEmpty()
 {
 	return head == nullptr;
+}
+
+void Set::treeTraveral(List & l)
+{
+	if (!isEmpty())
+	{
+		treeTraveralRecursion(head, l);
+	}
+}
+
+void Set::treeTraveralRecursion(Node const * current, List & l)
+{
+	l.addNode(current->data);
+	if (current->leftChild != nullptr)
+	{
+		treeTraveralRecursion(current->leftChild, l);
+	}
+	if (current->rightChild != nullptr)
+	{
+		treeTraveralRecursion(current->rightChild, l);
+	}
+}
+
+bool Set::printInAscendingOrder()
+{
+	return false;
+}
+
+bool Set::printInDescendingOrder()
+{
+	List l;
+	treeTraveral(l);
+	if (head == nullptr)
+	{
+		return false;
+	}
+	cout << l;
+	return true;
 }
