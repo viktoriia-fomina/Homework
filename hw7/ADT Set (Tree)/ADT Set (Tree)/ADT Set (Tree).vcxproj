@@ -123,6 +123,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Set.cpp" />
+    <ClCompile Include="tests.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Set.h" />
+    <ClInclude Include="tests.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

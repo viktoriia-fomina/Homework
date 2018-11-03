@@ -11,8 +11,8 @@ struct List
 	~List();
 	void addNode(int const data);
 	void deleteNode(int const data);
-	void printInAscendingOrder();
-	void printInDescendingOrder();
+	void printInAscendingOrder() const;
+	void printInDescendingOrder() const;
 	bool isEmpty() const;
 private:
 	void deleteHead(int const data, Element* temp);
