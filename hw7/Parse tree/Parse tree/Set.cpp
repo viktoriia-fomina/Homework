@@ -142,28 +142,24 @@ bool Set::exists(char const data) const
 		return false;
 	}
 	auto* temp = head;
-	while (true)
+	bool flagIfExists = false;
+	existsRecursion(data, head, flagIfExists);
+	return flagIfExists;
+}
+
+void Set::existsRecursion(char const data, Node const * const current, bool & exists) const
+{
+	if (current->data == data)
 	{
-		if (temp->data > data)
-		{
-			if (temp->leftChild == nullptr)
-			{
-				return false;
-			}
-			temp = temp->leftChild;
-		}
-		else if (temp->data < data)
-		{
-			if (temp->rightChild == nullptr)
-			{
-				return false;
-			}
-			temp = temp->rightChild;
-		}
-		else
-		{
-			return true;
-		}
+		exists = true;
+	}
+	if (current->leftChild != nullptr)
+	{
+		existsRecursion(data, current->leftChild, exists);
+	}
+	if (current->rightChild != nullptr)
+	{
+		existsRecursion(data, current->rightChild, exists);
 	}
 }
 
@@ -241,11 +237,10 @@ void Set::addExpression(char * str)
 {
 	int i = 0;
 	int const size = strlen(str);
-	addExpressionRecursion(str, head, i);
-	
+	addExpressionRecursion(str, head, i);	
 }
 
-void Set::addExpressionRecursion(char * str, Node* current, int iterator)
+void Set::addExpressionRecursion(char * str, Node*& current, int iterator)
 {
 	if (str[iterator] == '\0')
 	{
@@ -274,12 +269,12 @@ void Set::addExpressionRecursion(char * str, Node* current, int iterator)
 	}
 }
 
-void Set::addIfOperator(char* str, Node* current, int iterator)
+void Set::addIfOperator(char* str, Node*& current, int iterator)
 {
 	int position = 0;
 	if (current == nullptr)
 	{
-		head = new Node(str[iterator]);
+		current = new Node(str[iterator]);
 		if (str[iterator + 1] == '(')
 		{
 			position = getPositionOfClosingBracket(str + iterator);
