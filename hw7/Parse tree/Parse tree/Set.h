@@ -12,6 +12,7 @@ struct Set
 	bool remove(char const data);
 	bool exists(char const data) const;
 	bool isEmpty() const;
+	bool printExpression() const;
 	bool printInAscendingOrder() const;
 	bool printInDescendingOrder() const;
 	void addExpression(char * str);

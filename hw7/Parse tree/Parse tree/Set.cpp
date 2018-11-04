@@ -189,6 +189,11 @@ void Set::treeTraversalRecursion(Node const * current, List & l) const
 	}
 }
 
+bool Set::printExpression() const
+{
+	return false;
+}
+
 bool Set::printInAscendingOrder() const
 {
 	List l;
@@ -279,12 +284,13 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		{
 			position = getPositionOfClosingBracket(str + iterator);
 			addExpressionRecursion(str, current, iterator + 2);
+			addExpressionRecursion(str, current, iterator + position + 1);
 		}
 		else
 		{
+			addExpressionRecursion(str, current, iterator + 1);
 			addExpressionRecursion(str, current, iterator + 2);
 		}
-		addExpressionRecursion(str, current, iterator + position + 1);
 	}
 	else if (current->leftChild == nullptr)
 	{
@@ -294,27 +300,29 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		{
 			position = getPositionOfClosingBracket(str + iterator);
 			addExpressionRecursion(str, current->leftChild, iterator + 2);
+			addExpressionRecursion(str, current->leftChild, iterator + position + 1);
 		}
 		else
 		{
+			addExpressionRecursion(str, current->leftChild, iterator + 1);
 			addExpressionRecursion(str, current->leftChild, iterator + 2);
 		}
-		addExpressionRecursion(str, current->leftChild, iterator + position + 1);
 	}
 	else
 	{
 		current->rightChild = new Node(str[iterator]);
-		current->leftChild->parent = current;
+		current->rightChild->parent = current;
 		if (str[iterator + 1] == '(')
 		{
 			position = getPositionOfClosingBracket(str + iterator);
 			addExpressionRecursion(str, current->rightChild, iterator + 2);
+			addExpressionRecursion(str, current->rightChild, iterator + position + 1);
 		}
 		else
 		{
-			addExpressionRecursion(str, current->rightChild, iterator + position + 1);
+			addExpressionRecursion(str, current->rightChild, iterator + 1);
+			addExpressionRecursion(str, current->rightChild, iterator + 2);
 		}
-		addExpressionRecursion(str, current->rightChild, iterator + position + 1);
 	}
 }
 
