@@ -14,7 +14,7 @@ struct Set
 	bool isEmpty() const;
 	bool printInAscendingOrder() const;
 	bool printInDescendingOrder() const;
-	void addExpression(char const * str);
+	void addExpression(char * str);
 private:
 	int readInfoFromFile();
 	void addExpressionRecursion(char * str, Node* current, int interator);

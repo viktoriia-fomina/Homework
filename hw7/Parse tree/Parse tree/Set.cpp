@@ -237,10 +237,11 @@ int Set::readInfoFromFile()
 	return 0;
 }
 
-void Set::addExpression(char const * str)
+void Set::addExpression(char * str)
 {
 	int i = 0;
 	int const size = strlen(str);
+	addExpressionRecursion(str, head, i);
 	
 }
 
@@ -260,17 +261,15 @@ void Set::addExpressionRecursion(char * str, Node* current, int iterator)
 	}
 	else if (isNumber(str[iterator]))
 	{
-		if (current->leftChild != nullptr)
+		if (current->leftChild == nullptr)
 		{
 			current->leftChild = new Node(str[iterator]);
 			current->leftChild->parent = current;
-			addExpressionRecursion(str, current->leftChild, iterator + 1);
 		}
 		else
 		{
 			current->rightChild = new Node(str[iterator]);
 			current->rightChild->parent = current;
-			addExpressionRecursion(str, current->leftChild, iterator + 1);
 		}
 	}
 }
@@ -278,7 +277,21 @@ void Set::addExpressionRecursion(char * str, Node* current, int iterator)
 void Set::addIfOperator(char* str, Node* current, int iterator)
 {
 	int position = 0;
-	if (current->leftChild == nullptr)
+	if (current == nullptr)
+	{
+		head = new Node(str[iterator]);
+		if (str[iterator + 1] == '(')
+		{
+			position = getPositionOfClosingBracket(str + iterator);
+			addExpressionRecursion(str, current, iterator + 2);
+		}
+		else
+		{
+			addExpressionRecursion(str, current, iterator + 2);
+		}
+		addExpressionRecursion(str, current, iterator + position + 1);
+	}
+	else if (current->leftChild == nullptr)
 	{
 		current->leftChild = new Node(str[iterator]);
 		current->leftChild->parent = current;
