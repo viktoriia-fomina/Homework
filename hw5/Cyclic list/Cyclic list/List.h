@@ -10,7 +10,7 @@ struct List
 	void addNode(int const data);
 	void deleteNode(int const data);
 	bool isEmpty() const;
-	bool ifOneNode() const;
+	bool isOneNode() const;
 	friend std::ostream & operator<<(std::ostream & os, List const & list);
 	Node* getHead() const;
 private:

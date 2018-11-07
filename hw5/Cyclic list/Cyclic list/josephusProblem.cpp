@@ -10,7 +10,7 @@ int josephusProblem(int const numberOfWarriors, int const murderFrequency)
 	}
 	auto* temp = l.getHead();
 	auto* nextAfterElementToDelete = temp;
-	while (!l.ifOneNode())
+	while (!l.isOneNode())
 	{
 		temp = nextAfterElementToDelete;
 		for (int i = 0; i < murderFrequency - 1; ++i)
