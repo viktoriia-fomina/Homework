@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 
-using namespace std;
-
 struct Node;
 
 struct List
@@ -13,7 +11,7 @@ struct List
 	void deleteNode(int const data);
 	bool isEmpty() const;
 	bool ifOneNode() const;
-	friend ostream & operator<<(ostream & os, List const & list);
+	friend std::ostream & operator<<(std::ostream & os, List const & list);
 	Node* getHead() const;
 private:
 	void deleteNodeIfOneNode(int const data);

@@ -34,7 +34,7 @@ void List::addNode(int const data)
 	auto* newElement = new Node(data);
 	if (!isEmpty())
 	{
-		if (!ifOneNode())
+		if (!isOneNode())
 		{
 			addNodeIfNextIsNotHead(newElement);
 		}
@@ -81,7 +81,7 @@ void List::deleteNode(int const data)
 	}
 	else
 	{
-		if (ifOneNode())
+		if (isOneNode())
 		{
 			deleteNodeIfOneNode(data);
 		}
@@ -166,7 +166,7 @@ bool List::isEmpty() const
 
 // проверка один ли элемент в списке
 
-bool List::ifOneNode() const
+bool List::isOneNode() const
 {
 	return head == head->next;
 }
@@ -177,7 +177,7 @@ ostream & operator<<(ostream & os, List const & list)
 {
 	if (!list.isEmpty())
 	{
-		if (list.ifOneNode())
+		if (list.isOneNode())
 		{
 			os << list.head->data;
 		}
