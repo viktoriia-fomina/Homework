@@ -14,23 +14,16 @@ List::~List()
 {
 	if (!isEmpty())
 	{ 
-		while (!ifOneNode())
+		auto* oldHead = head;
+		head = head->next;
+		auto* temp = head->next;
+		while (temp != oldHead)
 		{
-			auto* temp = head;
-			auto* prevBeforeHead = head;
-			while (prevBeforeHead->next != head)
-			{
-				prevBeforeHead = prevBeforeHead->next;
-			}
-			head = head->next;
-			prevBeforeHead->next = head;
-			temp->next = nullptr;
-			delete temp;
-			temp = nullptr;
+			temp = head->next;
+			delete head;
+			head = temp;
 		}
-		head->next = nullptr;
 		delete head;
-		head = nullptr;
 	}
 }
 
