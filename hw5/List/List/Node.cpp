@@ -6,10 +6,3 @@ Node::Node(int data = 0)
 	this->previous = nullptr;
 	this->next = nullptr;
 }
-
-Node::~Node()
-{
-	this->previous = nullptr;
-	this->next = nullptr;
-	data = 0;
-}

@@ -1,6 +1,8 @@
 #include "List.h"
 #include "Node.h"
 
+using namespace std;
+
 // конструкторы - деструкторы, добавление - удаление
 
 List::List()
@@ -10,14 +12,16 @@ List::List()
 
 List::~List()
 {
+	deleteList();
+}
+
+void List::deleteList()
+{
 	while (!isEmpty())
 	{
 		auto* temp = head;
 		head = head->next;
-		temp->next = nullptr;
-		temp->previous = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 }
 
@@ -43,11 +47,12 @@ void List::addNode(int const data) // 1
 	}
 }
 
-void List::deleteNode(int const data) // 2
+int List::deleteNode(int const data) // 2
 {
 	if (isEmpty())
 	{
 		cout << "List is empty. Node can not be deleted\n";
+		return -1;
 	}
 	else
 	{
@@ -59,6 +64,7 @@ void List::deleteNode(int const data) // 2
 		if (temp == nullptr)
 		{
 			cout << "Node was not found. Node can not be deleted\n";
+			return -1;
 		}
 		else
 		{
@@ -73,6 +79,7 @@ void List::deleteNode(int const data) // 2
 
 		}
 	}
+	return 0;
 }
 
 void List::deleteHead(int const data, Node* temp)
@@ -87,7 +94,7 @@ void List::deleteHead(int const data, Node* temp)
 	}
 	else
 	{
-		this->~List();
+		deleteList();
 	}
 }
 

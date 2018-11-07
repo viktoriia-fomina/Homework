@@ -2,8 +2,6 @@
 #include <iostream>
 #include "Node.h"
 
-using namespace std;
-
 struct Node;
 
 struct List
@@ -12,11 +10,12 @@ struct List
 	List();
 	~List();
 	void addNode(int const data); // 1
-	void deleteNode(int const data); // 2
+	int deleteNode(int const data); // 2
 	// остальное
-	friend ostream & operator<<(ostream & os, List const & list); // 3
+	friend std::ostream & operator<<(std::ostream & os, List const & list); // 3
 	bool isEmpty() const;
 private:
+	void deleteList();
 	void deleteHead(int const data, Node* temp);
 	void deleteElementThatIsNotHead(int const data, Node* temp);
 	void swap(Node * a, Node* b);

@@ -7,6 +7,4 @@ struct Node
 	int data;
 	Node* previous;
 	Node* next;
-private:
-	Node();
 };
