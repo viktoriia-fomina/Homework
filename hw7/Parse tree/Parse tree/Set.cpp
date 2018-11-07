@@ -282,9 +282,9 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		current = new Node(str[iterator]);
 		if (str[iterator + 1] == '(')
 		{
-			position = getPositionOfClosingBracket(str + iterator);
+			position = getPositionOfClosingBracket(str, iterator);
 			addExpressionRecursion(str, current, iterator + 2);
-			addExpressionRecursion(str, current, iterator + position + 1);
+			addExpressionRecursion(str, current, position + 1);
 		}
 		else
 		{
@@ -298,9 +298,9 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		current->leftChild->parent = current;
 		if (str[iterator + 1] == '(')
 		{
-			position = getPositionOfClosingBracket(str + iterator);
+			position = getPositionOfClosingBracket(str, iterator);
 			addExpressionRecursion(str, current->leftChild, iterator + 2);
-			addExpressionRecursion(str, current->leftChild, iterator + position + 1);
+			addExpressionRecursion(str, current->leftChild, position + 1);
 		}
 		else
 		{
@@ -314,9 +314,9 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		current->rightChild->parent = current;
 		if (str[iterator + 1] == '(')
 		{
-			position = getPositionOfClosingBracket(str + iterator);
+			position = getPositionOfClosingBracket(str, iterator);
 			addExpressionRecursion(str, current->rightChild, iterator + 2);
-			addExpressionRecursion(str, current->rightChild, iterator + position + 1);
+			addExpressionRecursion(str, current->rightChild, position + 1);
 		}
 		else
 		{
@@ -326,22 +326,23 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 	}
 }
 
-int Set::getPositionOfClosingBracket(char const * str) const
+int Set::getPositionOfClosingBracket(char const * str, int iterator) const
 {
 	int openingBrackets = 1;
-	int count = 1;
-	while (openingBrackets != 0, str[count] != '\0')
+	++iterator;
+	while (openingBrackets != 0 && str[iterator] != '\0')
 	{
-		if (str[count] == '(')
+		if (str[iterator] == '(')
 		{
 			++openingBrackets;
 		}
-		else if (str[count] == ')')
+		else if (str[iterator] == ')')
 		{
 			--openingBrackets;
 		}
+		++iterator;
 	}
-	return count;
+	return iterator - 1;
 }
 
 bool Set::isOperator(char const symbol) const

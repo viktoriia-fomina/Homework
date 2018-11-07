@@ -24,7 +24,7 @@ private:
 	void removeRecursion(Node*& current, char const data);
 	bool isOperator(char const symbol) const;
 	bool isNumber(char const symbol) const;
-	int getPositionOfClosingBracket(char const * str) const;
+	int getPositionOfClosingBracket(char const * str, int iterator) const;
 	void removeIfChildIsNullptr(Node*& current);
 	int maximum(Node const * const current) const;
 	void treeTraversal(List & l) const;

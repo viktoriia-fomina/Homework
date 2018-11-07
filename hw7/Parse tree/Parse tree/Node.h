@@ -2,7 +2,7 @@
 
 struct Node
 {
-	Node(char const data); // constructor
+	explicit Node(char const data); // constructor
 	~Node(); // destructor
 	char data;
 	Node* leftChild;
