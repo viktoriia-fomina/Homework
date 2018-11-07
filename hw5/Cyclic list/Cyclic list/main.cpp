@@ -13,34 +13,34 @@
 using namespace std;
 
 int josephusProblem(int const numberOfWarriors, int const murderFrequency);
-void tests();
+int tests();
 int parser(int* numbers, char const * string);
 
 int main()
 {
 	// этот закоменченный кусок кода для того, чтобы тестировать самостоятельно
 
-	//int n = 0;
-	//cout << "Input number of warriors\n";
-	//cin >> n;
-	//int m = 0;
-	//cout << "Input murder frequency\n";
-	//cin >> m;
-	//cout << "Safe position is " << josephusProblem(n, m) << endl;
+	/*int n = 0;
+	cout << "Input number of warriors\n";
+	cin >> n;
+	int m = 0;
+	cout << "Input murder frequency\n";
+	cin >> m;
+	cout << "Safe position is " << josephusProblem(n, m) << endl;*/
 
 	tests();
 
-	system("pause");
 	return 0;
 }
 
-void tests()
+int tests()
 {
 	ifstream file("tests.txt");
 	int numberOfStrings = 0;
 	if (!file.is_open())
 	{
 		cout << "File could not be opened\n";
+		return -1;
 	}
 	else
 	{
@@ -64,10 +64,11 @@ void tests()
 				{
 					cout << "Test " << count << " FAILED" << endl;
 				}
-				count++;
+				++count;
 			}
 		}
 	}
+	return 0;
 }
 
 int parser(int* numbers, char const * string)

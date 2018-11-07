@@ -8,8 +8,4 @@ Node::Node(int data = 0)
 	next = nullptr;
 }
 
-Node::~Node()
-{
-	this->data = 0;
-	next = nullptr;
-}
+Node::~Node() {}

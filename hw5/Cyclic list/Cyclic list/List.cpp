@@ -1,6 +1,8 @@
 #include "List.h"
 #include "Node.h"
 
+using namespace std;
+
 // конструктор - деструктор
 
 List::List()
@@ -32,30 +34,6 @@ List::~List()
 	}
 }
 
-// задача Иосифа
-
-int List::josephusProblem(int const numberOfWarriors, int const murderFrequency)
-{
-	for (int i = numberOfWarriors; i >= 1; --i)
-	{
-		addNode(i);
-	}
-	auto* temp = head;
-	auto* nextAfterElementToDelete = temp;
-	while (!ifOneNode())
-	{
-		temp = nextAfterElementToDelete;
-		for (int i = 0; i < murderFrequency - 1; ++i)
-		{
-			temp = temp->next;
-		}
-		int numberOfCurrentWarrior = temp->data;
-		nextAfterElementToDelete = temp->next;
-		deleteNode(numberOfCurrentWarrior);
-	}
-	return head->data;
-}
-
 // добавление элемента
 
 void List::addNode(int const data)
@@ -65,11 +43,11 @@ void List::addNode(int const data)
 	{
 		if (!ifOneNode())
 		{
-			addNodeIfNextIsNotHead(data, newElement);
+			addNodeIfNextIsNotHead(newElement);
 		}
 		else
 		{
-			addNodeIfNextIsHead(data, newElement);
+			addNodeIfNextIsHead(newElement);
 		}
 	}
 	else
@@ -79,7 +57,7 @@ void List::addNode(int const data)
 	}
 }
 
-void List::addNodeIfNextIsNotHead(int const data, Node * const newElement)
+void List::addNodeIfNextIsNotHead( Node * const newElement)
 {
 	auto* temp = head;
 	auto* lastHead = head;
@@ -92,7 +70,7 @@ void List::addNodeIfNextIsNotHead(int const data, Node * const newElement)
 	temp->next = head;
 }
 
-void List::addNodeIfNextIsHead(int const data, Node * const newElement)
+void List::addNodeIfNextIsHead( Node * const newElement)
 {
 	auto* temp = head;
 	head = newElement;
@@ -125,7 +103,8 @@ void List::deleteNodeIfOneNode(int const data)
 {
 	if (head->data == data)
 	{
-		this->~List();
+		delete head;
+		head = nullptr;
 	}
 	else
 	{
@@ -221,4 +200,9 @@ ostream & operator<<(ostream & os, List const & list)
 		}
 	}
 	return os;
+}
+
+Node* List::getHead() const
+{
+	return head;
 }
