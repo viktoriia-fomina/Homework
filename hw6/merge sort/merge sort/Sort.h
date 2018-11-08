@@ -1,5 +1,4 @@
 #pragma once
-#include "Compare interface.h"
 
 template<typename dataType, typename indexType>
 class Sort

@@ -1,12 +1,13 @@
 ﻿#pragma once
 #include <iostream>
 #include "Node.h"
+#include "Sort.h"
 
 using namespace std;
 
 struct Node;
 
-struct List
+struct List : Sort<Node, int>
 {
 	List(); // конструктор
 	~List(); // деструктор

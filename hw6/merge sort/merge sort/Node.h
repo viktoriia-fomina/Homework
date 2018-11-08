@@ -1,6 +1,7 @@
 #pragma once
+#include "Compare interface.h"
 
-struct Node
+struct Node : CompareInterface
 {
 	explicit Node(int data); // конструктор с параметром
 	~Node(); // деструктор
