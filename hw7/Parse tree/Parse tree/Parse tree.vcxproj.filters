@@ -15,34 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Set.cpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Файлы заголовков</Filter>
+    <ClCompile Include="Element.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="List.cpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
-    <ClCompile Include="Element.cpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Set.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Set.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Файлы ресурсов</Filter>
+    <ClInclude Include="Element.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="List.h">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Element.h">
-      <Filter>Файлы ресурсов</Filter>
+    <ClInclude Include="Node.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

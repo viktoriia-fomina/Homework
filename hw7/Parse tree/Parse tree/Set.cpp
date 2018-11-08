@@ -161,28 +161,57 @@ void Set::printRecursion(Node const * const current) const
 	}
 }
 
-bool Set::printInAscendingOrder() const
+int Set::getResult() const
 {
-	List l;
-	treeTraversal(l);
-	if (l.isEmpty())
+	if (isEmpty())
 	{
-		return false;
+		return -1;
 	}
-	l.printInAscendingOrder();
-	return true;
+	return getResultRecursion(head);
 }
 
-bool Set::printInDescendingOrder() const
+int Set::getResultRecursion(Node const * const current) const
 {
-	List l;
-	treeTraversal(l);
-	if (l.isEmpty())
+	int leftChild = 0;
+	int rightChild = 0;
+	if (isNumber(current->leftChild->data))
 	{
-		return false;
+		leftChild = atoi(&(current->leftChild->data));
 	}
-	l.printInDescendingOrder();
-	return true;
+	else
+	{
+		leftChild = getResultRecursion(current->leftChild);
+	}
+	if (isNumber(current->rightChild->data))
+	{
+		rightChild = atoi(&(current->rightChild->data));
+	}
+	else
+	{
+		rightChild = getResultRecursion(current->rightChild);
+	}
+	int result = makeOperation(current->data, leftChild, rightChild);
+	return result;
+}
+
+int Set::makeOperation(char const operation, int const operand1, int const operand2) const
+{
+	if (operation == '+')
+	{
+		return operand1 + operand2;
+	}
+	else if (operation == '-')
+	{
+		return operand1 - operand2;
+	}
+	else if (operation == '*')
+	{
+		return operand1 * operand2;
+	}
+	else
+	{
+		return operand1 / operand2;
+	}
 }
 
 int Set::readInfoFromFile()
@@ -242,53 +271,70 @@ void Set::addExpressionRecursion(char * str, Node*& current, int iterator)
 
 void Set::addIfOperator(char* str, Node*& current, int iterator)
 {
-	int position = 0;
 	if (current == nullptr)
 	{
-		current = new Node(str[iterator]);
-		if (str[iterator + 1] == '(')
-		{
-			position = getPositionOfClosingBracket(str, iterator + 1);
-			addExpressionRecursion(str, current, iterator + 2);
-			addExpressionRecursion(str, current, position + 1);
-		}
-		else
-		{
-			addExpressionRecursion(str, current, iterator + 1);
-			addExpressionRecursion(str, current, iterator + 2);
-		}
+		addIfOperatorAndCurrentIsNullptr(str, current, iterator);
 	}
 	else if (current->leftChild == nullptr)
 	{
-		current->leftChild = new Node(str[iterator]);
-		current->leftChild->parent = current;
-		if (str[iterator + 1] == '(')
-		{
-			position = getPositionOfClosingBracket(str, iterator);
-			addExpressionRecursion(str, current->leftChild, iterator + 2);
-			addExpressionRecursion(str, current->leftChild, position + 1);
-		}
-		else
-		{
-			addExpressionRecursion(str, current->leftChild, iterator + 1);
-			addExpressionRecursion(str, current->leftChild, iterator + 2);
-		}
+		addIfOperatorAndCurrentLeftChildIsNullptr(str, current, iterator);
 	}
 	else
 	{
-		current->rightChild = new Node(str[iterator]);
-		current->rightChild->parent = current;
-		if (str[iterator + 1] == '(')
-		{
-			position = getPositionOfClosingBracket(str, iterator);
-			addExpressionRecursion(str, current->rightChild, iterator + 2);
-			addExpressionRecursion(str, current->rightChild, position + 1);
-		}
-		else
-		{
-			addExpressionRecursion(str, current->rightChild, iterator + 1);
-			addExpressionRecursion(str, current->rightChild, iterator + 2);
-		}
+		addIfOperatorAndCurrentRightChildIsNullptr(str, current, iterator);
+	}
+}
+
+void Set::addIfOperatorAndCurrentIsNullptr(char* str, Node*& current, int iterator)
+{
+	int position = 0;
+	current = new Node(str[iterator]);
+	if (str[iterator + 1] == '(')
+	{
+		position = getPositionOfClosingBracket(str, iterator + 1);
+		addExpressionRecursion(str, current, iterator + 2);
+		addExpressionRecursion(str, current, position + 1);
+	}
+	else
+	{
+		addExpressionRecursion(str, current, iterator + 1);
+		addExpressionRecursion(str, current, iterator + 2);
+	}
+}
+
+void Set::addIfOperatorAndCurrentLeftChildIsNullptr(char* str, Node*& current, int iterator)
+{
+	int position = 0;
+	current->leftChild = new Node(str[iterator]);
+	current->leftChild->parent = current;
+	if (str[iterator + 1] == '(')
+	{
+		position = getPositionOfClosingBracket(str, iterator);
+		addExpressionRecursion(str, current->leftChild, iterator + 2);
+		addExpressionRecursion(str, current->leftChild, position + 1);
+	}
+	else
+	{
+		addExpressionRecursion(str, current->leftChild, iterator + 1);
+		addExpressionRecursion(str, current->leftChild, iterator + 2);
+	}
+}
+
+void Set::addIfOperatorAndCurrentRightChildIsNullptr(char* str, Node*& current, int iterator)
+{
+	int position = 0;
+	current->rightChild = new Node(str[iterator]);
+	current->rightChild->parent = current;
+	if (str[iterator + 1] == '(')
+	{
+		position = getPositionOfClosingBracket(str, iterator);
+		addExpressionRecursion(str, current->rightChild, iterator + 2);
+		addExpressionRecursion(str, current->rightChild, position + 1);
+	}
+	else
+	{
+		addExpressionRecursion(str, current->rightChild, iterator + 1);
+		addExpressionRecursion(str, current->rightChild, iterator + 2);
 	}
 }
 

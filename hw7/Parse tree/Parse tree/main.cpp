@@ -17,6 +17,8 @@ int main()
 	Set s;
 	s.addExpression(str);
 	s.printExpression();
+	cout << endl;
+	cout << s.getResult() << endl;
 
 	return 0;
 }
