@@ -8,9 +8,15 @@ Set::Set()
 
 Set::~Set()
 {
+	deleteExpression();
+}
+
+void Set::deleteExpression()
+{
 	if (!isEmpty())
 	{
 		removeRecursion(head);
+		head = nullptr;
 	}
 }
 
@@ -46,13 +52,7 @@ bool Set::printExpression() const
 
 void Set::printRecursion(Node const * const current) const
 {
-	if (current == head)
-	{
-		cout << head->data;
-		printRecursion(current->leftChild);
-		printRecursion(current->rightChild);
-	}
-	else if (isOperator(current->data))
+	if (isOperator(current->data))
 	{
 		cout << "(" << current->data;
 		printRecursion(current->leftChild);
@@ -61,14 +61,21 @@ void Set::printRecursion(Node const * const current) const
 	else
 	{
 		cout << current->data;
-		if (current->parent->rightChild == current && isNumber(current->parent->leftChild->data))
+		if (current->parent->rightChild == current)
 		{
-			cout << ")";
+			auto* last = current;
+			auto* temp = current->parent;
+			while (temp != nullptr && temp->rightChild == last)
+			{
+				cout << ")";
+				temp = temp->parent;
+				last = last->parent;
+			}
 		}
 	}
 }
 
-int Set::getResultOfExpression() const
+int Set::getResult() const
 {
 	if (isEmpty())
 	{
@@ -178,7 +185,7 @@ void Set::addIfOperatorAndCurrentIsNullptr(char* str, Node*& current, int iterat
 	current = new Node(str[iterator]);
 	if (str[iterator + 1] == '(')
 	{
-		position = getPositionOfClosingBracket(str, iterator + 1);
+		position = getPositionOfClosingBracket(str, iterator + 2);
 		addExpressionRecursion(str, current, iterator + 2);
 		addExpressionRecursion(str, current, position + 1);
 	}
@@ -196,7 +203,7 @@ void Set::addIfOperatorAndCurrentLeftChildIsNullptr(char* str, Node*& current, i
 	current->leftChild->parent = current;
 	if (str[iterator + 1] == '(')
 	{
-		position = getPositionOfClosingBracket(str, iterator);
+		position = getPositionOfClosingBracket(str, iterator + 2);
 		addExpressionRecursion(str, current->leftChild, iterator + 2);
 		addExpressionRecursion(str, current->leftChild, position + 1);
 	}
@@ -214,7 +221,7 @@ void Set::addIfOperatorAndCurrentRightChildIsNullptr(char* str, Node*& current, 
 	current->rightChild->parent = current;
 	if (str[iterator + 1] == '(')
 	{
-		position = getPositionOfClosingBracket(str, iterator);
+		position = getPositionOfClosingBracket(str, iterator + 2);
 		addExpressionRecursion(str, current->rightChild, iterator + 2);
 		addExpressionRecursion(str, current->rightChild, position + 1);
 	}
@@ -242,6 +249,11 @@ int Set::getPositionOfClosingBracket(char const * str, int iterator) const
 		++iterator;
 	}
 	return iterator - 1;
+}
+
+Node* Set::getHead() const
+{
+	return head;
 }
 
 bool Set::isOperator(char const symbol) const

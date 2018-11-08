@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 
 struct Node;
 struct List;
@@ -8,10 +7,12 @@ struct Set
 {
 	Set();
 	~Set();
+	void deleteExpression();
 	bool isEmpty() const;
 	bool printExpression() const;
 	void addExpression(char * str);
-	int getResultOfExpression() const;
+	int getResult() const;
+	Node* getHead() const;
 private:
 	int makeOperation(char const operation, int const operand1, int const operand2) const;
 	int getResultRecursion(Node const * const current) const;
