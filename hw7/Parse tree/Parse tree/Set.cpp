@@ -12,19 +12,23 @@ Set::~Set()
 {
 	if (!isEmpty())
 	{
-		// delete left subtree
-		while (head->leftChild != nullptr)
-		{
-			remove(maximum(head->leftChild));
-		}
-		// delete right subtree
-		while (head->rightChild != nullptr)
-		{
-			remove(maximum(head->rightChild));
-		}
-		delete head;
-		head = nullptr;
+		removeRecursion(head);
 	}
+}
+
+void Set::removeRecursion(Node*& current)
+{
+	if (current->leftChild != nullptr)
+	{
+		auto* tempLeftChild = current->leftChild;
+		removeRecursion(tempLeftChild);
+	}
+	if (current->rightChild != nullptr)
+	{
+		auto* tempRightChild = current->rightChild;
+		removeRecursion(tempRightChild);
+	}
+	delete current;
 }
 
 bool Set::add(char const data)
@@ -67,72 +71,6 @@ void Set::addNodeNotToHead(Node* node, char const data)
 			node->rightChild->parent = node;
 		}
 	}
-}
-
-bool Set::remove(char const data)
-{
-	if (!exists(data))
-	{
-		return false;
-	}
-	removeRecursion(head, data);
-	return true;
-}
-
-void Set::removeRecursion(Node*& current, char const data)
-{
-	if (current->data > data)
-	{
-		removeRecursion(current->leftChild, data);
-	}
-	else if (current->data < data)
-	{
-		removeRecursion(current->rightChild, data);
-	}
-	else
-	{
-		if (current->leftChild == nullptr || current->rightChild == nullptr)
-		{
-			removeIfChildIsNullptr(current);
-			return;
-		}
-		else
-		{
-			current->data = maximum(current->leftChild);
-			removeRecursion(current->leftChild, current->data);
-		}
-	}
-}
-
-int Set::maximum(Node const * const current) const
-{
-	auto* temp = current;
-	while (temp->rightChild != nullptr)
-	{
-		temp = temp->rightChild;
-	}
-	return temp->data;
-}
-
-void Set::removeIfChildIsNullptr(Node*& current)
-{
-	auto* temp = current;
-	if (current->leftChild == nullptr && current->rightChild == nullptr)
-	{
-		current->parent = nullptr;
-		current = nullptr;
-	}
-	else if (current->leftChild == nullptr && current->rightChild != nullptr)
-	{
-		current = current->rightChild;
-		current->parent = temp->parent;
-	}
-	else
-	{
-		current = current->leftChild;
-		current->parent = temp->parent;
-	}
-	delete temp;
 }
 
 bool Set::exists(char const data) const
@@ -191,7 +129,36 @@ void Set::treeTraversalRecursion(Node const * current, List & l) const
 
 bool Set::printExpression() const
 {
-	return false;
+	if (isEmpty())
+	{
+		return false;
+	}
+	printRecursion(head);
+	return true;
+}
+
+void Set::printRecursion(Node const * const current) const
+{
+	if (current == head)
+	{
+		cout << head->data;
+		printRecursion(current->leftChild);
+		printRecursion(current->rightChild);
+	}
+	else if (isOperator(current->data))
+	{
+		cout << "(" << current->data;
+		printRecursion(current->leftChild);
+		printRecursion(current->rightChild);
+	}
+	else
+	{
+		cout << current->data;
+		if (current->parent->rightChild == current && isNumber(current->parent->leftChild->data))
+		{
+			cout << ")";
+		}
+	}
 }
 
 bool Set::printInAscendingOrder() const
@@ -241,7 +208,6 @@ int Set::readInfoFromFile()
 void Set::addExpression(char * str)
 {
 	int i = 0;
-	int const size = strlen(str);
 	addExpressionRecursion(str, head, i);	
 }
 
@@ -282,7 +248,7 @@ void Set::addIfOperator(char* str, Node*& current, int iterator)
 		current = new Node(str[iterator]);
 		if (str[iterator + 1] == '(')
 		{
-			position = getPositionOfClosingBracket(str, iterator);
+			position = getPositionOfClosingBracket(str, iterator + 1);
 			addExpressionRecursion(str, current, iterator + 2);
 			addExpressionRecursion(str, current, position + 1);
 		}

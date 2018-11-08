@@ -16,6 +16,7 @@ int main()
 	str[7] = '\0';
 	Set s;
 	s.addExpression(str);
+	s.printExpression();
 
 	return 0;
 }
