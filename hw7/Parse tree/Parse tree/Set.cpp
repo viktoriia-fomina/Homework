@@ -1,8 +1,6 @@
 #include "Set.h"
 #include "Node.h"
 #include "List.h"
-#include <fstream>
-
 Set::Set()
 {
 	head = nullptr;
@@ -31,100 +29,9 @@ void Set::removeRecursion(Node*& current)
 	delete current;
 }
 
-bool Set::add(char const data)
-{
-	if (isEmpty())
-	{
-		head = new Node(data);
-	}
-	else
-	{
-		if (exists(data))
-		{
-			return false;
-		}
-		addNodeNotToHead(head, data);
-	}
-	return true;
-}
-
-void Set::addNodeNotToHead(Node* node, char const data)
-{
-	if (node->data > data && node->leftChild != nullptr)
-	{
-		addNodeNotToHead(node->leftChild, data);
-	}
-	else if (node->data < data && node->rightChild != nullptr)
-	{
-		addNodeNotToHead(node->rightChild, data);
-	}
-	else
-	{
-		if (node->data > data)
-		{
-			node->leftChild = new Node(data);
-			node->leftChild->parent = node;
-		}
-		else
-		{
-			node->rightChild = new Node(data);
-			node->rightChild->parent = node;
-		}
-	}
-}
-
-bool Set::exists(char const data) const
-{
-	if (isEmpty())
-	{
-		return false;
-	}
-	auto* temp = head;
-	bool flagIfExists = false;
-	existsRecursion(data, head, flagIfExists);
-	return flagIfExists;
-}
-
-void Set::existsRecursion(char const data, Node const * const current, bool & exists) const
-{
-	if (current->data == data)
-	{
-		exists = true;
-	}
-	if (current->leftChild != nullptr)
-	{
-		existsRecursion(data, current->leftChild, exists);
-	}
-	if (current->rightChild != nullptr)
-	{
-		existsRecursion(data, current->rightChild, exists);
-	}
-}
-
 bool Set::isEmpty() const
 {
 	return head == nullptr;
-}
-
-void Set::treeTraversal(List & l) const
-{
-	if (!isEmpty())
-	{
-		treeTraversalRecursion(head, l);
-	}
-}
-
-void Set::treeTraversalRecursion(Node const * current, List & l) const
-{
-	l.addNode(current->data);
-	if (current->leftChild != nullptr)
-	{
-		treeTraversalRecursion(current->leftChild, l);
-	}
-	if (current->rightChild != nullptr)
-	{
-		treeTraversalRecursion(current->rightChild, l);
-	}
 }
 
 bool Set::printExpression() const
@@ -161,7 +68,7 @@ void Set::printRecursion(Node const * const current) const
 	}
 }
 
-int Set::getResult() const
+int Set::getResultOfExpression() const
 {
 	if (isEmpty())
 	{
@@ -212,26 +119,6 @@ int Set::makeOperation(char const operation, int const operand1, int const opera
 	{
 		return operand1 / operand2;
 	}
-}
-
-int Set::readInfoFromFile()
-{
-	fstream file("data.txt", ios::in);
-	if (!file.is_open())
-	{
-		cout << "File not found" << endl;
-		return -1;
-	}
-	int const size = 100;
-	char* buffer = new char[size] {};
-	while (!file.eof())
-	{
-		file.getline(buffer, size);
-		addExpression(buffer);
-	}
-	file.close();
-	delete[] buffer;
-	return 0;
 }
 
 void Set::addExpression(char * str)
