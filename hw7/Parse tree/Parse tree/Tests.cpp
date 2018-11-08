@@ -61,7 +61,6 @@ bool test3()
 	Set s;
 	char test[] = "+1(*(+52)(-73))";
 	s.addExpression(test);
-	cout << (s.getHead()->rightChild->leftChild->leftChild->data == '5') << endl;
 	return s.getHead()->data == '+' && s.getHead()->leftChild->data == '1' && s.getHead()->rightChild->data == '*'
 			&& s.getHead()->rightChild->leftChild->data == '+' && s.getHead()->rightChild->rightChild->data == '-'
 			&& s.getHead()->rightChild->leftChild->leftChild->data == '5' &&
