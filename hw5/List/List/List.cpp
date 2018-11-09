@@ -54,30 +54,23 @@ int List::deleteNode(int const data) // 2
 		cout << "List is empty. Node can not be deleted\n";
 		return -1;
 	}
+	auto* temp = head;
+	while (temp != nullptr && temp->data != data)
+	{
+		temp = temp->next;
+	}
+	if (temp == nullptr)
+	{
+		cout << "Node was not found. Node can not be deleted\n";
+		return -1;
+	}
+	if (temp == head)
+	{
+		deleteHead(data, temp);
+	}
 	else
 	{
-		auto* temp = head;
-		while (temp != nullptr && temp->data != data)
-		{
-			temp = temp->next;
-		}
-		if (temp == nullptr)
-		{
-			cout << "Node was not found. Node can not be deleted\n";
-			return -1;
-		}
-		else
-		{
-			if (temp == head)
-			{
-				deleteHead(data, temp);
-			}
-			else
-			{
-				deleteElementThatIsNotHead(data, temp);
-			}
-
-		}
+		deleteElementThatIsNotHead(data, temp);
 	}
 	return 0;
 }
