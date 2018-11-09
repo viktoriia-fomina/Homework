@@ -42,30 +42,27 @@ int tests()
 		cout << "File could not be opened\n";
 		return -1;
 	}
-	else
+	int const size = 25;
+	char buffer[size] {};
+	int numbers[size] {};
+	int count = 1;
+	while (!file.eof())
 	{
-		int const size = 25;
-		char buffer[size] {};
-		int numbers[size] {};
-		int count = 1;
-		while (!file.eof())
+		file.getline(buffer, size);
+		int sizeOfArray = parser(numbers, buffer);
+		++numberOfStrings;
+		for (int i = 0; i < 10; ++i)
 		{
-			file.getline(buffer, size);
-			int sizeOfArray = parser(numbers, buffer);
-			++numberOfStrings;
-			for (int i = 0; i < 10; ++i)
+			int result = josephusProblem(numberOfStrings, i + 1);
+			if (result == numbers[i])
 			{
-				int result = josephusProblem(numberOfStrings, i + 1);
-				if (result == numbers[i])
-				{
-					cout << "Test " << count << " passed" << endl;
-				}
-				else
-				{
-					cout << "Test " << count << " FAILED" << endl;
-				}
-				++count;
+				cout << "Test " << count << " passed" << endl;
 			}
+			else
+			{
+				cout << "Test " << count << " FAILED" << endl;
+			}
+			++count;
 		}
 	}
 	return 0;
