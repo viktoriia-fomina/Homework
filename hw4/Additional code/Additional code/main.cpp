@@ -1,4 +1,4 @@
-#include "Header.h"
+#include "AdditionalCode.h"
 #include "locale.h"
 
 // ¬вести два числа, перевести в двоичное представление в дополнительном коде и напечатать, 
@@ -22,8 +22,8 @@ int main()
 	int number2 = 0;
 	printf("¬ведите второе число\n");
 	scanf("%i", &number2);
-	auto const num1 = additionalCode(number1);
-	auto const num2 = additionalCode(number2);
+	auto const num1 = AdditionalCode(number1);
+	auto const num2 = AdditionalCode(number2);
 	printf("ѕервое число в дополнительном коде:\n");
 	num1.print();
 	printf("\n");
@@ -78,8 +78,8 @@ bool test1()
 {
 	int const number1 = 3;
 	int const number2 = 9;
-	auto const num1 = additionalCode(number1);
-	auto const num2 = additionalCode(number2);
+	auto const num1 = AdditionalCode(number1);
+	auto const num2 = AdditionalCode(number2);
 	bool flagIfTestPassed = true;
 	// 3
 	for (int i = 0; i < 30; ++i)
@@ -137,8 +137,8 @@ bool test2()
 {
 	int const number1 = 0;
 	int const number2 = 0;
-	auto const num1 = additionalCode(number1);
-	auto const num2 = additionalCode(number2);
+	auto const num1 = AdditionalCode(number1);
+	auto const num2 = AdditionalCode(number2);
 	bool flagIfTestPassed = true;
 	// 0
 	for (int i = 0; i < 32; ++i)
@@ -181,8 +181,8 @@ bool test3()
 {
 	int const number1 = -4;
 	int const number2 = 2;
-	auto const num1 = additionalCode(number1);
-	auto const num2 = additionalCode(number2);
+	auto const num1 = AdditionalCode(number1);
+	auto const num2 = AdditionalCode(number2);
 	bool flagIfTestPassed = true;
 	// -4
 	for (int i = 0; i < 30; ++i)
