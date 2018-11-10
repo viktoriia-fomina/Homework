@@ -6,8 +6,7 @@ bool compareStr(char const * str1, char const * str2);
 
 Phonebook::Phonebook()
 {
-	int const size = 100;
-	base = new Subscriber[size];
+	base = new Subscriber[100];
 	numberOfNotes = 0;
 	readInfoFromFile();
 }
@@ -60,14 +59,9 @@ void Phonebook::readInfoFromFile()
 	fclose(file);
 }
 
-Phonebook::Phonebook(Phonebook const & p) {} // конструктор копирования
-
-void Phonebook::operator=(Phonebook const & p) {} // оператор присваивания
-
 Phonebook::~Phonebook()
 {
 	delete[] base;
-	numberOfNotes = 0;
 }
 
 // getter - setter

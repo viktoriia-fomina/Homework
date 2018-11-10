@@ -34,8 +34,8 @@ struct Phonebook
 	void saveToFile() const; // 5
 private:
 	void readInfoFromFile(); // вспомогательный метод к конструктору
-	Phonebook(Phonebook const & p); // конструктор копирования
-	void operator=(Phonebook const & p); // оператор присваивания
+	Phonebook(Phonebook const & p) = delete; // конструктор копирования
+	void operator=(Phonebook const & p) = delete; // оператор присваивания
 
 	Subscriber* base;
 	int numberOfNotes;

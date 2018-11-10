@@ -2,19 +2,15 @@
 #include "Phonebook.h"
 #include <stdio.h>
 
-#include <iostream>
-
 void tests();
-void menu();
+void userInterface();
 
 int main()
 {
 	// помимо интерактивного режима для пользователя есть тесты
 	// в мейне не стала вызывать функцию тестс - посчитала лишним
 	
-	menu();
-
-	system("pause");
+	userInterface();
 	return 0;
 }
 
@@ -39,7 +35,7 @@ void tests()
 	printf("Check file \"phonebook\" to finish testing\n");
 }
 
-void menu()
+void userInterface()
 {
 	Phonebook p;
 	int const size = 20;
