@@ -10,10 +10,8 @@
 //Размер базы ограничен сотней записей.
 
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS
-#include "Subscriber.h"
-#include <stdio.h>
-#include <string.h>
+
+struct Subscriber;
 
 struct Phonebook
 {
@@ -31,9 +29,9 @@ struct Phonebook
 	void printAllNotes() const; // 2
 	void findNumberByName(char const * name) const; // 3
 	void findNameByNumber(char const * number) const; // 4
-	void saveToFile() const; // 5
+	int saveToFile() const; // 5
 private:
-	void readInfoFromFile(); // вспомогательный метод к конструктору
+	int readInfoFromFile(); // вспомогательный метод к конструктору
 	Phonebook(Phonebook const & p) = delete; // конструктор копирования
 	void operator=(Phonebook const & p) = delete; // оператор присваивания
 

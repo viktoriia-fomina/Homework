@@ -1,11 +1,12 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Subscriber.h"
+#include <stdio.h>
+#include <string.h>
 
 // конструктор - оператор копирования - деструктор
 
-Subscriber::Subscriber(char const * name, char const * number)
+Subscriber::Subscriber(char const * name, char const * number) : Subscriber()
 {
-	this->name = nullptr;
-	this->number = nullptr;
 	setName(name);
 	setNumber(number);
 }
@@ -16,10 +17,8 @@ Subscriber::Subscriber()
 	this->number = nullptr;
 }
 
-Subscriber::Subscriber(Subscriber const & s)
+Subscriber::Subscriber(Subscriber const & s) : Subscriber()
 {
-	this->name = nullptr;
-	this->number = nullptr;
 	setName(s.name);
 	setNumber(s.number);
 }
@@ -52,11 +51,7 @@ void Subscriber::setStr(char const * str, char** destination)
 	{
 		int const size = (int)strlen(str);
 		*destination = new char[size + 1];
-		for (int i = 0; i < size; ++i)
-		{
-			(*destination)[i] = str[i];
-		}
-		(*destination)[size] = '\0';
+		strcpy(*destination, str);
 	}
 	else
 	{

@@ -121,10 +121,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Phonebook.cpp" />
     <ClCompile Include="Subscriber.cpp" />
+    <ClCompile Include="tests.cpp" />
+    <ClCompile Include="userInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Phonebook.h" />
     <ClInclude Include="Subscriber.h" />
+    <ClInclude Include="tests.h" />
+    <ClInclude Include="userInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="phonebook.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

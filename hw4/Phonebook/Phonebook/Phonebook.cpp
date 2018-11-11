@@ -1,6 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Phonebook.h"
-
-bool compareStr(char const * str1, char const * str2);
+#include "Subscriber.h"
+#include <stdio.h>
+#include <string.h>
 
 // конструкторы - деструктор
 
@@ -11,7 +13,7 @@ Phonebook::Phonebook()
 	readInfoFromFile();
 }
 
-void Phonebook::readInfoFromFile()
+int Phonebook::readInfoFromFile()
 {
 	FILE* file = fopen("phonebook.txt", "r");
 	int const sizeData = 100;
@@ -19,44 +21,43 @@ void Phonebook::readInfoFromFile()
 	if (!file)
 	{
 		printf("File could not be opened\n");
+		return -1;
 	}
-	else
+	char* data[sizeData] = {};
+	int linesRead = 0;
+	while (!feof(file))
 	{
-		char* data[sizeData] = {};
-		int linesRead = 0;
-		while (!feof(file))
+		char* buffer = new char[sizeBuffer];
+		const int readBytes = fscanf(file, "%s", buffer);
+		if (readBytes < 0)
 		{
-			char* buffer = new char[sizeBuffer];
-			const int readBytes = fscanf(file, "%s", buffer);
-			if (readBytes < 0)
-			{
-				break;
-			}
-			data[linesRead] = buffer;
-			++linesRead;
+			break;
 		}
-		if (linesRead > 0)
+		data[linesRead] = buffer;
+		++linesRead;
+	}
+	if (linesRead > 0)
+	{
+		numberOfNotes = linesRead / 2;
+		for (int i = 0; i < linesRead; ++i)
 		{
-			numberOfNotes = linesRead / 2;
-			for (int i = 0; i < linesRead; ++i)
+			Subscriber* s = new Subscriber;
+			s->setName(data[i]);
+			s->setNumber(data[i + 1]);
+			(*this)[i / 2] = *s;
+			++i;
+			if (i == linesRead - 1)
 			{
-				Subscriber* s = new Subscriber;
-				s->setName(data[i]);
-				s->setNumber(data[i + 1]);
-				(*this)[i / 2] = *s;
-				++i;
-				if (i == linesRead - 1)
-				{
-					delete s;
-				}
+				delete s;
 			}
-			for (int i = 0; i < linesRead; ++i)
-			{
-				delete[] data[i];
-			}
+		}
+		for (int i = 0; i < linesRead; ++i)
+		{
+			delete[] data[i];
 		}
 	}
 	fclose(file);
+	return 0;
 }
 
 Phonebook::~Phonebook()
@@ -98,28 +99,11 @@ void Phonebook::printAllNotes() const // 2
 	}
 }
 
-bool compareStr(char const * str1, char const * str2)
-{
-	if (strlen(str1) != strlen(str2))
-	{
-		return false;
-	}
-	int const length = (int)strlen(str1);
-	for (int i = 0; i < length; ++i)
-	{
-		if (str1[i] != str2[i])
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
 void Phonebook::findNumberByName(char const * name) const // 3
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if (compareStr((*this)[i].getName(), name))
+		if (strcmp((*this)[i].getName(), name))
 		{
 			(*this)[i].print();
 		}
@@ -130,29 +114,28 @@ void Phonebook::findNameByNumber(char const * number) const // 4
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if (compareStr((*this)[i].getNumber(), number))
+		if (strcmp((*this)[i].getNumber(), number))
 		{
 			(*this)[i].print();
 		}
 	}	
 }
 
-void Phonebook::saveToFile() const // 5
+int Phonebook::saveToFile() const // 5
 {
 	FILE* file = fopen("phonebook.txt", "w");
 	if (!file)
 	{
 		printf("FILE WAS NOT FOUND\n!");
-	}
-	else
+		return -1;
+	}	
+	for (int i = 0; i < numberOfNotes; ++i)
 	{
-		for (int i = 0; i < numberOfNotes; ++i)
-		{
-			fwrite((*this)[i].getName(), sizeof(char), strlen((*this)[i].getName()), file);
-			fwrite(" ", sizeof(char), 1, file);
-			fwrite((*this)[i].getNumber(), sizeof(char), strlen((*this)[i].getNumber()), file);
-			fwrite("\n", sizeof(char), 1, file);
-		}
+		fwrite((*this)[i].getName(), sizeof(char), strlen((*this)[i].getName()), file);
+		fwrite(" ", sizeof(char), 1, file);
+		fwrite((*this)[i].getNumber(), sizeof(char), strlen((*this)[i].getNumber()), file);
+		fwrite("\n", sizeof(char), 1, file);
 	}
 	fclose(file);
+	return 0;
 }
