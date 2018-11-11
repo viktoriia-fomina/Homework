@@ -18,7 +18,8 @@ private:
 	void deleteNodeIfMoreThanOneNode(int const data);
 	void deleteHeadNodeIfMoreThanOneNode(int const data);
 	void deleteNotHeadNodeIfMoreThanOneNode(int const data);
-	void addNodeIfNextIsNotHead(Node * const newElement);
-	void addNodeIfNextIsHead(Node * const newElement);
+	void addNodeIfWasMoreThanOneNode(Node * const newElement);
+	void addNodeIfWasOneNode(Node * const newElement);
 	Node* head;
+	Node* tail;
 };

@@ -8,6 +8,7 @@ using namespace std;
 List::List()
 {
 	head = nullptr;
+	tail = nullptr;
 }
 
 List::~List()
@@ -36,39 +37,35 @@ void List::addNode(int const data)
 	{
 		if (!isOneNode())
 		{
-			addNodeIfNextIsNotHead(newElement);
+			addNodeIfWasMoreThanOneNode(newElement);
 		}
 		else
 		{
-			addNodeIfNextIsHead(newElement);
+			addNodeIfWasOneNode(newElement);
 		}
 	}
 	else
 	{
 		head = newElement;
+		tail = head;
 		head->next = head;
 	}
 }
 
-void List::addNodeIfNextIsNotHead( Node * const newElement)
+void List::addNodeIfWasMoreThanOneNode(Node * const newElement)
 {
-	auto* temp = head;
 	auto* lastHead = head;
-	while (temp->next != head)
-	{
-		temp = temp->next;
-	}
 	head = newElement;
 	head->next = lastHead;
-	temp->next = head;
+	tail->next = head;
 }
 
-void List::addNodeIfNextIsHead( Node * const newElement)
+void List::addNodeIfWasOneNode(Node * const newElement)
 {
 	auto* temp = head;
 	head = newElement;
 	head->next = temp;
-	temp->next = head;
+	tail->next = head;
 }
 
 // удаление элемента
@@ -98,6 +95,7 @@ void List::deleteNodeIfOneNode(int const data)
 	{
 		delete head;
 		head = nullptr;
+		tail = nullptr;
 	}
 	else
 	{
@@ -119,41 +117,48 @@ void List::deleteNodeIfMoreThanOneNode(int const data)
 
 void List::deleteHeadNodeIfMoreThanOneNode(int const data)
 {
-	auto* temp = head;
-	auto* prevBeforeHead = head;
-	while (prevBeforeHead->next != head)
-	{
-		prevBeforeHead = prevBeforeHead->next;
-	}
-	head = head->next;
-	prevBeforeHead->next = head;
-	temp->next = nullptr;
-	delete temp;
-	temp = nullptr;
+	auto* lastHead = head;
+	head = lastHead->next;
+	tail->next = head;
+	delete lastHead;
 }
 
 void List::deleteNotHeadNodeIfMoreThanOneNode(int const data)
 {
-	auto* temp = head;
-	while (temp->data != data && temp->next != head)
+	auto* prevBeforeElementToDelete = head;
+	if (head->next->data == data && head->next == tail)
 	{
-		temp = temp->next;
-	}
-	if (temp->data == data)
-	{
-		auto* prevBeforeElementToDelete = temp;
-		while (prevBeforeElementToDelete->next != temp)
-		{
-			prevBeforeElementToDelete = prevBeforeElementToDelete->next;
-		}
-		prevBeforeElementToDelete->next = temp->next;
-		temp->next = nullptr;
-		delete temp;
-		temp = nullptr;
+		auto* elementToDelete = tail;
+		head->next = head;
+		tail = head;
+		delete elementToDelete;
 	}
 	else
 	{
-		cout << "Node was not found. Node can not be deleted\n";
+		while (prevBeforeElementToDelete->next->data != data && prevBeforeElementToDelete->next != head)
+		{
+			prevBeforeElementToDelete = prevBeforeElementToDelete->next;
+		}
+		if (prevBeforeElementToDelete->next->data == data)
+		{
+			if (prevBeforeElementToDelete->next == tail)
+			{
+				auto* lastTail = tail;
+				tail = prevBeforeElementToDelete;
+				tail->next = head;
+				delete lastTail;
+			}
+			else
+			{
+				auto* elementToDelete = prevBeforeElementToDelete->next;
+				prevBeforeElementToDelete->next = elementToDelete->next;
+				delete elementToDelete;
+			}
+		}
+		else
+		{
+			cout << "Node was not found. Node can not be deleted\n";
+		}
 	}
 }
 
@@ -184,7 +189,7 @@ ostream & operator<<(ostream & os, List const & list)
 		else
 		{
 			auto* temp = list.head;
-			while (temp->next != list.head)
+			while (temp != list.tail)
 			{
 				cout << temp->data << " ";
 				temp = temp->next;

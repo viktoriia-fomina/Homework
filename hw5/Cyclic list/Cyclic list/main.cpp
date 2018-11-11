@@ -14,7 +14,6 @@ using namespace std;
 
 int josephusProblem(int const numberOfWarriors, int const murderFrequency);
 int tests();
-int parser(int* numbers, char const * string);
 
 int main()
 {
@@ -27,7 +26,7 @@ int main()
 	cout << "Input murder frequency\n";
 	cin >> m;
 	cout << "Safe position is " << josephusProblem(n, m) << endl;*/
-
+	
 	tests();
 
 	return 0;
@@ -36,66 +35,41 @@ int main()
 int tests()
 {
 	ifstream file("tests.txt");
-	int numberOfStrings = 0;
 	if (!file.is_open())
 	{
 		cout << "File could not be opened\n";
 		return -1;
 	}
-	int const size = 25;
-	char buffer[size] {};
-	int numbers[size] {};
-	int count = 1;
+	int numberOfString = 0;
+	int const size = 10;
+	int numbers[size]{};
+	int count = 0;
+	int number = 0;
+	int numberOfTest = 1;
 	while (!file.eof())
 	{
-		file.getline(buffer, size);
-		int sizeOfArray = parser(numbers, buffer);
-		++numberOfStrings;
-		for (int i = 0; i < 10; ++i)
+		file >> number;
+		numbers[count] = number;
+		++count;
+		if (count == size)
 		{
-			int result = josephusProblem(numberOfStrings, i + 1);
-			if (result == numbers[i])
+			++numberOfString;
+			for (int i = 0; i < size; ++i)
 			{
-				cout << "Test " << count << " passed" << endl;
+				int result = josephusProblem(numberOfString, i + 1);
+				if (result == numbers[i])
+				{
+					cout << "Test " << numberOfTest << " passed" << endl;
+				}
+				else
+				{
+					cout << "Test " << numberOfTest << " FAILED" << endl;
+				}
+				++numberOfTest;
 			}
-			else
-			{
-				cout << "Test " << count << " FAILED" << endl;
-			}
-			++count;
+			count = 0;
 		}
 	}
+	file.close();
 	return 0;
-}
-
-int parser(int* numbers, char const * string)
-{
-	int const sizeOfTemp = 100;
-	char* temp = new char[sizeOfTemp];
-	int size = 0;
-	int iterator = 0;
-	while (string[iterator] != '\0')
-	{
-		int j = 0;
-		bool ifSpaceOrEndOfLineOrEndOfStr = false;
-		while (string[iterator] != ' ' && string[iterator] != '\n' && string[iterator] != '\0')
-		{
-			temp[j] = string[iterator];
-			++j;
-			++iterator;
-			ifSpaceOrEndOfLineOrEndOfStr = true;
-		}
-		if (ifSpaceOrEndOfLineOrEndOfStr)
-		{
-			temp[j] = '\0';
-			numbers[size] = atoi(temp);
-			++size;
-		}
-		else
-		{
-			++iterator;
-		}
-	}
-	delete[] temp;
-	return size;
 }
