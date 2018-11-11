@@ -11,7 +11,5 @@ int main()
 	cin >> str;
 	cout << "result is " << fromPostfixToResult(str) << endl;
 
-
-	system("pause");
 	return 0;
 }

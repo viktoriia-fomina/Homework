@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
 #include <string>
 
-using namespace std;
-
-int fromPostfixToResult(string const & str);
+int fromPostfixToResult(std::string const & str);
