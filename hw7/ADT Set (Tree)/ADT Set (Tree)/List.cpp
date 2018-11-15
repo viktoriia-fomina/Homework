@@ -44,36 +44,36 @@ void List::addNode(int const data)
 	}
 }
 
-void List::deleteNode(int const data)
+bool List::deleteNode(int const data)
 {
 	if (isEmpty())
 	{
 		cout << "List is empty. Node can not be deleted\n";
+		return false;
+	}
+	auto* temp = head;
+	while (temp != nullptr && temp->data != data)
+	{
+		temp = temp->next;
+	}
+	if (temp == nullptr)
+	{
+		cout << "Node was not found. Node can not be deleted\n";
+		return false;
 	}
 	else
 	{
-		auto* temp = head;
-		while (temp != nullptr && temp->data != data)
+		if (temp == head)
 		{
-			temp = temp->next;
-		}
-		if (temp == nullptr)
-		{
-			cout << "Node was not found. Node can not be deleted\n";
+			deleteHead(data, temp);
 		}
 		else
 		{
-			if (temp == head)
-			{
-				deleteHead(data, temp);
-			}
-			else
-			{
-				deleteElementThatIsNotHead(data, temp);
-			}
-
+			deleteElementThatIsNotHead(data, temp);
 		}
+
 	}
+	return true;
 }
 
 void List::deleteHead(int const data, Element* temp)
