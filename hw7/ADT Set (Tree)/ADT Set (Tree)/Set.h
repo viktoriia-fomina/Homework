@@ -14,6 +14,7 @@ struct Set
 	bool printInAscendingOrder() const;
 	bool printInDescendingOrder() const;
 private:
+	void removeSetRecursion(Node* node);
 	void addNodeNotToHead(Node* node, int const data);
 	void removeRecursion(Node*& current, int const data);
 	void removeIfChildIsNullptr(Node*& current);

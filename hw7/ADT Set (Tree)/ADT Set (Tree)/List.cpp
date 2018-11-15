@@ -7,18 +7,21 @@ using namespace std;
 List::List()
 {
 	head = nullptr;
+	tail = nullptr;
 }
 
 List::~List()
+{
+	deleteList();
+}
+
+void List::deleteList()
 {
 	while (!isEmpty())
 	{
 		auto* temp = head;
 		head = head->next;
-		temp->next = nullptr;
-		temp->previous = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 }
 
@@ -31,8 +34,12 @@ void List::addNode(int const data)
 		head->next = temp;
 		head->previous = nullptr;
 		head->next->previous = head;
+		if (head == tail)
+		{
+			tail->previous = head;
+		}
 		auto* temporary = head;
-		while (temporary->next != nullptr && temporary->data < temporary->next->data)
+		while (temporary != tail && temporary->data < temporary->next->data)
 		{
 			swap(temporary, temporary->next);
 			temporary = temporary->next;
@@ -41,6 +48,7 @@ void List::addNode(int const data)
 	else
 	{
 		head = new Element(data);
+		tail = head;
 	}
 }
 
@@ -82,13 +90,11 @@ void List::deleteHead(int const data, Element* temp)
 	{
 		head = head->next;
 		head->previous = nullptr;
-		temp->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 	else
 	{
-		this->~List();
+		deleteList();
 	}
 }
 
@@ -98,17 +104,13 @@ void List::deleteElementThatIsNotHead(int const data, Element* temp)
 	{
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
-		temp->previous = nullptr;
-		temp->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 	else
 	{
-		temp->previous->next = nullptr;
-		temp->previous = nullptr;
+		tail = tail->previous;
+		tail->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 }
 
@@ -124,11 +126,7 @@ void List::printInDescendingOrder() const
 
 void List::printInAscendingOrder() const
 {
-	auto* temp = head;
-	while (temp->next != nullptr)
-	{
-		temp = temp->next;
-	}
+	auto* temp = tail;
 	while (temp != nullptr)
 	{
 		cout << temp->data << " ";

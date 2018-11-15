@@ -17,35 +17,30 @@ void userInterface()
 	{
 		userCommands();
 		cin >> number;
-		if (number == 0)
+		switch (number)
 		{
+		case 0:
 			break;
-		}
-		else if (number == 1)
-		{
+		case 1:
 			case1(number, s);
-		}
-		else if (number == 2)
-		{
+			break;
+		case 2:
 			case2(number, s);
-		}
-		else if (number == 3)
-		{
+			break;
+		case 3:
 			case3(number, s);
-		}
-		else if (number == 4)
-		{
+			break;
+		case 4:
 			s.printInAscendingOrder();
 			cout << endl << endl;
-		}
-		else if (number == 5)
-		{
+			break;
+		case 5:
 			s.printInDescendingOrder();
 			cout << endl << endl;
-		}
-		else
-		{
+			break;
+		default:
 			cout << "There is no such menu option: " << number << endl << endl;
+			break;
 		}
 	}
 }

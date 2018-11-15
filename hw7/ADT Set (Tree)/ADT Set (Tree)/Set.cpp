@@ -11,19 +11,25 @@ Set::~Set()
 {
 	if (!isEmpty())
 	{
-		// delete left subtree
-		while (head->leftChild != nullptr)
-		{
-			remove(maximum(head->leftChild));
-		}
-		// delete right subtree
-		while (head->rightChild != nullptr)
-		{
-			remove(maximum(head->rightChild));
-		}
-		delete head;
-		head = nullptr;
+		removeSetRecursion(head);
 	}
+}
+
+void Set::removeSetRecursion(Node* node)
+{
+	if (isEmpty())
+	{
+		return;
+	}
+	if (node->leftChild != nullptr)
+	{
+		removeSetRecursion(node->leftChild);
+	}
+	if (node->rightChild != nullptr)
+	{
+		removeSetRecursion(node->rightChild);
+	}
+	delete node;
 }
 
 bool Set::add(int const data)
