@@ -29,24 +29,21 @@ void Stack::push(char data)
 	head = newElement;
 }
 
-int Stack::pop()
+bool Stack::pop()
 {
-	if (!isEmpty())
+	if (isEmpty())
 	{
-		auto* temp = head->next;
-		head->next = nullptr;
-		delete head;
-		head = nullptr;
-		head = temp;
-		return 0;
+		return false;
 	}
-	else
-	{
-		return -1;
-	}
+	auto* temp = head->next;
+	head->next = nullptr;
+	delete head;
+	head = nullptr;
+	head = temp;
+	return true;
 }
 
-char Stack::peek()
+char Stack::peek() const
 {
 	if (!isEmpty())
 	{
@@ -59,7 +56,7 @@ char Stack::peek()
 	}
 }
 
-bool Stack::isEmpty()
+bool Stack::isEmpty() const
 {
 	return head == nullptr;
 }

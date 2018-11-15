@@ -2,8 +2,7 @@
 
 struct Element
 {
-	Element(char data);
-	~Element();
+	explicit Element(char data);
 	char data;
 	Element* next;
 };

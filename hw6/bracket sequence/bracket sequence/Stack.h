@@ -18,11 +18,11 @@ struct Stack
 	// добавление элемента в голову
 	void push(char data);
 	// удаление элемента из головы
-	int pop();
+	bool pop();
 	// посмотреть на головной элемент
-	char peek();
+	char peek() const;
 	// проверяет является ли стек пустым
-	bool isEmpty();
+	bool isEmpty() const;
 private:
 	Element* head;
 };
