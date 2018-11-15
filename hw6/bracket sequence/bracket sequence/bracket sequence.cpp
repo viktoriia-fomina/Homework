@@ -1,11 +1,12 @@
 #include "bracket sequence.h"
+#include "Stack.h"
 
 bool isBracket(char const symbol);
 bool ifClosingBracket(char const symbol);
 bool ifOpeningBracket(char const symbol);
 bool ifPairOfBrackets(char const openingBracket, char const closingBracket);
 
-bool ifBracketSequenceIsCorrect(string const & str)
+bool ifBracketSequenceIsCorrect(std::string const & str)
 {
 	Stack s;
 	for (int i = 0; i < str.size(); ++i)
