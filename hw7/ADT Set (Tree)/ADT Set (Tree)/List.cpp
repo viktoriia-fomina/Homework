@@ -1,5 +1,8 @@
 #include "List.h"
 #include "Element.h"
+#include <iostream>
+
+using namespace std;
 
 List::List()
 {

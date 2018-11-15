@@ -6,10 +6,3 @@ Element::Element(int data = 0)
 	this->previous = nullptr;
 	this->next = nullptr;
 }
-
-Element::~Element()
-{
-	this->previous = nullptr;
-	this->next = nullptr;
-	data = 0;
-}
