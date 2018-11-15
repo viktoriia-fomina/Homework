@@ -67,7 +67,7 @@ AdditionalCode operator+(AdditionalCode const & number1, AdditionalCode const & 
 	{
 		if (number1[size - i - 1] == 1 && number2[size - i - 1] == 1)
 		{
-			if (temp == true)
+			if (temp)
 			{
 				sum[size - i - 1] = 1;
 			}
@@ -83,7 +83,7 @@ AdditionalCode operator+(AdditionalCode const & number1, AdditionalCode const & 
 		}
 		else
 		{
-			if (temp == true)
+			if (temp)
 			{
 				sum[size - i - 1] = 1;
 				temp = false;
