@@ -1,5 +1,8 @@
 #include "Stack.h"
 #include "Element.h"
+#include <iostream>
+
+using namespace std;
 
 Stack::Stack()
 {
@@ -8,14 +11,12 @@ Stack::Stack()
 
 Stack::~Stack()
 {
-	auto* temp = head;
 	while (!isEmpty())
 	{
-		temp = head;
+		auto* temp = head;
 		head = temp->next;
 		temp->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 }
 
@@ -38,7 +39,6 @@ bool Stack::pop()
 	auto* temp = head->next;
 	head->next = nullptr;
 	delete head;
-	head = nullptr;
 	head = temp;
 	return true;
 }
