@@ -1,4 +1,4 @@
-#include "Read from file.h"
+#include "ReadFromFile.h"
 #include "Tests.h"
 #include <iostream>
 
@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	readInfoFromFile();
+	readInfoFromFileAndCalculateExpression();
 	cout << endl;
 	tests();
 

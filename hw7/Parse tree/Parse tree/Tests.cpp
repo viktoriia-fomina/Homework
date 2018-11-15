@@ -1,5 +1,5 @@
 #include "Tests.h"
-#include "Set.h"
+#include "ParseTree.h"
 #include "Node.h"
 #include <iostream>
 
@@ -39,32 +39,24 @@ void tests()
 
 bool test1()
 {
-	Set s;
+	ParseTree s;
 	char test[] = "+11";
 	s.addExpression(test);
-	return s.getHead()->data == '+' && s.getHead()->leftChild->data == '1' && s.getHead()->rightChild->data == '1'
-			&& s.getResult() == 2;
+	return s.getResult() == 2;
 }
 
 bool test2()
 {
-	Set s;
+	ParseTree s;
 	char test[] = "/9(-52)";
 	s.addExpression(test);
-	return s.getHead()->data == '/' && s.getHead()->leftChild->data == '9' && s.getHead()->rightChild->data == '-'
-			&& s.getHead()->rightChild->leftChild->data == '5' && s.getHead()->rightChild->rightChild->data == '2'
-			&& s.getResult() == 3;
+	return s.getResult() == 3;
 }
 
 bool test3()
 {
-	Set s;
+	ParseTree s;
 	char test[] = "+1(*(+52)(-73))";
 	s.addExpression(test);
-	return s.getHead()->data == '+' && s.getHead()->leftChild->data == '1' && s.getHead()->rightChild->data == '*'
-			&& s.getHead()->rightChild->leftChild->data == '+' && s.getHead()->rightChild->rightChild->data == '-'
-			&& s.getHead()->rightChild->leftChild->leftChild->data == '5' &&
-			s.getHead()->rightChild->leftChild->rightChild->data == '2' &&
-			s.getHead()->rightChild->rightChild->leftChild->data == '7' &&
-			s.getHead()->rightChild->rightChild->rightChild->data == '3' && s.getResult() == 29;
+	return s.getResult() == 29;
 }

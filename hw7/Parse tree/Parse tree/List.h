@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-
-using namespace std;
 
 struct Element;
 
@@ -15,6 +12,7 @@ struct List
 	void printInDescendingOrder() const;
 	bool isEmpty() const;
 private:
+	void deleteList();
 	void deleteHead(int const data, Element* temp);
 	void deleteElementThatIsNotHead(int const data, Element* temp);
 	void swap(Element* a, Element* b);

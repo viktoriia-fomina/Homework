@@ -1,5 +1,8 @@
 #include "List.h"
 #include "Element.h"
+#include <iostream>
+
+using namespace std;
 
 List::List()
 {
@@ -7,6 +10,11 @@ List::List()
 }
 
 List::~List()
+{
+	deleteList();
+}
+
+void List::deleteList()
 {
 	while (!isEmpty())
 	{
@@ -46,30 +54,28 @@ void List::deleteNode(int const data)
 	if (isEmpty())
 	{
 		cout << "List is empty. Node can not be deleted\n";
+		return;
+	}
+	auto* temp = head;
+	while (temp != nullptr && temp->data != data)
+	{
+		temp = temp->next;
+	}
+	if (temp == nullptr)
+	{
+		cout << "Node was not found. Node can not be deleted\n";
 	}
 	else
 	{
-		auto* temp = head;
-		while (temp != nullptr && temp->data != data)
+		if (temp == head)
 		{
-			temp = temp->next;
-		}
-		if (temp == nullptr)
-		{
-			cout << "Node was not found. Node can not be deleted\n";
+			deleteHead(data, temp);
 		}
 		else
 		{
-			if (temp == head)
-			{
-				deleteHead(data, temp);
-			}
-			else
-			{
-				deleteElementThatIsNotHead(data, temp);
-			}
-
+			deleteElementThatIsNotHead(data, temp);
 		}
+
 	}
 }
 
@@ -85,7 +91,7 @@ void List::deleteHead(int const data, Element* temp)
 	}
 	else
 	{
-		this->~List();
+		deleteList();
 	}
 }
 

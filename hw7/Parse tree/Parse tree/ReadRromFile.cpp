@@ -1,13 +1,13 @@
-#include "Read from file.h"
-#include "Set.h"
+#include "ReadFromFile.h"
+#include "ParseTree.h"
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-int readInfoFromFile()
+int readInfoFromFileAndCalculateExpression()
 {
-	Set s;
+	ParseTree s;
 	fstream file("data.txt", ios::in);
 	if (!file.is_open())
 	{
