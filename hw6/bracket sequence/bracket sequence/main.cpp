@@ -18,6 +18,5 @@ int main()
 	bool result = ifBracketSequenceIsCorrect(s);
 	cout << "res is " << result << endl;
 
-	system("pause");
 	return 0;
 }

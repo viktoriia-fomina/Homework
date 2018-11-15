@@ -14,31 +14,21 @@ bool ifBracketSequenceIsCorrect(string const & str)
 		{
 			if (s.isEmpty())
 			{
-				if (ifOpeningBracket(str[i]))
-				{
-					s.push(str[i]);
-				}
-				else
+				if (!ifOpeningBracket(str[i]))
 				{
 					return false;
 				}
+				s.push(str[i]);
 			}
 			else
 			{
 				if (ifClosingBracket(str[i]))
 				{
-					if (ifClosingBracket(s.peek()))
+					if (!ifPairOfBrackets(s.peek(), str[i]))
 					{
 						return false;
 					}
-					if (ifPairOfBrackets(s.peek(), str[i]))
-					{
-						s.pop();
-					}
-					else
-					{
-						return false;
-					}
+					s.pop();
 				}
 				else
 				{
@@ -67,14 +57,7 @@ bool ifClosingBracket(char const symbol)
 
 bool ifOpeningBracket(char const symbol)
 {
-	if (symbol == '(' || symbol == '[' || symbol == '{')
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (symbol == '(' || symbol == '[' || symbol == '{');
 }
 
 bool ifPairOfBrackets(char const openingBracket, char const closingBracket)

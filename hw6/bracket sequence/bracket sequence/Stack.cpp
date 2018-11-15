@@ -49,11 +49,8 @@ char Stack::peek() const
 	{
 		return head->data;
 	}
-	else
-	{
-		cout << "Stack is empty\n";
-		return '\0';
-	}
+	cout << "Stack is empty\n";
+	return '\0';
 }
 
 bool Stack::isEmpty() const
