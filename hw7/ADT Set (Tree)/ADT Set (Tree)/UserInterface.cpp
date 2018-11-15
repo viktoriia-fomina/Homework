@@ -40,7 +40,6 @@ void userInterface()
 			break;
 		default:
 			cout << "There is no such menu option: " << number << endl << endl;
-			break;
 		}
 	}
 }
