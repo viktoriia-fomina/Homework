@@ -1,13 +1,16 @@
 #pragma once
-#include "Compare interface.h"
+#include "CompareInterface.h"
+#include <string>
 
 struct Node : CompareInterface
 {
-	explicit Node(int data); // конструктор с параметром
-	~Node(); // деструктор
-	int data;
+	explicit Node(std::string const & data); // конструктор с параметром
+
+	bool operator<(CompareInterface const & c2) const;
+
+	std::string data;
 	Node* previous;
 	Node* next;
 private:
-	Node(); // конструктор без параметров
+	int compareTwoLetters(char const letter1, char const letter2) const;
 };

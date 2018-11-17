@@ -1,6 +1,8 @@
 ﻿#include "List.h"
 #include "Node.h"
 
+using namespace std;
+
 List::List()
 {
 	head = nullptr;
@@ -8,18 +10,20 @@ List::List()
 
 List::~List()
 {
+	deleteList();
+}
+
+void List::deleteList()
+{
 	while (!isEmpty())
 	{
 		auto* temp = head;
 		head = head->next;
-		temp->next = nullptr;
-		temp->previous = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 }
 
-void List::addNode(int const data)
+void List::addNode(string const & data)
 {
 	if (!isEmpty())
 	{
@@ -28,12 +32,6 @@ void List::addNode(int const data)
 		head->next = temp;
 		head->previous = nullptr;
 		head->next->previous = head;
-		auto* temporary = head;
-		while (temporary->next != nullptr && temporary->data < temporary->next->data)
-		{
-			swap(temporary, temporary->next);
-			temporary = temporary->next;
-		}
 	}
 	else
 	{
@@ -41,72 +39,72 @@ void List::addNode(int const data)
 	}
 }
 
-void List::deleteNode(int const data)
+int List::deleteNode(string const & data)
 {
 	if (isEmpty())
 	{
 		cout << "List is empty. Node can not be deleted\n";
+		return -1;
+	}
+	auto* temp = head;
+	while (temp != nullptr && temp->data != data)
+	{
+		temp = temp->next;
+	}
+	if (temp == nullptr)
+	{
+		cout << "Node was not found. Node can not be deleted\n";
+		return -1;
+	}
+	if (temp == head)
+	{
+		deleteHead(data, temp);
 	}
 	else
 	{
-		auto* temp = head;
-		while (temp != nullptr && temp->data != data)
-		{
-			temp = temp->next;
-		}
-		if (temp == nullptr)
-		{
-			cout << "Node was not found. Node can not be deleted\n";
-		}
-		else
-		{
-			if (temp == head)
-			{
-				deleteHead(data, temp);
-			}
-			else
-			{
-				deleteElementThatIsNotHead(data, temp);
-			}
-
-		}
+		deleteElementThatIsNotHead(data, temp);
 	}
+	return 0;
 }
 
-void List::deleteHead(int const data, Node* temp)
+void List::deleteHead(string const & data, Node* temp)
 {
 	if (head->next != nullptr)
 	{
 		head = head->next;
 		head->previous = nullptr;
-		temp->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 	else
 	{
-		this->~List();
+		deleteList();
 	}
 }
 
-void List::deleteElementThatIsNotHead(int const data, Node* temp)
+void List::deleteElementThatIsNotHead(string const & data, Node* temp)
 {
 	if (temp->next != nullptr)
 	{
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
-		temp->previous = nullptr;
-		temp->next = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
 	else
 	{
 		temp->previous->next = nullptr;
-		temp->previous = nullptr;
 		delete temp;
-		temp = nullptr;
 	}
+}
+
+Node & List::operator[](int const & index)
+{
+	int i = 0;
+	auto* temp = head;
+	while (i < index - 1)
+	{
+		temp = temp->next;
+	}
+	return *temp;
 }
 
 ostream & operator<<(ostream & os, List const & list)
@@ -123,11 +121,4 @@ ostream & operator<<(ostream & os, List const & list)
 bool List::isEmpty() const
 {
 	return head == nullptr;
-}
-
-void List::swap(Node* a, Node* b)
-{
-	int const c = a->data;
-	a->data = b->data;
-	b->data = c;
 }

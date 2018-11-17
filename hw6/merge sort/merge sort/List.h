@@ -1,23 +1,32 @@
 ﻿#pragma once
 #include <iostream>
-#include "Node.h"
 #include "Sort.h"
-
-using namespace std;
+#include <string>
 
 struct Node;
 
 struct List : Sort<Node, int>
 {
-	List(); // конструктор
-	~List(); // деструктор
-	void addNode(int const data); // добавить узел
-	void deleteNode(int const data); // удалить узел
-	bool isEmpty() const; // проверить является ли список пустым
-	friend ostream & operator<<(ostream & os, List const & list); // оператор вывода
+	List();
+
+	~List();
+
+	void addNode(std::string const & data);
+
+	int deleteNode(std::string const & data);
+
+	Node & operator[](int const & index);
+									
+	friend std::ostream & operator<<(std::ostream & os, List const & list); 
+
+	bool isEmpty() const;
+
 private:
-	void deleteHead(int const data, Node* temp); // удаление головы
-	void deleteElementThatIsNotHead(int const data, Node* temp); // удаление не головного элемента
-	void swap(Node * a, Node* b); // метод своп
+	void deleteList();
+
+	void deleteHead(std::string const & data, Node* temp);
+
+	void deleteElementThatIsNotHead(std::string const & data, Node* temp);
+
 	Node* head;
 };
