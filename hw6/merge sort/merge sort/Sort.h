@@ -1,6 +1,6 @@
 #pragma once
 
-template<typename DataType, typename IndexType>
+template<class DataType, typename IndexType>
 struct Sort
 {
 	void mergeSort(IndexType first, IndexType last)
