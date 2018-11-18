@@ -1,26 +1,34 @@
 #pragma once
+#include <vector>
 
 template<class DataType, typename IndexType>
 struct Sort
 {
-	void mergeSort(IndexType first, IndexType last)
+	void mergeSort()
 	{
-		if (last - first > 0)
-		{
-			IndexType middle = (first + last) / 2;
-			mergeSort(first, middle);
-			mergeSort(middle + 1, last);
-			merge(first, middle, middle + 1, last);
-		}
+		std::vector<DataType> data;
+		data.resize(size());
+		mergeSortRecursion(0, size() - 1, data);
 	}
 
 protected:
 	virtual DataType & operator[](IndexType const & i) = 0;
+	virtual IndexType size() const = 0;
 
 private:
-	void merge(IndexType first1, IndexType last1, IndexType first2, IndexType last2)
+	void mergeSortRecursion(IndexType first, IndexType last, std::vector<DataType> & data)
 	{
-		DataType* data = new DataType[last2 - first1 + 1]{};
+		if (last - first > 0)
+		{
+			IndexType middle = (first + last) / 2;
+			mergeSortRecursion(first, middle, data);
+			mergeSortRecursion(middle + 1, last, data);
+			merge(first, middle, middle + 1, last, data);
+		}
+	}
+
+	void merge(IndexType first1, IndexType last1, IndexType first2, IndexType last2, std::vector<DataType> & data)
+	{
 		IndexType iterator1 = first1;
 		IndexType iterator2 = first2;
 		for (IndexType i = 0; i < last2 - first1 + 1; ++i)
@@ -35,6 +43,7 @@ private:
 				{
 					ifOneArrayIsEnded(data, first1, last2, iterator1, i);
 				}
+				break;
 			}
 			if ((*this)[iterator1] < (*this)[iterator2])
 			{
@@ -47,11 +56,10 @@ private:
 				++iterator2;
 			}
 		}
-		copyArrayToSortedArray()
-		delete[] data;
+		copyArrayToSortingArray(data, first1, last1, last2);
 	}
 
-	void ifOneArrayIsEnded(DataType data[], IndexType const & first1,
+	void ifOneArrayIsEnded(std::vector<DataType> & data, IndexType const & first1,
 			IndexType const & last2,  IndexType & iteratorOfPart, IndexType & i)
 	{
 		while (i < last2 - first1 + 1)
@@ -62,16 +70,16 @@ private:
 		}
 	}
 
-	void copyArrayToSortingArray(DataType const data[], IndexType const & first1,
+	void copyArrayToSortingArray(std::vector<DataType> const & data, IndexType const & first1,
 			IndexType const & last1, IndexType const & last2)
 	{
 		IndexType iter = first1;
 		IndexType j = 0;
-		copyPartOfArray(data[], iter, j, last1);
-		copyPartOfArray(data[], iter, j, last2);
+		copyPartOfArray(data, iter, j, last1);
+		copyPartOfArray(data, iter, j, last2);
 	}
 
-	void copyPartOfArray(DataType const data[], IndexType & iter, IndexType & j,
+	void copyPartOfArray(std::vector<DataType> const & data, IndexType & iter, IndexType & j,
 			IndexType const & last)
 	{
 		while (iter <= last)
