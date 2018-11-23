@@ -1,4 +1,5 @@
 #pragma once
+#include <utility>
 
 struct Element;
 
@@ -17,7 +18,7 @@ struct Stack
 	bool pop();
 
 	// посмотреть на головной элемент
-	int peek() const;
+	std::pair<bool, int> & peek(std::pair<bool, int> & p) const;
 
 	// проверяет является ли стек пустым
 	bool isEmpty() const;

@@ -1,4 +1,5 @@
 #pragma once
 #include <string>
+#include <utility>
 
-int fromPostfixToResult(std::string const & str);
+std::pair<bool, int> & fromPostfixToResult(std::string const & str, std::pair <bool, int> & p);

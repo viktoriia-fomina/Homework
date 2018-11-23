@@ -43,17 +43,21 @@ bool Stack::pop()
 	return true;
 }
 
-int Stack::peek() const
+pair<bool, int> & Stack::peek(pair<bool, int> & p) const
 {
-	if (!isEmpty())
+	p.first = head->data;
+	if (isEmpty())
 	{
-		return head->data;
+		p.first = false;
+		cout << "Stack is empty" << endl;
+		p.second = -1;
 	}
 	else
 	{
-		cout << "Stack is empty\n";
-		return -1;
+		p.first = true;
+		p.second = head->data;
 	}
+	return p;
 }
 
 bool Stack::isEmpty() const

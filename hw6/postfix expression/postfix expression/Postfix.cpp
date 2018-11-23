@@ -8,10 +8,10 @@ bool isOperator(char symbol);
 
 int performOperation(char symbol, int firstNum, int secondNum);
 
-int fromPostfixToResult(string const & str)
+pair<bool, int> & fromPostfixToResult(string const & str, pair<bool, int> & p)
 {
 	Stack s;
-	size_t sizeOfStr = str.size();
+	size_t const sizeOfStr = str.size();
 	for (size_t i = 0; i < sizeOfStr; ++i)
 	{
 		if (!isOperator(str[i]))
@@ -20,32 +20,40 @@ int fromPostfixToResult(string const & str)
 			int numberInInt = atoi(&number);
 			s.push(numberInInt);
 		}
-		else if (!isOperator(str[i]))
+		else if (isOperator(str[i]))
 		{
-			if (s.peek() == -1)
+			if (!s.peek(p).first)
 			{
+				p.first = false;
 				cout << "Incorrect expression" << endl;
-				return -1;
+				p.second = -1;
+				return p;
 			}
-			int num2 = s.peek();
+			int num2 = s.peek(p).second;
 			s.pop();
-			if (s.peek() == -1)
+			if (!s.peek(p).first)
 			{
+				p.first = false;
 				cout << "Incorrect expression" << endl;
-				return -1;
+				p.second = -1;
+				return p;
 			}
-			int num1 = s.peek();
+			int num1 = s.peek(p).second;
 			s.pop();
 			int resultOfOperation = performOperation(str[i], num1, num2);
 			s.push(resultOfOperation);
 		}
 		else
 		{
+			p.first = false;
 			cout << "Incorrect expression" << endl;
-			return -1;
+			p.second = -1;
+			return p;
 		}
 	}
-	return s.peek();
+	p.first = s.peek(p).first;
+	p.second = s.peek(p).second;
+	return p;
 }
 
 bool isOperator(char symbol)
