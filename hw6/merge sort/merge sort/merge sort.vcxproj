@@ -121,19 +121,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CompareInterface.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Tests.cpp" />
+    <ClCompile Include="userInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CompareInterface.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Tests.h" />
+    <ClInclude Include="userInterface.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="text.txt" />
+    <Text Include="forSort.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
