@@ -22,6 +22,7 @@ void List::deleteList()
 		head = head->next;
 		delete temp;
 	}
+	sizeOfList = 0;
 }
 
 void List::addNode(string const & data)
@@ -90,15 +91,13 @@ void List::deleteElementThatIsNotHead(string const & data, Node* temp)
 	{
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
-		delete temp;
-		--sizeOfList;
 	}
 	else
 	{
 		temp->previous->next = nullptr;
-		delete temp;
-		--sizeOfList;
 	}
+	delete temp;
+	--sizeOfList;
 }
 
 Node & List::operator[](int const & index)

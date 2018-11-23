@@ -1,12 +1,13 @@
 #pragma once
-#include "CompareInterface.h"
 #include <string>
 
-struct Node : CompareInterface
+struct Node
 {
-	explicit Node(std::string const & data); // конструктор с параметром
+	explicit Node(std::string const & data);
+
 	Node();
-	bool operator<(CompareInterface const & c) const;
+	bool operator<(Node const & node) const;
+	Node & operator=(Node const & node);
 
 	std::string data;
 	Node* previous;

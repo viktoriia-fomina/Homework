@@ -1,6 +1,4 @@
 #include "Node.h"
-#include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -18,8 +16,16 @@ Node::Node()
 	this->next = nullptr;
 }
 
-bool Node::operator<(CompareInterface const & c) const
+bool Node::operator<(Node const & node) const
 {
-	Node const element = static_cast<Node const &>(c);
-	return this->data < element.data;
+	return this->data < node.data;
+}
+
+Node & Node::operator=(Node const & node)
+{
+	if (this != &node)
+	{
+		(*this).data = node.data;
+	}
+	return *this;
 }
