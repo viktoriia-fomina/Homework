@@ -18,7 +18,7 @@ struct Stack
 	bool pop();
 
 	// посмотреть на головной элемент
-	std::pair<bool, int> & peek(std::pair<bool, int> & p) const;
+	std::pair<bool, int> peek(std::pair<bool, int> & p) const;
 
 	// проверяет является ли стек пустым
 	bool isEmpty() const;
