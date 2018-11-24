@@ -38,11 +38,7 @@ bool ifBracketSequenceIsCorrect(std::string const & str)
 			}
 		}
 	}
-	if (!s.isEmpty())
-	{
-		return false;
-	}
-	return true;
+	return s.isEmpty();
 }
 
 bool isBracket(char const symbol)
