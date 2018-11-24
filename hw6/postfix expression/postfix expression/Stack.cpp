@@ -43,9 +43,8 @@ bool Stack::pop()
 	return true;
 }
 
-pair<bool, int> & Stack::peek(pair<bool, int> & p) const
+pair<bool, int> Stack::peek(pair<bool, int> & p) const
 {
-	p.first = head->data;
 	if (isEmpty())
 	{
 		p.first = false;

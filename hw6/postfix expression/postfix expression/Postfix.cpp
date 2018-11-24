@@ -8,6 +8,8 @@ bool isOperator(char symbol);
 
 int performOperation(char symbol, int firstNum, int secondNum);
 
+pair<bool, int> & error(pair<bool, int> & p);
+
 pair<bool, int> & fromPostfixToResult(string const & str, pair<bool, int> & p)
 {
 	Stack s;
@@ -24,19 +26,13 @@ pair<bool, int> & fromPostfixToResult(string const & str, pair<bool, int> & p)
 		{
 			if (!s.peek(p).first)
 			{
-				p.first = false;
-				cout << "Incorrect expression" << endl;
-				p.second = -1;
-				return p;
+				return error(p);
 			}
 			int num2 = s.peek(p).second;
 			s.pop();
 			if (!s.peek(p).first)
 			{
-				p.first = false;
-				cout << "Incorrect expression" << endl;
-				p.second = -1;
-				return p;
+				return error(p);
 			}
 			int num1 = s.peek(p).second;
 			s.pop();
@@ -45,14 +41,19 @@ pair<bool, int> & fromPostfixToResult(string const & str, pair<bool, int> & p)
 		}
 		else
 		{
-			p.first = false;
-			cout << "Incorrect expression" << endl;
-			p.second = -1;
-			return p;
+			return error(p);
 		}
 	}
 	p.first = s.peek(p).first;
 	p.second = s.peek(p).second;
+	return p;
+}
+
+pair<bool, int> & error(pair<bool, int> & p)
+{
+	p.first = false;
+	cout << "Incorrect expression" << endl;
+	p.second = -1;
 	return p;
 }
 

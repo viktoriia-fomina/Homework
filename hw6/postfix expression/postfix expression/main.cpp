@@ -11,14 +11,7 @@ int main()
 	pair <bool, int> p;
 	cout << "Input string" << endl;
 	cin >> str;
-	if (!fromPostfixToResult(str, p).first)
-	{
-		cout << "Incorrect expression" << endl;
-	}
-	else
-	{
-		cout << "result is " << fromPostfixToResult(str, p).second << endl;
-	}
+	cout << "result is " << fromPostfixToResult(str, p).second << endl;
 
 	return 0;
 }
