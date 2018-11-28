@@ -9,21 +9,68 @@ void Set::addValueByKey(std::string const & key, std::string const & value)
 		head->value = value;
 		return;
 	}
-	auto* temp = head;
-	while (temp->leftChild != nullptr)
+	bool ifKeyExists = keyExists(key);
+	if (ifKeyExists)
 	{
-		temp = temp->leftChild;
+		addIfKeyExists(key, value, head);
+		return;
 	}
-	temp->leftChild = new Node(key, value);
-	temp->leftChild->parent = temp;
+	auto* temp = head;
+	
 	
 	// дальше разобраться с балансом
+}
+
+Node & Set::addIfKeyExists(std::string const & key, std::string const & value, Node *& current)
+{
+	if (key == current->key)
+	{
+		current->value = value;
+	}
+	else if (key < current->key)
+	{
+		addIfKeyExists(key, value, current->leftChild);
+	}
+	else
+	{
+		addIfKeyExists(key, value, current->rightChild);
+	}
+}
+
+Node *& Set::addRecurson(std::string const & key, std::string const & value, Node *& current)
+{
+	if (key < current->key)
+	{
+		if (current->leftChild != nullptr)
+		{
+			addRecurson(key, value, current);
+		}
+		else
+		{
+			current->leftChild = new Node(key, value);
+			return current->leftChild;
+		}
+	} 
+	else
+	{
+		if (current->rightChild != nullptr)
+		{
+			addRecurson(key, value, current);
+		}
+		else
+		{
+			current->rightChild = new Node(key, value);
+			return current->rightChild;
+		}
+	}
 }
 
 void Set::balance()
 {
 
 }
+
+void Set::
 
 void Set::fixDifferenceBetweenHeights(Node const * const addedElement)
 {

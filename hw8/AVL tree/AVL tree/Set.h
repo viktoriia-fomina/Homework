@@ -10,6 +10,8 @@ struct Set
 	bool keyExists(std::string const & key) const;
 	void deleteKeyAndItsValue(std::string const & key);
 private:
+	Node & addIfKeyExists(std:: string const & key, std::string const & value, Node *& current);
+	Node *& addRecurson(std::string const & key, std::string const & value, Node *& current);
 	Node & setValueByKey(std::string const & key);
 	void fixDifferenceBetweenHeights(Node const * const addedElement);
 	void fixDifferenceBetweenHeightsRecursion(Node const * const current);
