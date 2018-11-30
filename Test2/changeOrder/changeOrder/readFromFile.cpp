@@ -56,7 +56,7 @@ void writeFromList(ofstream & file, List & l)
 {
 	int buffer = 0;
 	int iterator = l.size() - 1;
-	while (!l.isEmpty())
+	while (iterator >= 0)
 	{
 		buffer = l.getNumber(iterator);
 		--iterator;
