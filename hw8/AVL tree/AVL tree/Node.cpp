@@ -7,5 +7,5 @@ Node::Node(std::string const & key, std::string const & value)
 	parent = nullptr;
 	leftChild = nullptr;
 	rightChild = nullptr;
-	differenceBetweenHeights = 0;
+	balanceFactor = 0;
 }

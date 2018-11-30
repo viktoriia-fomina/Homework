@@ -7,7 +7,7 @@ struct Node
 
 	std::string key; // нельз€ хранить значени€ с 2 одинаковыми ключами
 	std::string value;
-	int differenceBetweenHeights;
+	int balanceFactor;
 	Node* parent;
 	Node* leftChild;
 	Node* rightChild;
