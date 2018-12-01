@@ -8,7 +8,10 @@ Set::Set()
 
 Set::~Set()
 {
-	deleteRecursion(head);
+	if (head != nullptr)
+	{
+		deleteRecursion(head);
+	}
 }
 
 void Set::deleteRecursion(Node * current)
