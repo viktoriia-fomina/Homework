@@ -1,12 +1,34 @@
 #include "Set.h"
 #include "Node.h"
 
+Set::Set()
+{
+	head = nullptr;
+}
+
+Set::~Set()
+{
+	deleteRecursion(head);
+}
+
+void Set::deleteRecursion(Node * current)
+{
+	if (current->leftChild != nullptr)
+	{
+		deleteRecursion(current->leftChild);
+	}
+	if (current->rightChild != nullptr)
+	{
+		deleteRecursion(current->rightChild);
+	}
+	delete current;
+}
+
 void Set::addValueByKey(std::string const & key, std::string const & value)
 {
 	if (isEmpty())
 	{
-		head->key = key;
-		head->value = value;
+		head = new Node(key, value);
 		return;
 	}
 	bool ifKeyExists = keyExists(key);
@@ -15,13 +37,11 @@ void Set::addValueByKey(std::string const & key, std::string const & value)
 		addIfKeyExists(key, value, head);
 		return;
 	}
-	auto* temp = head;
-	
-	
-	// дальше разобраться с балансом
+	auto* added = addRecurson(key, value, head);
+	balance(added);
 }
 
-Node & Set::addIfKeyExists(std::string const & key, std::string const & value, Node *& current)
+void Set::addIfKeyExists(std::string const & key, std::string const & value, Node * current)
 {
 	if (key == current->key)
 	{
@@ -29,25 +49,26 @@ Node & Set::addIfKeyExists(std::string const & key, std::string const & value, N
 	}
 	else if (key < current->key)
 	{
-		return addIfKeyExists(key, value, current->leftChild);
+		addIfKeyExists(key, value, current->leftChild);
 	}
 	else
 	{
-		return addIfKeyExists(key, value, current->rightChild);
+		addIfKeyExists(key, value, current->rightChild);
 	}
 }
 
-Node *& Set::addRecurson(std::string const & key, std::string const & value, Node *& current)
+Node * Set::addRecurson(std::string const & key, std::string const & value, Node * current)
 {
 	if (key < current->key)
 	{
 		if (current->leftChild != nullptr)
 		{
-			addRecurson(key, value, current);
+			return addRecurson(key, value, current->leftChild);
 		}
 		else
 		{
 			current->leftChild = new Node(key, value);
+			current->leftChild->parent = current;
 			return current->leftChild;
 		}
 	} 
@@ -55,11 +76,12 @@ Node *& Set::addRecurson(std::string const & key, std::string const & value, Nod
 	{
 		if (current->rightChild != nullptr)
 		{
-			addRecurson(key, value, current);
+			return addRecurson(key, value, current->rightChild);
 		}
 		else
 		{
 			current->rightChild = new Node(key, value);
+			current->rightChild->parent = current;
 			return current->rightChild;
 		}
 	}
@@ -74,17 +96,17 @@ void Set::balance(Node * added)
 	auto* current = added->parent->parent;
 	auto* prev = added->parent;
 	auto* prevPrev = added;
-	int lengthL = 0;
-	int lengthR = 0;
-	while (current != head)
+	while (current != nullptr)
 	{
+		int lengthL = 0;
+		int lengthR = 0;
 		if (current->leftChild != nullptr)
 		{
-			lengthL = lengthOfSubtree(current->leftChild);
+			lengthL = lengthOfSubtree(current->leftChild, 0);
 		}
 		if (current->rightChild != nullptr)
 		{
-			lengthR = lengthOfSubtree(current->rightChild);
+			lengthR = lengthOfSubtree(current->rightChild, 0);
 		}
 		int balanceFactor = lengthR - lengthL;
 		current->balanceFactor = balanceFactor;
@@ -99,28 +121,27 @@ void Set::balance(Node * added)
 	}
 }
 
-int Set::lengthOfSubtree(Node * added) const
+int Set::lengthOfSubtree(Node * current, int count) const
 {
 	int left = 0;
 	int right = 0;
-	if (added->leftChild != nullptr)
+	if (current->leftChild != nullptr)
 	{
-		left = lengthOfSubtree(added->leftChild);
+		left = lengthOfSubtree(current->leftChild, count + 1);
 	}
 	else
 	{
 		left = -1;
 	}
-	if (added->rightChild != nullptr)
+	if (current->rightChild != nullptr)
 	{
-		right = lengthOfSubtree(added->rightChild);
+		right = lengthOfSubtree(current->rightChild, count + 1);
 	}
 	else
 	{
 		right = -1;
 	}
-	int max = left > right ? left : right;
-	return max + 1;
+	return count + 1;
 }
 
 void Set::setBalance(Node * a, Node * b, Node * c)
@@ -128,22 +149,28 @@ void Set::setBalance(Node * a, Node * b, Node * c)
 	if (a->leftChild == b && b->leftChild == c)
 	{
 		rotateSmallLeft(a, b, c);
-		// расставить баланс факторы
+		a->balanceFactor = lengthOfSubtree(a, 0);
+		b->balanceFactor = lengthOfSubtree(b, 0);
 	}
 	else if (a->rightChild == b && b->rightChild == c)
 	{
 		rotateSmallRight(a, b, c);
-		// расставить баланс факторы
+		a->balanceFactor = lengthOfSubtree(a, 0);
+		b->balanceFactor = lengthOfSubtree(b, 0);
 	}
 	else if (a->leftChild == b && b->rightChild == c)
 	{
 		rotateRight(a, b, c);
-		// расставить баланс факторы
+		a->balanceFactor = lengthOfSubtree(a, 0);
+		b->balanceFactor = lengthOfSubtree(b, 0);
+		c->balanceFactor = lengthOfSubtree(c, 0);
 	}
 	else
 	{
 		rotateLeft(a, b, c);
-		// расставить баланс факторы
+		a->balanceFactor = lengthOfSubtree(a, 0);
+		b->balanceFactor = lengthOfSubtree(b, 0);
+		c->balanceFactor = lengthOfSubtree(c, 0);
 	}
 }
 
@@ -161,13 +188,13 @@ void Set::rotateSmallLeft(Node * a, Node * b, Node * c)
 			a->parent->leftChild = b;
 		}
 	}
-	a->rightChild = b->leftChild;
-	if (b->leftChild != nullptr)
+	a->leftChild = b->rightChild;
+	if (b->rightChild != nullptr)
 	{
-		b->leftChild->parent = a;
+		b->rightChild->parent = a;
 	}
-	b->leftChild = a;
-	a->parent = b;
+	b->leftChild = c;
+	c->parent = b;
 }
 
 void Set::rotateSmallRight(Node * a, Node * b, Node * c)
@@ -195,7 +222,32 @@ void Set::rotateSmallRight(Node * a, Node * b, Node * c)
 
 void Set::rotateLeft(Node * a, Node * b, Node * c)
 {
-
+	c->parent = a->parent;
+	if (a->parent != nullptr)
+	{
+		if (a->parent->leftChild == a)
+		{
+			a->parent->leftChild = c;
+		}
+		else
+		{
+			a->parent->rightChild = c;
+		}
+	}
+	b->leftChild = c->rightChild;
+	if (c->rightChild != nullptr)
+	{
+		c->rightChild->parent = b;
+	}
+	c->rightChild = b;
+	b->parent = c;
+	a->rightChild = c->leftChild;
+	if (c->leftChild != nullptr)
+	{
+		c->leftChild->parent = a;
+	}
+	c->leftChild = a;
+	a->parent = c;
 }
 
 void Set::rotateRight(Node * a, Node * b, Node * c)
@@ -246,13 +298,19 @@ void Set::getValueByKeyRecursion(std::string & value, std::string const & key, N
 		value = current->value;
 		return;
 	}
-	if (current->leftChild != nullptr)
+	else if (current->key > key)
 	{
-		getValueByKeyRecursion(value, key, current->leftChild);
+		if (current->leftChild != nullptr)
+		{
+			getValueByKeyRecursion(value, key, current->leftChild);
+		}
 	}
-	if (current->rightChild != nullptr)
+	else
 	{
-		getValueByKeyRecursion(value, key, current->rightChild);
+		if (current->rightChild != nullptr)
+		{
+			getValueByKeyRecursion(value, key, current->rightChild);
+		}
 	}
 }
 
@@ -294,7 +352,7 @@ void Set::deleteKeyAndItsValue(std::string const & key)
 
 }
 
-Node & Set::setValueByKey(std::string const & key)
-{
-	//while
-}
+//Node & Set::setValueByKey(std::string const & key)
+//{
+//	//while
+//}
