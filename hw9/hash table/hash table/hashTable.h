@@ -5,7 +5,9 @@ struct Set
 {
 	Set();
 
-	void add(std::string const & str);
+	void addElement(std::string const & str);
+
+	double loadFactor() const;
 
 	void deleteElement(std::string const & str);
 
