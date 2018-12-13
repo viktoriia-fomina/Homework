@@ -14,9 +14,9 @@ struct List
 
 	int deleteElement(std::string const & data);
 
-	Node & operator[](int const & index);
+	Node & operator[](int const & index) const;
 
-	int operator()(int const & index);
+	void printData(int const & index) const;
 
 	friend std::ostream & operator<<(std::ostream & os, List const & list);
 

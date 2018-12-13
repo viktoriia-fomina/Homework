@@ -1,3 +1,4 @@
 #pragma once
+#include <fstream>
 
-bool frequencyOfEveryWordInText();
+bool frequencyOfEveryWordInText(std::ifstream & file);

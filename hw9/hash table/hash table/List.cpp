@@ -129,7 +129,7 @@ void List::deleteElementThatIsNotHead(string const & data, Node* temp)
 	}
 }
 
-Node & List::operator[](int const & index)
+Node & List::operator[](int const & index) const
 {
 	int i = 0;
 	auto* temp = head;
@@ -141,9 +141,9 @@ Node & List::operator[](int const & index)
 	return *temp;
 }
 
-int List::operator()(int const & index)
+void List::printData(int const & index) const
 {
-	return (*this)[index].number;
+	cout << (*this)[index].data << " " << (*this)[index].number;
 }
 
 ostream & operator<<(ostream & os, List const & list)

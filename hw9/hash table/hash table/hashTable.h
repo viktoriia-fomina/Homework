@@ -1,6 +1,5 @@
 #include <vector>
-
-struct List;
+#include "List.h"
 
 struct Set
 {

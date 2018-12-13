@@ -20,11 +20,8 @@ Set::Set()
 
 void Set::addElement(std::string const & str)
 {
-	if (!exists(str))
-	{
-		int hash = hashFunction(str) % size();
-		buckets[hash].addElement(str);
-	}
+	int hash = hashFunction(str) % size();
+	buckets[hash].addElement(str);
 }
 
 void Set::deleteElement(std::string const & str)
@@ -45,7 +42,7 @@ bool Set::exists(std::string const & str) const
 int Set::hashFunction(std::string const & str) const
 {
 	int sum = 0;
-	for (int i = 0; i < str.size(); ++i)
+	for (size_t i = 0; i < str.size(); ++i)
 	{
 		sum += sum * 5 + str[i];
 	}
@@ -63,7 +60,7 @@ int Set::numberOfElements() const
 	int sum = 0;
 	for (int i = 0; i < size(); ++i)
 	{
-		sum += buckets[i].numberOfElements();
+		sum += buckets[i].size();
 	}
 	return sum;
 }
@@ -73,9 +70,9 @@ int Set::maxSizeOfList() const
 	int max = 0;
 	for (int i = 0; i < size(); ++i)
 	{
-		if (buckets[i].numberOfElements() > max)
+		if (buckets[i].size() > max)
 		{
-			max = buckets[i].numberOfElements();
+			max = buckets[i].size();
 		}
 	}
 	return max;
@@ -102,7 +99,11 @@ void Set::frequencyOfEveryWord()
 	{
 		if (!buckets[i].isEmpty())
 		{
-			for 
+			for (int j = 0; j < buckets[i].size(); ++j)
+			{
+				buckets[i].printData(j);
+				cout << endl;
+			}
 		}
 	}
 }

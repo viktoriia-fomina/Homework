@@ -1,15 +1,13 @@
-#include "readFromFile.h"
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include "readFromFile.h"
 #include "hashTable.h"
 
 using namespace std;
 
-bool frequencyOfEveryWordInText()
+bool frequencyOfEveryWordInText(ifstream & file)
 {
-	ifstream file;
-	file.open("text.txt", ios::in);
-	if (!file.is_open)
+	if (!file.is_open())
 	{
 		cout << "File not found" << endl;
 		return false;
@@ -21,8 +19,6 @@ bool frequencyOfEveryWordInText()
 		file >> buffer;
 		s.addElement(buffer);		
 	}
-	for (int i = 0; i < s.size(); ++i)
-	{
-		for (int j = 0; j < )
-	}
+	s.frequencyOfEveryWord();
+	return true;
 }
