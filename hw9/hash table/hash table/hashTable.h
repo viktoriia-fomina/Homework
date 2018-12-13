@@ -1,11 +1,20 @@
-#include <list>
 #include <vector>
+
+struct List;
 
 struct Set
 {
 	Set();
 
 	void addElement(std::string const & str);
+
+	int maxSizeOfList() const;
+
+	int size() const;
+
+	void frequencyOfEveryWord();
+
+	double averageSizeOfList() const;
 
 	double loadFactor() const;
 
@@ -16,5 +25,7 @@ struct Set
 private:
 	int hashFunction(std::string const & str) const;
 
-	std::vector<std::list<std::string>> buckets;
+	int numberOfElements() const;
+
+	std::vector<List> buckets;
 };
