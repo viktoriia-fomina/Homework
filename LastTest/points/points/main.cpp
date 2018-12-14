@@ -29,6 +29,7 @@ int main()
 		}
 	}
 
+	cout << "Saddle points:" << endl;
 	saddlePoints(array, rows, cols);
 
 	for (int i = 0; i < rows; ++i)

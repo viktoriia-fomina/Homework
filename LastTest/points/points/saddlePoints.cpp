@@ -11,7 +11,6 @@ void saddlePoints(int const * const * const array, int rows, int cols)
 {
 	int* minInRows = new int[rows] {};
 	int* maxInCols = new int[cols] {};
-
 	for (int i = 0; i < rows; ++i)
 	{
 		minInRows[i] = getMinInRow(array[i], cols);
@@ -30,7 +29,6 @@ void saddlePoints(int const * const * const array, int rows, int cols)
 			}
 		}
 	}
-
 	delete[] minInRows;
 	delete[] maxInCols;
 }
