@@ -12,11 +12,11 @@ void saddlePoints(int** array, int rows, int cols)
 	int* minInRows = new int[rows] {};
 	int* maxInCols = new int[cols] {};
 
-	for (int i = 0; i < cols; ++i)
+	for (int i = 0; i < rows; ++i)
 	{
 		minInRows[i] = getMinInRow(array[i], cols);
 	}
-	for (int i = 0; i < rows; ++i)
+	for (int i = 0; i < cols; ++i)
 	{
 		maxInCols[i] = getMaxInCol(array, rows, i);
 	}
