@@ -7,7 +7,6 @@ List::List()
 {
 	head = nullptr;
 	sizeOfList = 0;
-	numOfElements = 0;
 }
 
 List::~List()
@@ -24,7 +23,6 @@ void List::deleteList()
 		delete temp;
 	}
 	sizeOfList = 0;
-	numOfElements = 0;
 }
 
 void List::addElement(int const data)
@@ -57,15 +55,14 @@ void List::addElement(int const data)
 		++head->number;
 		++sizeOfList;
 	}
-	++numOfElements;
 }
 
-int List::deleteElement(int const data)
+bool List::deleteElement(int const data)
 {
 	if (isEmpty())
 	{
 		cout << "List is empty. Node can not be deleted\n";
-		return -1;
+		return false;
 	}
 	auto* temp = head;
 	while (temp != nullptr && temp->data != data)
@@ -75,7 +72,7 @@ int List::deleteElement(int const data)
 	if (temp == nullptr)
 	{
 		cout << "Node was not found. Node can not be deleted\n";
-		return -1;
+		return false;
 	}
 	if (temp == head)
 	{
@@ -85,8 +82,7 @@ int List::deleteElement(int const data)
 	{
 		deleteElementThatIsNotHead(data, temp);
 	}
-	--numOfElements;
-	return 0;
+	return true;
 }
 
 void List::deleteHead(int const data, Node* temp)
@@ -175,11 +171,6 @@ bool List::exists(int const data) const
 		temp = temp->next;
 	}
 	return elementExists;
-}
-
-int List::numberOfElements() const
-{
-	return numOfElements;
 }
 
 void List::sort()

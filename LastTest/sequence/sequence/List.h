@@ -11,7 +11,7 @@ struct List
 
 	void addElement(int const data);
 
-	int deleteElement(int const data);
+	bool deleteElement(int const data);
 
 	Node & operator[](int const index) const;
 
@@ -20,8 +20,6 @@ struct List
 	bool isEmpty() const;
 
 	int size() const;
-
-	int numberOfElements() const;
 
 	bool exists(int const data) const;
 
@@ -35,7 +33,6 @@ private:
 
 	void deleteElementThatIsNotHead(int const data, Node* temp);
 
-	int numOfElements;
 	int sizeOfList;
 	Node* head;
 };
