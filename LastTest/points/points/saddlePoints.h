@@ -1,3 +1,3 @@
 #pragma once
 
-void saddlePoints(int** array, int rows, int cols);
+void saddlePoints(int const * const * const array, int rows, int cols);

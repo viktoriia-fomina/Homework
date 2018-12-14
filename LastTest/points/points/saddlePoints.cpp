@@ -3,11 +3,11 @@
 
 using namespace std;
 
-int getMinInRow(int* row, int cols);
+int getMinInRow(int const * const row, int cols);
 
-int getMaxInCol(int** array, int rows, int coleNumber);
+int getMaxInCol(int const * const * const array, int rows, int coleNumber);
 
-void saddlePoints(int** array, int rows, int cols)
+void saddlePoints(int const * const * const array, int rows, int cols)
 {
 	int* minInRows = new int[rows] {};
 	int* maxInCols = new int[cols] {};
@@ -35,7 +35,7 @@ void saddlePoints(int** array, int rows, int cols)
 	delete[] maxInCols;
 }
 
-int getMinInRow(int* row, int cols)
+int getMinInRow(int const * const row, int cols)
 {
 	int min = row[0];
 	for (int i = 0; i < cols; ++i)
@@ -48,7 +48,7 @@ int getMinInRow(int* row, int cols)
 	return min;
 }
 
-int getMaxInCol(int** array, int rows, int coleNubmer)
+int getMaxInCol(int const * const * const array, int rows, int coleNubmer)
 {
 	int max = array[0][coleNubmer];
 	for (int i = 0; i < rows; ++i)
