@@ -36,7 +36,7 @@ int main()
 	{
 		delete[] array[i];
 	}
-	delete array;
+	delete[] array;
 
 	return 0;
 }
