@@ -21,6 +21,7 @@ int main()
 		}
 	}
 	l.sort();
+	cout << "Numbers and quantities" << endl;
 	cout << l << endl;
 
 	return 0;

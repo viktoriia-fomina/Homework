@@ -142,7 +142,7 @@ ostream & operator<<(ostream & os, List const & list)
 	auto* temp = list.head;
 	while (temp != nullptr)
 	{
-		os << temp->data << " " << temp->number << " times" << endl;
+		os << temp->data << " " << temp->number << " time(s)" << endl;
 		temp = temp->next;
 	}
 	return os;
