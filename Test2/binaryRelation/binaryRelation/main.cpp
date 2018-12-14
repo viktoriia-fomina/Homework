@@ -26,8 +26,8 @@ int main()
 		delete[] matrix[i];
 		delete[] matrixToWrite[i];
 	}
-	delete[] matrix;
-	delete[] matrixToWrite;
+	delete matrix;
+	delete matrixToWrite;
 
 	return 0;
 }
