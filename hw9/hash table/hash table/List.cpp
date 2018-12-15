@@ -7,7 +7,6 @@ List::List()
 {
 	head = nullptr;
 	sizeOfList = 0;
-	numOfElements = 0;
 }
 
 List::~List()
@@ -24,7 +23,6 @@ void List::deleteList()
 		delete temp;
 	}
 	sizeOfList = 0;
-	numOfElements = 0;
 }
 
 void List::addElement(string const & data)
@@ -47,8 +45,8 @@ void List::addElement(string const & data)
 			head->next = temp;
 			head->previous = nullptr;
 			head->next->previous = head;
-			++sizeOfList;
 			++head->number;
+			++sizeOfList;
 		}
 	}
 	else
@@ -57,7 +55,6 @@ void List::addElement(string const & data)
 		++head->number;
 		++sizeOfList;
 	}
-	++numOfElements;
 }
 
 int List::deleteElement(string const & data)
@@ -85,7 +82,6 @@ int List::deleteElement(string const & data)
 	{
 		deleteElementThatIsNotHead(data, temp);
 	}
-	--numOfElements;
 	return 0;
 }
 
@@ -149,12 +145,11 @@ void List::printData(int const & index) const
 ostream & operator<<(ostream & os, List const & list)
 {
 	auto* temp = list.head;
-	while (temp->next != nullptr)
+	while (temp != nullptr)
 	{
 		os << temp->data << endl;
 		temp = temp->next;
 	}
-	os << temp->data;
 	return os;
 }
 
@@ -174,16 +169,11 @@ bool List::exists(string const & data) const
 	auto* temp = head;
 	while (!elementExists && temp != nullptr)
 	{
-		if (head->data == data)
+		if (temp->data == data)
 		{
 			elementExists = true;
 		}
 		temp = temp->next;
 	}
 	return elementExists;
-}
-
-int List::numberOfElements() const
-{
-	return numOfElements;
 }

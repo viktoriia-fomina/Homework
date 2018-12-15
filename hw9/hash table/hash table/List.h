@@ -24,8 +24,6 @@ struct List
 
 	int size() const;
 
-	int numberOfElements() const;
-
 	bool exists(std::string const & data) const;
 
 private:
@@ -36,7 +34,6 @@ private:
 
 	void deleteElementThatIsNotHead(std::string const & data, Node* temp);
 
-	int numOfElements;
 	int sizeOfList;
 	Node* head;
 };
