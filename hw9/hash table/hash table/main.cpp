@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	Set s;
+	HashTable s;
 	cout << s.loadFactor() << endl;
 	s.frequencyOfEveryWord();
 	cout << s.averageSizeOfList() << endl;

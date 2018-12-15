@@ -1,9 +1,9 @@
 #include <vector>
 #include "List.h"
 
-struct Set
+struct HashTable
 {
-	Set();
+	HashTable();
 
 	void addElement(std::string const & str);
 

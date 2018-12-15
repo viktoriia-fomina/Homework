@@ -12,19 +12,19 @@ using namespace std;
 //Хеш - таблицу реализовать в отдельном модуле, использующем модуль "Список". Подсчитать и вывести также 
 //коэффициент заполнения хеш - таблицы, максимальную и среднюю длину списка в сегменте таблицы.
 
-Set::Set()
+HashTable::HashTable()
 {
 	int size = 100;
 	buckets.resize(size);
 }
 
-void Set::addElement(std::string const & str)
+void HashTable::addElement(std::string const & str)
 {
 	int hash = hashFunction(str) % size();
 	buckets[hash].addElement(str);
 }
 
-void Set::deleteElement(std::string const & str)
+void HashTable::deleteElement(std::string const & str)
 {
 	if (exists(str))
 	{
@@ -33,13 +33,13 @@ void Set::deleteElement(std::string const & str)
 	}
 }
 
-bool Set::exists(std::string const & str) const
+bool HashTable::exists(std::string const & str) const
 {
 	int hash = hashFunction(str) % size();
 	return buckets[hash].exists(str);
 }
 
-int Set::hashFunction(std::string const & str) const
+int HashTable::hashFunction(std::string const & str) const
 {
 	int sum = 0;
 	for (size_t i = 0; i < str.size(); ++i)
@@ -49,13 +49,13 @@ int Set::hashFunction(std::string const & str) const
 	return sum;
 }
 
-double Set::loadFactor() const
+double HashTable::loadFactor() const
 {
 	int sum = numberOfElements();
 	return (double)sum / size();
 }
 
-int Set::numberOfElements() const
+int HashTable::numberOfElements() const
 {
 	int sum = 0;
 	for (int i = 0; i < size(); ++i)
@@ -65,7 +65,7 @@ int Set::numberOfElements() const
 	return sum;
 }
 
-int Set::maxSizeOfList() const
+int HashTable::maxSizeOfList() const
 {
 	int max = 0;
 	for (int i = 0; i < size(); ++i)
@@ -78,7 +78,7 @@ int Set::maxSizeOfList() const
 	return max;
 }
 
-double Set::averageSizeOfList() const
+double HashTable::averageSizeOfList() const
 {
 	int sum = 0;
 	for (int i = 0; i < size(); ++i)
@@ -88,12 +88,12 @@ double Set::averageSizeOfList() const
 	return double(sum) / size();
 }
 
-int Set::size() const
+int HashTable::size() const
 {
 	return buckets.size();
 }
 
-void Set::frequencyOfEveryWord()
+void HashTable::frequencyOfEveryWord()
 {
 	for (int i = 0; i < size(); ++i)
 	{

@@ -12,7 +12,7 @@ bool frequencyOfEveryWordInText(ifstream & file)
 		cout << "File not found" << endl;
 		return false;
 	}
-	Set s;
+	HashTable s;
 	char buffer[30]{};
 	while (!file.eof())
 	{
