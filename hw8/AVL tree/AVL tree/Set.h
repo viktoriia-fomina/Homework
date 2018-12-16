@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 struct Node;
 
@@ -17,10 +18,14 @@ struct Set
 
 	void deleteKeyAndItsValue(std::string const & key);
 
+	void print() const;
+
 private:
+	void printRecursion(Node const * const current) const;
+
 	void deleteRecursion(Node * current);
 
-	void addIfKeyExists(std:: string const & key, std::string const & value, Node * current);
+	void addIfKeyExists(std::string const & key, std::string const & value, Node * current);
 
 	Node * addRecurson(std::string const & key, std::string const & value, Node * current);
 

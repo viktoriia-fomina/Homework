@@ -6,15 +6,14 @@ using namespace std;
 int main()
 {
 	Set s;
-	s.addValueByKey("ama", "ololo");
-	s.addValueByKey("baba", "blolo");
-	s.addValueByKey("gaga", "crololo");
-	string str1 = s.getValueByKey("gaga");
-	cout << str1 << endl;
-	string str2 = s.getValueByKey("ama");
-	string str3 = s.getValueByKey("baba");
-	cout << str2 << " " << str3 << endl;
-	cout << s.keyExists("ama") << " " << s.keyExists("baba") << " " << s.keyExists("gaga") << endl;
+	s.addValueByKey("krasivaya", "vika");
+	s.addValueByKey("umnii", "vitalik");
+	//s.addValueByKey("dobrya", "mama");
+	s.print();
+	cout << endl;
+	s.addValueByKey("necshastnii", "kotik");
+	//s.addValueByKey("amazing", "tralala");
+	s.print();
 
 	return 0;
 }

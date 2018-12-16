@@ -99,23 +99,24 @@ void Set::balance(Node * added)
 	auto* current = added->parent->parent;
 	auto* prev = added->parent;
 	auto* prevPrev = added;
-	while (current != nullptr)
+	bool balanceFixed = false;
+	while (current != nullptr && !balanceFixed)
 	{
 		int lengthL = 0;
 		int lengthR = 0;
 		if (current->leftChild != nullptr)
 		{
-			lengthL = lengthOfSubtree(current->leftChild, 0);
+			lengthL = lengthOfSubtree(current->leftChild, 0) + 1;
 		}
 		if (current->rightChild != nullptr)
 		{
-			lengthR = lengthOfSubtree(current->rightChild, 0);
+			lengthR = lengthOfSubtree(current->rightChild, 0) + 1;
 		}
 		int balanceFactor = lengthR - lengthL;
-		current->balanceFactor = balanceFactor;
 		if (abs(balanceFactor) == 2)
 		{
 			setBalance(current, prev, prevPrev);
+			balanceFixed = true;
 			return;
 		}
 		prevPrev = prev;
@@ -188,7 +189,7 @@ void Set::rotateSmallLeft(Node * a, Node * b, Node * c)
 		}
 		else
 		{
-			a->parent->leftChild = b;
+			a->parent->rightChild = b;
 		}
 	}
 	a->leftChild = b->rightChild;
@@ -196,8 +197,12 @@ void Set::rotateSmallLeft(Node * a, Node * b, Node * c)
 	{
 		b->rightChild->parent = a;
 	}
-	b->leftChild = c;
-	c->parent = b;
+	b->rightChild = a;
+	a->parent = b;
+	if (a == head)
+	{
+		head = b;
+	}
 }
 
 void Set::rotateSmallRight(Node * a, Node * b, Node * c)
@@ -214,13 +219,17 @@ void Set::rotateSmallRight(Node * a, Node * b, Node * c)
 			a->parent->rightChild = b;
 		}
 	}
-	a->leftChild = b->rightChild;
-	if (b->rightChild != nullptr)
+	a->rightChild = b->leftChild;
+	if (b->leftChild != nullptr)
 	{
-		b->rightChild->parent = a;
+		b->leftChild->parent = a;
 	}
-	b->rightChild = a;
+	b->leftChild = a;
 	a->parent = b;
+	if (a == head)
+	{
+		head = b;
+	}
 }
 
 void Set::rotateLeft(Node * a, Node * b, Node * c)
@@ -251,6 +260,10 @@ void Set::rotateLeft(Node * a, Node * b, Node * c)
 	}
 	c->leftChild = a;
 	a->parent = c;
+	if (a == head)
+	{
+		head = c;
+	}
 }
 
 void Set::rotateRight(Node * a, Node * b, Node * c)
@@ -266,20 +279,24 @@ void Set::rotateRight(Node * a, Node * b, Node * c)
 		{
 			a->parent->rightChild = c;
 		}
-		b->rightChild = c->leftChild;
-		if (c->leftChild != nullptr)
-		{
-			c->leftChild->parent = b;
-		}
-		c->leftChild = b;
-		b->parent = c;
-		a->leftChild = c->rightChild;
-		if (c->rightChild != nullptr)
-		{
-			c->rightChild->parent = a;
-		}
-		c->rightChild = a;
-		a->parent = c;
+	}
+	b->rightChild = c->leftChild;
+	if (c->leftChild != nullptr)
+	{
+		c->leftChild->parent = b;
+	}
+	c->leftChild = b;
+	b->parent = c;
+	a->leftChild = c->rightChild;
+	if (c->rightChild != nullptr)
+	{
+		c->rightChild->parent = a;
+	}
+	c->rightChild = a;
+	a->parent = c;
+	if (a == head)
+	{
+		head = c;
 	}
 }
 
@@ -353,6 +370,27 @@ bool Set::isEmpty() const
 void Set::deleteKeyAndItsValue(std::string const & key)
 {
 
+}
+
+void Set::print() const
+{
+	if (!isEmpty())
+	{
+		printRecursion(head);
+	}
+}
+
+void Set::printRecursion(Node const * const current) const
+{
+	if (current->leftChild != nullptr)
+	{
+		printRecursion(current->leftChild);
+	}
+	if (current->rightChild != nullptr)
+	{
+		printRecursion(current->rightChild);
+	}
+	std::cout << current->key << std::endl;
 }
 
 //Node & Set::setValueByKey(std::string const & key)
