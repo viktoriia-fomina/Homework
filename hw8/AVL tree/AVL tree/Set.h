@@ -16,11 +16,25 @@ struct Set
 
 	bool keyExists(std::string const & key) const;
 
-	void deleteKeyAndItsValue(std::string const & key);
+	void deleteNodeByKey(std::string const & key);
 
 	void print() const;
 
+	bool isEmpty() const;
+
 private:
+	void deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(Node * elementToDelete);
+
+	void deleteNodeByKeyIfNodeHasRightSubtree(std::string const & key, Node * elementToDelete);
+
+	void swap(Node * const a, Node * const b);
+
+	Node * getMinInSubtree(Node * const current);
+
+	Node * getNodeByKey(std::string const & key) const;
+
+	Node * getNodeByKeyRecursion(std::string const & key, Node * const current) const;
+
 	void printRecursion(Node const * const current) const;
 
 	void deleteRecursion(Node * current);
@@ -28,8 +42,6 @@ private:
 	void addIfKeyExists(std::string const & key, std::string const & value, Node * current);
 
 	Node * addRecurson(std::string const & key, std::string const & value, Node * current);
-
-	//Node & setValueByKey(std::string const & key);
 
 	void balance(Node *  added);
 
@@ -45,14 +57,11 @@ private:
 
 	void rotateRight(Node * a, Node * b, Node * c);
 
-	void getValueByKeyRecursion(std::string & value, std::string const & key, 
+	void setValueByKeyRecursion(std::string & value, std::string const & key, 
 			Node const * const current);
 
 	void keyExistsRecursion(bool & keyWasFound, std::string const & key, 
 			Node const * const current) const;
 
-	bool isEmpty() const;
-
-private:
 	Node* head;
 };

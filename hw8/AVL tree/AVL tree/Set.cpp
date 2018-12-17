@@ -294,11 +294,11 @@ std::string Set::getValueByKey(std::string const & key)
 	{
 		return value;
 	}
-	getValueByKeyRecursion(value, key, head);
+	setValueByKeyRecursion(value, key, head);
 	return value;
 }
 
-void Set::getValueByKeyRecursion(std::string & value, std::string const & key, Node const * const current)
+void Set::setValueByKeyRecursion(std::string & value, std::string const & key, Node const * const current)
 {
 	if (current->key == key)
 	{
@@ -309,14 +309,14 @@ void Set::getValueByKeyRecursion(std::string & value, std::string const & key, N
 	{
 		if (current->leftChild != nullptr)
 		{
-			getValueByKeyRecursion(value, key, current->leftChild);
+			setValueByKeyRecursion(value, key, current->leftChild);
 		}
 	}
 	else
 	{
 		if (current->rightChild != nullptr)
 		{
-			getValueByKeyRecursion(value, key, current->rightChild);
+			setValueByKeyRecursion(value, key, current->rightChild);
 		}
 	}
 }
@@ -354,9 +354,112 @@ bool Set::isEmpty() const
 	return head == nullptr;
 }
 
-void Set::deleteKeyAndItsValue(std::string const & key)
+void Set::swap(Node * const a, Node * const b)
 {
+	Node  const temp = *b;
+	b->value = a->value;
+	b->key = a->key;
+	a->value = temp.value;
+	a->key = temp.key;
+}
 
+void Set::deleteNodeByKey(std::string const & key)
+{
+	if (keyExists(key))
+	{
+		auto* elementToDelete = getNodeByKey(key);
+		if (elementToDelete->rightChild != nullptr)
+		{
+			deleteNodeByKeyIfNodeHasRightSubtree(key, elementToDelete);
+		}
+		else
+		{
+			deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(elementToDelete);
+		}			
+	}
+}
+
+void Set::deleteNodeByKeyIfNodeHasRightSubtree(std::string const & key, Node * elementToDelete)
+{
+	auto* minElementInRightSubtree = getMinInSubtree(elementToDelete->rightChild);
+	swap(elementToDelete, minElementInRightSubtree);
+	if (minElementInRightSubtree->parent->leftChild == minElementInRightSubtree)
+	{
+		minElementInRightSubtree->parent->leftChild = nullptr;
+	}
+	else
+	{
+		minElementInRightSubtree->parent->rightChild = nullptr;
+	}
+	delete minElementInRightSubtree;
+}
+
+void Set::deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(Node * elementToDelete)
+{
+	if (elementToDelete != head)
+	{
+		if (elementToDelete->leftChild != nullptr)
+		{
+			head = elementToDelete->leftChild;
+			head->parent = nullptr;
+		}
+		else
+		{
+			if (elementToDelete->parent->leftChild == elementToDelete)
+			{
+				elementToDelete->parent->leftChild = nullptr;
+			}
+			else
+			{
+				elementToDelete->parent->rightChild = nullptr;
+			}
+		}
+		delete elementToDelete;
+	}
+	else
+	{
+		delete elementToDelete;
+		head = nullptr;
+	}
+}
+
+Node * Set::getNodeByKey(std::string const & key) const
+{
+	return getNodeByKeyRecursion(key, head);
+}
+
+Node * Set::getNodeByKeyRecursion(std::string const & key, Node * const current) const
+{
+	if (current->key == key)
+	{
+		return current;
+	}
+	else if (current->key > key)
+	{
+		if (current->leftChild != nullptr)
+		{
+			return getNodeByKeyRecursion(key, current->leftChild);
+		}
+	}
+	else
+	{
+		if (current->rightChild != nullptr)
+		{
+			return getNodeByKeyRecursion(key, current->rightChild);
+		}
+	}
+}
+
+Node * Set::getMinInSubtree(Node * const current)
+{
+	if (current->leftChild != nullptr)
+	{
+		return getMinInSubtree(current->leftChild);
+	}
+	else
+	{
+		return current;
+	}
 }
 
 void Set::print() const
@@ -379,8 +482,3 @@ void Set::printRecursion(Node const * const current) const
 	}
 	std::cout << current->key << std::endl;
 }
-
-//Node & Set::setValueByKey(std::string const & key)
-//{
-//	//while
-//}
