@@ -33,7 +33,7 @@ private:
 
 	void balance(Node *  added);
 
-	int lengthOfSubtree(Node * current, int count) const;
+	int lengthOfSubtree(Node * current) const;
 
 	void setBalance(Node * a, Node * b, Node * c);
 

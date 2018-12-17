@@ -1,5 +1,6 @@
 #include "Set.h"
 #include "Node.h"
+#include <algorithm>
 
 Set::Set()
 {
@@ -106,11 +107,11 @@ void Set::balance(Node * added)
 		int lengthR = 0;
 		if (current->leftChild != nullptr)
 		{
-			lengthL = lengthOfSubtree(current->leftChild, 0) + 1;
+			lengthL = lengthOfSubtree(current->leftChild);
 		}
 		if (current->rightChild != nullptr)
 		{
-			lengthR = lengthOfSubtree(current->rightChild, 0) + 1;
+			lengthR = lengthOfSubtree(current->rightChild);
 		}
 		int balanceFactor = lengthR - lengthL;
 		if (abs(balanceFactor) == 2)
@@ -125,27 +126,13 @@ void Set::balance(Node * added)
 	}
 }
 
-int Set::lengthOfSubtree(Node * current, int count) const
+int Set::lengthOfSubtree(Node * current) const
 {
-	int left = 0;
-	int right = 0;
-	if (current->leftChild != nullptr)
+	if (current == nullptr)
 	{
-		left = lengthOfSubtree(current->leftChild, count + 1);
+		return 0;
 	}
-	else
-	{
-		left = -1;
-	}
-	if (current->rightChild != nullptr)
-	{
-		right = lengthOfSubtree(current->rightChild, count + 1);
-	}
-	else
-	{
-		right = -1;
-	}
-	return count + 1;
+	return 1 + std::max(lengthOfSubtree(current->leftChild), lengthOfSubtree(current->rightChild));
 }
 
 void Set::setBalance(Node * a, Node * b, Node * c)
@@ -153,28 +140,28 @@ void Set::setBalance(Node * a, Node * b, Node * c)
 	if (a->leftChild == b && b->leftChild == c)
 	{
 		rotateSmallLeft(a, b, c);
-		a->balanceFactor = lengthOfSubtree(a, 0);
-		b->balanceFactor = lengthOfSubtree(b, 0);
+		a->balanceFactor = lengthOfSubtree(a);
+		b->balanceFactor = lengthOfSubtree(b);
 	}
 	else if (a->rightChild == b && b->rightChild == c)
 	{
 		rotateSmallRight(a, b, c);
-		a->balanceFactor = lengthOfSubtree(a, 0);
-		b->balanceFactor = lengthOfSubtree(b, 0);
+		a->balanceFactor = lengthOfSubtree(a);
+		b->balanceFactor = lengthOfSubtree(b);
 	}
 	else if (a->leftChild == b && b->rightChild == c)
 	{
 		rotateRight(a, b, c);
-		a->balanceFactor = lengthOfSubtree(a, 0);
-		b->balanceFactor = lengthOfSubtree(b, 0);
-		c->balanceFactor = lengthOfSubtree(c, 0);
+		a->balanceFactor = lengthOfSubtree(a);
+		b->balanceFactor = lengthOfSubtree(b);
+		c->balanceFactor = lengthOfSubtree(c);
 	}
 	else
 	{
 		rotateLeft(a, b, c);
-		a->balanceFactor = lengthOfSubtree(a, 0);
-		b->balanceFactor = lengthOfSubtree(b, 0);
-		c->balanceFactor = lengthOfSubtree(c, 0);
+		a->balanceFactor = lengthOfSubtree(a);
+		b->balanceFactor = lengthOfSubtree(b);
+		c->balanceFactor = lengthOfSubtree(c);
 	}
 }
 
