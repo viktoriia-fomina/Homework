@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// bool ifBracketSequenceIsCorrect(string const & str);
-
 int main()
 {
 	string s;
