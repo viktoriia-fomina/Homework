@@ -43,18 +43,18 @@ bool List::addToPosition(int const position, int const data)
 	{
 		if (position == numberOfElements)
 		{
-			auto* prev = (*this)[position - 1];
-			prev->next = new Node(data);
-			prev->next->prev = prev;
+			auto* prevEl = (*this)[position - 1];
+			prevEl ->next = new Node(data);
+			prevEl->next->prev = prevEl;
 		}
 		else
 		{
-			auto* prev = (*this)[position - 1];
-			auto* next = (*this)[position];
-			prev->next = new Node(data);
-			prev->next->prev = prev;
-			prev->next->next = next;
-			next->prev = prev->next;
+			auto* prevEl = (*this)[position - 1];
+			auto* nextEl = (*this)[position];
+			prevEl->next = new Node(data);
+			prevEl->next->prev = prevEl;
+			prevEl->next->next = nextEl;
+			nextEl->prev = prevEl->next;
 		}
 	}
 	++numberOfElements;
@@ -77,7 +77,7 @@ bool List::deleteFromThePosition(int const position)
 	{
 		auto* prev = (*this)[position - 1];
 		auto* elementToDelete = prev->next;
-		prev->next = prev->next->next;
+		prev->next = elementToDelete->next;
 		if (prev->next != nullptr)
 		{
 			prev->next->prev = prev;
