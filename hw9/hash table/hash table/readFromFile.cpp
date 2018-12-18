@@ -5,20 +5,20 @@
 
 using namespace std;
 
-bool frequencyOfEveryWordInText(ifstream & file)
+HashTable * frequencyOfEveryWordInText(ifstream & file)
 {
+	HashTable* s = new HashTable();
 	if (!file.is_open())
 	{
 		cout << "File not found" << endl;
-		return false;
+		return s;
 	}
-	HashTable s;
 	char buffer[30]{};
 	while (!file.eof())
 	{
 		file >> buffer;
-		s.addElement(buffer);		
+		s->addElement(buffer);		
 	}
-	s.frequencyOfEveryWord();
-	return true;
+	s->frequencyOfEveryWord();
+	return s;
 }

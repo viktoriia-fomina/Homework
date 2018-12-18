@@ -20,7 +20,7 @@ HashTable::HashTable()
 
 void HashTable::addElement(std::string const & str)
 {
-	int hash = hashFunction(str) % size();
+	int hash = abs(hashFunction(str) % size());
 	buckets[hash].addElement(str);
 }
 
@@ -28,14 +28,14 @@ void HashTable::deleteElement(std::string const & str)
 {
 	if (exists(str))
 	{
-		int hash = hashFunction(str) % size();
+		int hash = abs(hashFunction(str) % size());
 		buckets[hash].deleteElement(str);
 	}
 }
 
 bool HashTable::exists(std::string const & str) const
 {
-	int hash = hashFunction(str) % size();
+	int hash = abs(hashFunction(str) % size());
 	return buckets[hash].exists(str);
 }
 

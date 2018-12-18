@@ -7,14 +7,13 @@ using namespace std;
 
 int main()
 {
-	HashTable s;
-	cout << s.loadFactor() << endl;
-	s.frequencyOfEveryWord();
-	cout << s.averageSizeOfList() << endl;
 	ifstream file;
 	file.open("text.txt", ios::in);
-	frequencyOfEveryWordInText(file);
+	HashTable * table = frequencyOfEveryWordInText(file);
 	file.close();
+	cout << table->averageSizeOfList() << endl;
+	cout << table->loadFactor() << endl;
+	cout << table->maxSizeOfList() << endl;
 
 	return 0;
 }

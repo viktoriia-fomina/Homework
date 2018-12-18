@@ -1,4 +1,5 @@
 #pragma once
 #include <fstream>
+#include "hashTable.h"
 
-bool frequencyOfEveryWordInText(std::ifstream & file);
+HashTable * frequencyOfEveryWordInText(std::ifstream & file);
