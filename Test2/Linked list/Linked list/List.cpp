@@ -27,8 +27,17 @@ bool List::addToPosition(int const position, int const data)
 	}
 	if (position == 0)
 	{
-		head = new Node(data);
-		++numberOfElements;
+		if (isEmpty())
+		{
+			head = new Node(data);
+		}
+		else
+		{
+			auto* lastHead = head;
+			head = new Node(data);
+			head->next = lastHead;
+			lastHead->prev = head;
+		}
 	}
 	else
 	{
@@ -37,14 +46,18 @@ bool List::addToPosition(int const position, int const data)
 			auto* prev = (*this)[position - 1];
 			prev->next = new Node(data);
 			prev->next->prev = prev;
-			++numberOfElements;
 		}
 		else
 		{
-			auto* getNode = (*this)[position];
-			getNode->data = data;
+			auto* prev = (*this)[position - 1];
+			auto* next = (*this)[position];
+			prev->next = new Node(data);
+			prev->next->prev = prev;
+			prev->next->next = next;
+			next->prev = prev->next;
 		}
 	}
+	++numberOfElements;
 	return true;
 }
 
