@@ -115,12 +115,11 @@ Node & List::operator[](int const & index)
 ostream & operator<<(ostream & os, List const & list)
 {
 	auto* temp = list.head;
-	while (temp->next != nullptr)
+	while (temp != nullptr)
 	{
-		cout << temp->data << endl;
+		os << temp->data << endl;
 		temp = temp->next;
 	}
-	cout << temp->data;
 	return os;
 }
 
