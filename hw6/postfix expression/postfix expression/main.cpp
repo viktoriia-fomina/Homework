@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	string str;
-	pair <bool, int> p;
+	pair<bool, int> p;
 	cout << "Input string" << endl;
 	cin >> str;
 	cout << "result is " << fromPostfixToResult(str, p).second << endl;

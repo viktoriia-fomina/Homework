@@ -18,6 +18,13 @@ pair<bool, int> & fromPostfixToResult(string const & str, pair<bool, int> & p)
 	{
 		if (!isOperator(str[i]))
 		{
+			if (!isdigit(str[i]))
+			{
+				cout << "Incorrect input" << endl;
+				p.first = false;
+				p.second = -1;
+				return p;
+			}
 			char number = str[i];
 			int numberInInt = atoi(&number);
 			s.push(numberInInt);
