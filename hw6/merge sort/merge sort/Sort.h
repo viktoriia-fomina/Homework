@@ -75,9 +75,10 @@ private:
 	{
 		IndexType iter = first1;
 		IndexType j = 0;
-		while (iter < last2)
+		while (iter <= last2)
 		{
 			(*this)[iter] = data[j];
+			++iter;
 			++j;
 		}
 	}
