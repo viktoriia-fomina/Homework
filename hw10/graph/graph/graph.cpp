@@ -31,23 +31,36 @@ Graph::~Graph()
 	delete[] adjacencyMatrix;
 }
 
-int & Graph::operator()(int const i, int const j)
+int & Graph::edgeWeight(int const vertex1, int const vertex2)
 {
-	return adjacencyMatrix[i][j];
+	return adjacencyMatrix[vertex1][vertex2];
 }
 
-int const & Graph::operator()(int const i, int const j) const
+int const & Graph::edgeWeight(int const vertex1, int const vertex2) const
 {
-	return adjacencyMatrix[i][j];
+	return adjacencyMatrix[vertex1][vertex2];
+}
+
+int Graph::getNumberOfVertexes() const
+{
+	return numberOfVertexes;
+}
+
+void Graph::printVertexes() const
+{
+	for (set<int>::iterator i = vertexes.begin(); i != vertexes.end(); ++i)
+	{
+		cout << *i << " ";
+	}
 }
 
 ostream & operator<<(ostream & os, Graph const & graph)
 {
-	for (int i = 0; i < graph.numberOfVertexes; ++i)
+	for (int vertex1 = 0; vertex1 < graph.getNumberOfVertexes(); ++vertex1)
 	{
-		for (int j = 0; j < graph.numberOfVertexes; ++j)
+		for (int vertex2 = 0; vertex2 < graph.getNumberOfVertexes(); ++vertex2)
 		{
-			os << graph(i, j) << " ";
+			os << graph.edgeWeight(vertex1, vertex2) << " ";
 		}
 		os << endl;
 	}
@@ -56,11 +69,12 @@ ostream & operator<<(ostream & os, Graph const & graph)
 
 istream & operator>>(istream & is, Graph & graph)
 {
-	for (int i = 0; i < graph.numberOfVertexes; ++i)
+	for (int vertex1 = 0; vertex1 < graph.getNumberOfVertexes(); ++vertex1)
 	{
-		for (int j = 0; j < graph.numberOfVertexes; ++j)
+		graph.vertexes.insert(vertex1);
+		for (int vertex2 = 0; vertex2 < graph.getNumberOfVertexes(); ++vertex2)
 		{
-			is >> graph(i, j);
+			is >> graph.edgeWeight(vertex1, vertex2);
 		}
 	}
 	return is;
