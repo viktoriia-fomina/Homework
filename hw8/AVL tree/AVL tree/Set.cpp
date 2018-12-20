@@ -370,58 +370,15 @@ void Set::deleteNodeByKey(std::string const & key)
 		auto* elementToDelete = getNodeByKey(key);
 		if (elementToDelete->rightChild != nullptr)
 		{
-			deleteNodeByKeyIfNodeHasRightSubtree(key, elementToDelete);
+		
 		}
 		else
 		{
-			deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(elementToDelete);
+	
 		}			
 	}
 }
 
-void Set::deleteNodeByKeyIfNodeHasRightSubtree(std::string const & key, Node * elementToDelete)
-{
-	auto* minElementInRightSubtree = getMinInSubtree(elementToDelete->rightChild);
-	swap(elementToDelete, minElementInRightSubtree);
-	if (minElementInRightSubtree->parent->leftChild == minElementInRightSubtree)
-	{
-		minElementInRightSubtree->parent->leftChild = nullptr;
-	}
-	else
-	{
-		minElementInRightSubtree->parent->rightChild = nullptr;
-	}
-	delete minElementInRightSubtree;
-}
-
-void Set::deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(Node * elementToDelete)
-{
-	if (elementToDelete != head)
-	{
-		if (elementToDelete->leftChild != nullptr)
-		{
-			head = elementToDelete->leftChild;
-			head->parent = nullptr;
-		}
-		else
-		{
-			if (elementToDelete->parent->leftChild == elementToDelete)
-			{
-				elementToDelete->parent->leftChild = nullptr;
-			}
-			else
-			{
-				elementToDelete->parent->rightChild = nullptr;
-			}
-		}
-		delete elementToDelete;
-	}
-	else
-	{
-		delete elementToDelete;
-		head = nullptr;
-	}
-}
 
 Node * Set::getNodeByKey(std::string const & key) const
 {

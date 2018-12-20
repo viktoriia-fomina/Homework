@@ -23,9 +23,6 @@ struct Set
 	bool isEmpty() const;
 
 private:
-	void deleteNodeByKeyIfNodeDoesNotHaveRightSubtree(Node * elementToDelete);
-
-	void deleteNodeByKeyIfNodeHasRightSubtree(std::string const & key, Node * elementToDelete);
 
 	void swap(Node * const a, Node * const b);
 
