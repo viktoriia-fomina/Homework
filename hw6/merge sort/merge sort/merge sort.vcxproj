@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="forStrings.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
@@ -132,6 +133,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="forStrings.h" />
+=======
+    <ClCompile Include="CompareInterface.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CompareInterface.h" />
+>>>>>>> parent of 02b726b... added tests
 =======
     <ClCompile Include="CompareInterface.cpp" />
     <ClCompile Include="List.cpp" />
