@@ -7,6 +7,8 @@
 
 bool readFromFileAndSort(int const numberOfWordByWhichToSort);
 
+void printCommands();
+
 using namespace std;
 
 bool userInterface()
@@ -14,10 +16,7 @@ bool userInterface()
 	while (true)
 	{
 		int number = 0;
-		cout << "Input number:" << endl;
-		cout << "0 - exit" << endl;
-		cout << "1 - sort by names" << endl;
-		cout << "2 - sort by phone numbers" << endl << endl;
+		printCommands();
 		cin >> number;
 		cout << endl;
 		switch (number)
@@ -49,7 +48,7 @@ bool userInterface()
 bool readFromFileAndSort(int const numberOfWordByWhichToSort)
 {
 	assert(numberOfWordByWhichToSort == 1 || numberOfWordByWhichToSort == 2);
-	List l;
+	List list;
 	ifstream file;
 	file.open("dataToSort.txt", ios::in);
 	if (!file.is_open())
@@ -58,26 +57,33 @@ bool readFromFileAndSort(int const numberOfWordByWhichToSort)
 		return false;
 	}
 	string buffer;
-	string firstWord;
-	string secondWord;
+	string name;
+	string number;
 	int numberOfWords = 1;
-	int whichWordToSet = 0;
 	while (!file.eof())
 	{
 		file >> buffer;
 		if (numberOfWords % 2 == 1)
 		{
-			firstWord = buffer;
+			name = buffer;
 		}
 		else
 		{
-			secondWord = buffer;
-			l.addNode(firstWord, secondWord);
+			number = buffer;
+			list.addNode(name, number);
 		}
 		++numberOfWords;
 	}
-	l.mergeSort(numberOfWordByWhichToSort);
-	cout << l;
+	list.mergeSort(numberOfWordByWhichToSort);
+	cout << list;
 	file.close();
 	return true;
+}
+
+void printCommands()
+{
+	cout << "Input number:" << endl;
+	cout << "0 - exit" << endl;
+	cout << "1 - sort by names" << endl;
+	cout << "2 - sort by phone numbers" << endl << endl;
 }

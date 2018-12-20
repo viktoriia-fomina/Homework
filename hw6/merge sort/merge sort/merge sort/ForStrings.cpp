@@ -58,12 +58,3 @@ bool ifPartsIsStr(std::string const & str, std::string const & part1, std::strin
 	}
 	return partsIsStr;
 }
-
-//string connectTwoString(string const & firstPart, string const & secondPart)
-//{
-//	string result;
-//	result += firstPart;
-//	result += ' ';
-//	result += secondPart;
-//	return result;
-//}
