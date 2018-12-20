@@ -62,7 +62,7 @@ bool readFromFileAndSort(int const number)
 		}
 		++numberOfWords;
 	}
-	l.mergeSort();
+	mergeSort();
 	cout << l;
 	file.close();
 	return true;

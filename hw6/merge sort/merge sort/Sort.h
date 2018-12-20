@@ -4,7 +4,7 @@
 template<class DataType, typename IndexType>
 struct Sort
 {
-	void mergeSort()
+	void mergeSort(DataType & dataToSort, IndexType const & index)
 	{
 		std::vector<DataType> data;
 		data.resize(size());

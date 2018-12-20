@@ -1,5 +1,6 @@
 ﻿#include "List.h"
 #include "Node.h"
+#include "forStrings.h"
 
 using namespace std;
 
@@ -50,7 +51,7 @@ int List::deleteNode(string const & data)
 		return -1;
 	}
 	auto* temp = head;
-	while (temp != nullptr && temp->data != data)
+	while (temp != nullptr && !ifPartsIsStr(data, temp->firstWord, temp->secondWord))
 	{
 		temp = temp->next;
 	}
@@ -61,7 +62,7 @@ int List::deleteNode(string const & data)
 	}
 	if (temp == head)
 	{
-		deleteHead(data, temp);
+		deleteHead(temp);
 	}
 	else
 	{
@@ -70,7 +71,7 @@ int List::deleteNode(string const & data)
 	return 0;
 }
 
-void List::deleteHead(string const & data, Node* temp)
+void List::deleteHead(Node* temp)
 {
 	if (head->next != nullptr)
 	{
@@ -117,7 +118,7 @@ ostream & operator<<(ostream & os, List const & list)
 	auto* temp = list.head;
 	while (temp != nullptr)
 	{
-		os << temp->data << endl;
+		os << temp->firstWord << ' ' << temp->secondWord << endl;
 		temp = temp->next;
 	}
 	return os;
