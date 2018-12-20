@@ -287,36 +287,34 @@ void Set::rotateRight(Node * a, Node * b, Node * c)
 
 std::string Set::getValueByKey(std::string const & key)
 {
-	std::string value;
 	if (isEmpty())
 	{
-		return value;
+		return "";
 	}
-	setValueByKeyRecursion(value, key, head);
-	return value;
+	return getValueByKeyRecursion(key, head);
 }
 
-void Set::setValueByKeyRecursion(std::string & value, std::string const & key, Node const * const current)
+std::string Set::getValueByKeyRecursion(std::string const & key, Node const * const current)
 {
 	if (current->key == key)
 	{
-		value = current->value;
-		return;
+		return current->value;
 	}
 	else if (current->key > key)
 	{
 		if (current->leftChild != nullptr)
 		{
-			setValueByKeyRecursion(value, key, current->leftChild);
+			return getValueByKeyRecursion(key, current->leftChild);
 		}
 	}
 	else
 	{
 		if (current->rightChild != nullptr)
 		{
-			setValueByKeyRecursion(value, key, current->rightChild);
+			return getValueByKeyRecursion(key, current->rightChild);
 		}
 	}
+	return "";
 }
 
 bool Set::keyExists(std::string const & key) const
@@ -407,7 +405,7 @@ Node * Set::deleteElementThatDoesNotHaveChildren(Node * elementToDelete)
 
 Node * Set::deleteElementThatHasAChild(Node * elementToDelete)
 {
-	Node* parent;
+	Node* parent = nullptr;
 	auto* temp = elementToDelete;
 	if (elementToDelete->leftChild != nullptr)
 	{

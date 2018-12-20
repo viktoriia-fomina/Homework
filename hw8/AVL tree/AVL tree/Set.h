@@ -58,7 +58,7 @@ private:
 
 	void rotateRight(Node * a, Node * b, Node * c);
 
-	void setValueByKeyRecursion(std::string & value, std::string const & key, 
+	std::string getValueByKeyRecursion(std::string const & key, 
 			Node const * const current);
 
 	void keyExistsRecursion(bool & keyWasFound, std::string const & key, 
