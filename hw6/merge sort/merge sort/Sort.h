@@ -1,31 +1,11 @@
 #pragma once
 #include <vector>
+#include "List.h"
 
-template<class DataType, typename IndexType>
-struct Sort
-{
-	void mergeSort(DataType & dataToSort, IndexType const & index)
-	{
-		std::vector<DataType> data;
-		data.resize(size());
-		mergeSortRecursion(0, size() - 1, data);
-	}
+void mergeSort(List const & dataToSort, int const size);
 
-protected:
-	virtual DataType & operator[](IndexType const & i) = 0;
-	virtual IndexType size() const = 0;
 
-private:
-	void mergeSortRecursion(IndexType first, IndexType last, std::vector<DataType> & data)
-	{
-		if (last - first > 0)
-		{
-			IndexType middle = (first + last) / 2;
-			mergeSortRecursion(first, middle, data);
-			mergeSortRecursion(middle + 1, last, data);
-			merge(first, middle, middle + 1, last, data);
-		}
-	}
+void mergeSortRecursion(int const first, int const last, List & dataToSort, vector<Node> & tempContainer);
 
 	void merge(IndexType first1, IndexType last1, IndexType first2, IndexType last2, std::vector<DataType> & data)
 	{
