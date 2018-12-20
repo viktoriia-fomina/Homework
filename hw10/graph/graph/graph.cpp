@@ -79,3 +79,22 @@ istream & operator>>(istream & is, Graph & graph)
 	}
 	return is;
 }
+
+set<int> Graph::subGraphFrontier(set<int> subGraph)
+{
+	set<int> frontier;
+	for (set<int>::iterator vertex = subGraph.begin(); vertex != subGraph.end(); ++vertex)
+	{
+		// check if adjacent vertexes are in subgraph. if not add to frontier 
+		for (set<int>::iterator frontierCandidate = vertexes.begin();
+				frontierCandidate != vertexes.end(); ++frontierCandidate)
+		{
+			if (subGraph.find(*frontierCandidate) == subGraph.end() && 
+					edgeWeight(*vertex, *frontierCandidate) != 0)
+			{
+				frontier.insert(*frontierCandidate);
+			}
+		}
+	}
+	return frontier;
+}
