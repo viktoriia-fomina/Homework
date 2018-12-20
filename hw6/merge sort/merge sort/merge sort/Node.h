@@ -6,10 +6,13 @@ struct Node
 	explicit Node(std::string const & data);
 
 	Node();
-	bool operator<(Node const & node) const;
+
 	Node & operator=(Node const & node);
 
-	std::string data;
+	std::string getWordNumbered(int const number) const;
+
+	std::string firstWord;
+	std::string secondWord;
 	Node* previous;
 	Node* next;
 };

@@ -28,7 +28,7 @@ struct List : Sort<Node, int>
 private:
 	void deleteList();
 
-	void deleteHead(std::string const & data, Node* temp);
+	void deleteHead(Node* temp);
 
 	void deleteElementThatIsNotHead(std::string const & data, Node* temp);
 

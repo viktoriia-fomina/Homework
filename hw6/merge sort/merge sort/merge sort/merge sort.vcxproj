@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ForStrings.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="userInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ForStrings.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Sort.h" />
