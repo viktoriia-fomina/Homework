@@ -121,6 +121,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="forStrings.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
@@ -131,14 +132,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="forStrings.h" />
+=======
+    <ClCompile Include="CompareInterface.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CompareInterface.h" />
+>>>>>>> parent of 02b726b... added tests
     <ClInclude Include="List.h" />
-    <ClInclude Include="Tests.h" />
-    <ClInclude Include="userInterface.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="forSort.txt" />
+    <Text Include="text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
