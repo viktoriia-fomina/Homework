@@ -26,7 +26,7 @@ private:
 
 	Node * deleteElementThatDoesNotHaveChildren(Node * elementToDelete);
 
-	Node * deleteElementThatHasAChild(Node * elementToDelete);
+	Node * deleteElementThatHasAChild(Node *& elementToDelete);
 
 	void swap(Node * const a, Node * const b);
 

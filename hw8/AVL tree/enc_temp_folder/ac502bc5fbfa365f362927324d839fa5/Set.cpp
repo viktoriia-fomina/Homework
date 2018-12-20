@@ -397,7 +397,7 @@ Node * Set::deleteElementThatDoesNotHaveChildren(Node * elementToDelete)
 	return parent;
 }
 
-Node * Set::deleteElementThatHasAChild(Node * elementToDelete)
+Node * Set::deleteElementThatHasAChild(Node *& elementToDelete)
 {
 	Node* parent;
 	auto* temp = elementToDelete;
