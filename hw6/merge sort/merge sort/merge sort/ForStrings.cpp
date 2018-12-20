@@ -2,9 +2,9 @@
 
 using namespace std;
 
-string * firstPartOfStr(string const & str)
+string firstPartOfStr(string const & str)
 {
-	string* firstPart;
+	string firstPart;
 	int position = 0;
 	while (str[position] != ' ')
 	{
@@ -14,10 +14,10 @@ string * firstPartOfStr(string const & str)
 	return firstPart;
 }
 
-string * secondPartOfStr(string const & str)
+string secondPartOfStr(string const & str)
 {
-	string* secondPart;
-	int position = 0;
+	string secondPart;
+	size_t position = 0;
 	while (str[position] != ' ')
 	{
 		++position;
@@ -26,12 +26,14 @@ string * secondPartOfStr(string const & str)
 	while (position < str.size())
 	{
 		secondPart += str[position];
+		++position;
 	}
+	return secondPart;
 }
 
-bool ifPartsIsStr(std::string const & str, std::string & const part1, std::string & const part2)
+bool ifPartsIsStr(std::string const & str, std::string const & part1, std::string const & part2)
 {
-	int position = 0;
+	size_t position = 0;
 	bool partsIsStr = true;
 	while (str[position] != ' ')
 	{
@@ -56,3 +58,12 @@ bool ifPartsIsStr(std::string const & str, std::string & const part1, std::strin
 	}
 	return partsIsStr;
 }
+
+//string connectTwoString(string const & firstPart, string const & secondPart)
+//{
+//	string result;
+//	result += firstPart;
+//	result += ' ';
+//	result += secondPart;
+//	return result;
+//}

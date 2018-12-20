@@ -139,6 +139,9 @@
     <ClInclude Include="Tests.h" />
     <ClInclude Include="userInterface.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="dataToSort.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

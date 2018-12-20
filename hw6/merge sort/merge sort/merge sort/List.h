@@ -2,22 +2,23 @@
 #include <iostream>
 #include "Sort.h"
 #include <string>
-
 #include "Node.h"
 
 struct Node;
 
-struct List : Sort<Node, int>
+struct List : Sort<Node, std::string, int>
 {
 	List();
 
 	~List();
 
-	void addNode(std::string const & data);
+	void addNode(std::string const & firstWord, std::string const & secondWord);
 
 	int deleteNode(std::string const & data);
 
 	Node & operator[](int const & index);
+
+	std::string operator()(int const & index, int const & numberOfWord);
 
 	friend std::ostream & operator<<(std::ostream & os, List const & list);
 

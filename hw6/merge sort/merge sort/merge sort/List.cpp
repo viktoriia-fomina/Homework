@@ -26,19 +26,19 @@ void List::deleteList()
 	sizeOfList = 0;
 }
 
-void List::addNode(string const & data)
+void List::addNode(std::string const & firstWord, std::string const & secondWord)
 {
 	if (!isEmpty())
 	{
 		auto* temp = head;
-		head = new Node(data);
+		head = new Node(firstWord, secondWord);
 		head->next = temp;
 		head->previous = nullptr;
 		head->next->previous = head;
 	}
 	else
 	{
-		head = new Node(data);
+		head = new Node(firstWord, secondWord);
 	}
 	++sizeOfList;
 }
@@ -132,4 +132,9 @@ bool List::isEmpty() const
 int List::size() const
 {
 	return sizeOfList;
+}
+
+string List::operator()(int const & index, int const & numberOfWord)
+{
+	return (*this)[index].getWordNumbered(numberOfWord);
 }

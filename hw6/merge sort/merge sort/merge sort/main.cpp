@@ -7,6 +7,7 @@ using namespace std;
 int main()
 {
 	tests();
+	cout << endl;
 	userInterface();
 
 	return 0;
