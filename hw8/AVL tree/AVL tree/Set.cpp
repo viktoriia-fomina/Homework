@@ -368,8 +368,16 @@ void Set::deleteNodeByKey(std::string const & key)
 		auto* elementToDelete = getNodeByKey(key);
 		if (elementToDelete->leftChild == nullptr && elementToDelete->rightChild == nullptr)
 		{
-			auto* parent = deleteElementThatDoesNotHaveChildren(elementToDelete);
-			balance(parent);
+			if (elementToDelete == head)
+			{
+				delete head;
+				head = nullptr;
+			}
+			else
+			{
+				auto* parent = deleteElementThatDoesNotHaveChildren(elementToDelete);
+				balance(parent);
+			}
 		}
 		else
 		{
@@ -410,7 +418,7 @@ Node * Set::deleteElementThatHasAChild(Node * elementToDelete)
 		}
 		parent = temp->parent;
 		parent->leftChild = nullptr;
-		delete elementToDelete;
+		delete temp;
 	}
 	else
 	{
@@ -421,7 +429,7 @@ Node * Set::deleteElementThatHasAChild(Node * elementToDelete)
 		}
 		parent = temp->parent;
 		parent->rightChild = nullptr;
-		delete elementToDelete;
+		delete temp;
 	}
 	return parent;
 }
