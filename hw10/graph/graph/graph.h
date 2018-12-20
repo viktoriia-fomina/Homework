@@ -18,7 +18,9 @@ struct Graph
 
 	friend std::istream & operator>>(std::istream & is, Graph & graph);
 
-	std::set<int> subGraphFrontier(std::set<int> subGraph);
+	std::set<int> subGraphFrontier(std::set<int> const & subGraph) const;
+
+	std::set<int> subGraph
 
 private:
 	int & edgeWeight(int const vertex1, int const vertex2);

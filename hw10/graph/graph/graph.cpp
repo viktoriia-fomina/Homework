@@ -80,7 +80,7 @@ istream & operator>>(istream & is, Graph & graph)
 	return is;
 }
 
-set<int> Graph::subGraphFrontier(set<int> subGraph)
+set<int> Graph::subGraphFrontier(set<int> const & subGraph) const
 {
 	set<int> frontier;
 	for (set<int>::iterator vertex = subGraph.begin(); vertex != subGraph.end(); ++vertex)

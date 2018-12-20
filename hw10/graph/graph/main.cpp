@@ -6,22 +6,8 @@ using namespace std;
 
 int main()
 {
-	Graph g(6);
-	cin >> g;
-	set<int> sg;
-	sg.insert(3);
-	set<int> fr = g.subGraphFrontier(sg);
-	for (set<int>::iterator i = fr.begin(); i != fr.end(); ++i)
-	{
-		cout << *i << " ";
-	}
-	cout << endl;
-	sg.insert(4);
-	fr = g.subGraphFrontier(sg);
-	for (set<int>::iterator i = fr.begin(); i != fr.end(); ++i)
-	{
-		cout << *i << " ";
-	}
-	cout << endl;
+	int const x = 3;
+	int y = x;
+
 	return 0;
 }
