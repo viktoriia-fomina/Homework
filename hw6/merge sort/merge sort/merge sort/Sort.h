@@ -56,7 +56,7 @@ private:
 				++iterator2;
 			}
 		}
-		copyArrayToSortingArray(data, first1, last1, last2);
+		copyArrayToSortingArray(data, first1, last2);
 	}
 
 	void ifOneArrayIsEnded(std::vector<DataType> & data, IndexType const & first1,
@@ -70,23 +70,16 @@ private:
 		}
 	}
 
-	void copyArrayToSortingArray(std::vector<DataType> const & data, IndexType const & first1,
-		IndexType const & last1, IndexType const & last2)
+	void copyArrayToSortingArray(std::vector<DataType> const & data, IndexType const & first1, 
+			IndexType const & last2)
 	{
-		IndexType iter = first1;
-		IndexType j = 0;
-		copyPartOfArray(data, iter, j, last1);
-		copyPartOfArray(data, iter, j, last2);
-	}
-
-	void copyPartOfArray(std::vector<DataType> const & data, IndexType & iter, IndexType & j,
-		IndexType const & last)
-	{
-		while (iter <= last)
+		IndexType iterator = first1;
+		IndexType position = 0;
+		while (iterator <= last2)
 		{
-			(*this)[iter] = data[j];
-			++iter;
-			++j;
+			(*this)[iterator] = data[position];
+			++iterator;
+			++position;
 		}
-	}
+	} 
 };
