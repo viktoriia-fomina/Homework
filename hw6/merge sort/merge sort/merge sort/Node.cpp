@@ -4,28 +4,24 @@
 
 using namespace std;
 
-Node::Node(std::string const & data)
+Node::Node(std::string const & data) : Node()
 {
 	this->firstWord = firstPartOfStr(data);
 	this->secondWord = secondPartOfStr(data);
-	this->previous = nullptr;
-	this->next = nullptr;
 }
 
-Node::Node(string const & firstWord, string const & secondWord)
+Node::Node(string const & firstWord, string const & secondWord) : Node()
 {
 	this->firstWord = firstWord;
 	this->secondWord = secondWord;
-	this->previous = nullptr;
-	this->next = nullptr;
 }
 
 Node::Node()
 {
-	this->firstWord = '\0';
-	this->secondWord = '\0';
 	this->previous = nullptr;
 	this->next = nullptr;
+	this->firstWord = '\0';
+	this->secondWord = '\0';
 }
 
 Node & Node::operator=(Node const & node)

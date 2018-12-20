@@ -1,8 +1,9 @@
 #include "List.h"
-#include "Node.h"
 #include "ForStrings.h"
 
 using namespace std;
+
+struct Node;
 
 List::List()
 {
@@ -51,7 +52,7 @@ int List::deleteNode(string const & data)
 		return -1;
 	}
 	auto* temp = head;
-	while (temp != nullptr && !ifPartsIsStr(data, temp->firstWord, temp->secondWord))
+	while (temp != nullptr && !ifSubstrings(data, temp->firstWord, temp->secondWord))
 	{
 		temp = temp->next;
 	}

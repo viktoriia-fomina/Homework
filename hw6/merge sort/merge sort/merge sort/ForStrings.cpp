@@ -1,9 +1,12 @@
 #include "forStrings.h"
+#include <cassert>
 
 using namespace std;
 
 string firstPartOfStr(string const & str)
 {
+	assert(str.find(' ') != string::npos);
+	assert(str.find(' ') != str.size() - 1);
 	string firstPart;
 	int position = 0;
 	while (str[position] != ' ')
@@ -16,6 +19,8 @@ string firstPartOfStr(string const & str)
 
 string secondPartOfStr(string const & str)
 {
+	assert(str.find(' ') != string::npos);
+	assert(str.find(' ') != str.size() - 1);
 	string secondPart;
 	size_t position = 0;
 	while (str[position] != ' ')
@@ -31,8 +36,10 @@ string secondPartOfStr(string const & str)
 	return secondPart;
 }
 
-bool ifPartsIsStr(std::string const & str, std::string const & part1, std::string const & part2)
+bool ifSubstrings(std::string const & str, std::string const & part1, std::string const & part2)
 {
+	assert(str.find(' ') != string::npos);
+	assert(str.find(' ') != str.size() - 1);
 	size_t position = 0;
 	bool partsIsStr = true;
 	while (str[position] != ' ')
