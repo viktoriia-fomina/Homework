@@ -12,10 +12,6 @@ using namespace std;
 void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 		set<int> & unvisitedCities, string const & filename);
 
-void getDataFromConsole(Graph & graph, vector<set<int>> & countries, set<int> & unvisitedCities);
-
-void initializeCountriesFromConsole(vector<set<int>> & countries, set<int> & unvisitedCities);
-
 void initializeCountriesFromFile(vector<set<int>> & countries,
 		set<int> & unvisitedCities, ifstream & file);
 
@@ -104,47 +100,6 @@ void initializeCountriesFromFile(vector<set<int>> & countries,
 	}
 }
 
-void getDataFromConsole(Graph & graph, vector<set<int>> & countries, set<int> & unvisitedCities)
-{
-	// ввод городов и расстояний между ними
-	int numberOfCities;
-	cout << "Input number of cities : ";
-	cin >> numberOfCities;
-	assert(numberOfCities > 0);
-	graph.resize(numberOfCities);
-	cout << "Input distances between cities as adjacency matrix :" << endl;
-	cin >> graph;
-
-	// ввод количества стран и их столиц, инициализация стран и непосещённых городов
-	int numberOfCountries;
-	cout << "Input number of countries : ";
-	cin >> numberOfCountries;
-	assert(numberOfCountries > 0 && numberOfCountries <= numberOfCities);
-	countries.resize(numberOfCountries);
-	unvisitedCities = graph.getSetOfVertexes();
-
-	// пихаем столицы в страны и удаляем столицы из непосещённых
-	initializeCountriesFromConsole(countries, unvisitedCities);
-}
-
-void initializeCountriesFromConsole(vector<set<int>> & countries, set<int> & unvisitedCities)
-{
-	for (int country = 0; country < countries.size(); ++country)
-	{
-		cout << "Input the capital of the country " << country << endl;
-		int capital;
-		cin >> capital;
-		bool capitalIsInUnvisited = true;
-		if (unvisitedCities.count(capital) == 0)
-		{
-			capitalIsInUnvisited = false;
-		}
-		assert(capitalIsInUnvisited);
-		countries[country].insert(capital);
-		unvisitedCities.erase(capital);
-	}
-}
-
 void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int> & unvisitedCities)
 {
 	int country = 0;
@@ -185,9 +140,9 @@ void printCountries(vector<set<int>> const & countries)
 {
 	for (int country = 0; country < countries.size(); ++country)
 	{
-		cout << "Country : " << country << endl;
+		cout << "Country: " << country << endl;
 		for (set<int>::iterator city = countries[country].begin();
-			city != countries[country].end(); ++city)
+				city != countries[country].end(); ++city)
 		{
 			cout << *city << " ";
 		}
