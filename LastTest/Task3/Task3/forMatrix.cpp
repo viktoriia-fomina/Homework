@@ -33,6 +33,11 @@ void toAdgencyMatrix(int numberOfVertexes, int edge, int* arrVertexes, int** adj
 			}
 			else if (arrVertexes[i] == -1 && arrVertexes[j] == 1)
 			{
+				adjencyMatrix[i][j] = 0;
+				adjencyMatrix[j][i] = 1;
+			}
+			else if (arrVertexes[i] == 1 && arrVertexes[j] == -1)
+			{
 				adjencyMatrix[i][j] = 1;
 				adjencyMatrix[j][i] = 0;
 			}
