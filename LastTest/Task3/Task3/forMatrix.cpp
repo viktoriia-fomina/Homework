@@ -59,13 +59,22 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 		}
 	}
 
+	bool reachableVer = true;
 	for (int i = 0; i < numberOfVertexes; ++i)
 	{
+		reachableVer = true;
 		for (int j = 0; j < numberOfVertexes; ++j)
 		{
-			cout << reachable[i][j] << " ";
+			if (reachable[i][j] == 0)
+			{
+				if (i != j)
+				{
+					reachableVer = false;
+					break;
+				}
+			}
 		}
-		cout << endl;
+		cout << i << endl;
 	}
 
 	for (int i = 0; i < numberOfVertexes; ++i)

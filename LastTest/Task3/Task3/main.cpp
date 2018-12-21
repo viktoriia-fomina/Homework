@@ -50,6 +50,7 @@ int main()
 		}
 		cout << endl;
 	}
+	cout << endl;
 
 	reachableVertexes(numberOfVertexes, adjencyMatrix);
 
