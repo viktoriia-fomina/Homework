@@ -65,7 +65,7 @@ void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 		file >> graph.edgeWeight(row, column);
 		graph.edgeWeight(column, row) = graph.edgeWeight(row, column);
 	}
-	graph.symmetricAdjacencyMatrix();
+	graph.symmetricAdjacencyMatrix(); // здесь чисто для проверки, что на главной диагонали все нули
 
 	// ввод количества стран и их столиц, инициализация стран и непосещённых городов
 	int numberOfCountries;
@@ -74,7 +74,7 @@ void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 	countries.resize(numberOfCountries);
 	unvisitedCities = graph.getSetOfVertexes();
 
-	// пихаем столицы в страны и удаляем столицы из непосещённых
+	// добавляем столицы в страны и удаляем столицы из непосещённых
 	initializeCountriesFromFile(countries, unvisitedCities, file);
 	file.close();
 }
