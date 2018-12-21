@@ -79,6 +79,10 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 				}
 			}
 		}
+		if (reachableVer)
+		{
+			cout << i << endl;
+		}
 		cout << i << endl;
 	}
 
