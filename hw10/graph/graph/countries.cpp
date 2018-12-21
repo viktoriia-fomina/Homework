@@ -10,30 +10,29 @@
 using namespace std;
 
 void getDataFromFile(Graph & graph, vector<set<int>> & countries,
-						set<int> & unvisitedCities, string const filename);
+		set<int> & unvisitedCities, string const & filename);
 
 void getDataFromConsole(Graph & graph, vector<set<int>> & countries, set<int> & unvisitedCities);
 
 void initializeCountriesFromConsole(vector<set<int>> & countries, set<int> & unvisitedCities);
 
 void initializeCountriesFromFile(vector<set<int>> & countries,
-									set<int> & unvisitedCities, ifstream & file);
+		set<int> & unvisitedCities, ifstream & file);
 
 void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int> & unvisitedCities);
 
 void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph const & graph);
 
-void printCountries(vector<set<int>> countries);
+void printCountries(vector<set<int>> const & countries);
 
-vector<set<int>> mainFunc(string const filename)
+vector<set<int>> mainFunc(string const & filename)
 {
-	//создаём пустые контейнеры для данных
+	// создаём пустые контейнеры для данных
 	Graph graph;
 	vector<set<int>> countries;
 	set<int> unvisitedCities;
 
-	//инициализация данных
-	//getDataFromConsole(graph, countries, unvisitedCities);
+	// инициализация данных
 	getDataFromFile(graph, countries, unvisitedCities, filename);
 
 	// основной алгоритм, добавление городов в страны
@@ -45,11 +44,14 @@ vector<set<int>> mainFunc(string const filename)
 }
 
 void getDataFromFile(Graph & graph, vector<set<int>> & countries,
-	set<int> & unvisitedCities, string const filename)
+	set<int> & unvisitedCities, string const & filename)
 {
 	ifstream file(filename);
-	bool fileIsOpen = file.is_open();
-	assert(fileIsOpen);
+	if (!file.is_open())
+	{
+		cout << "File not found" << endl;
+		return;
+	}
 
 	// ввод городов и расстояний между ними
 	int numberOfCities;
@@ -59,7 +61,7 @@ void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 	int numberOfEdges;
 	file >> numberOfEdges;
 	bool numberOfEdgesIsCorrect =
-		(numberOfEdges == ((numberOfCities * numberOfCities - numberOfCities) / 2));
+			(numberOfEdges == ((numberOfCities * numberOfCities - numberOfCities) / 2));
 	assert(numberOfEdgesIsCorrect);
 	for (int edge = 0; edge < numberOfEdges; ++edge)
 	{
@@ -85,7 +87,7 @@ void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 }
 
 void initializeCountriesFromFile(vector<set<int>> & countries,
-									set<int> & unvisitedCities, ifstream & file)
+		set<int> & unvisitedCities, ifstream & file)
 {
 	for (int country = 0; country < countries.size(); ++country)
 	{
@@ -179,7 +181,7 @@ void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph cons
 	}
 }
 
-void printCountries(vector<set<int>> countries)
+void printCountries(vector<set<int>> const & countries)
 {
 	for (int country = 0; country < countries.size(); ++country)
 	{

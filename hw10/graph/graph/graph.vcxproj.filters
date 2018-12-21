@@ -34,9 +34,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="task.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
     <Text Include="data.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
