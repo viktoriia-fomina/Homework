@@ -56,9 +56,6 @@ void getDataFromFile(Graph & graph, vector<set<int>> & countries,
 	graph.resize(numberOfCities);
 	int numberOfEdges;
 	file >> numberOfEdges;
-	bool numberOfEdgesIsCorrect =
-			(numberOfEdges == ((numberOfCities * numberOfCities - numberOfCities) / 2));
-	assert(numberOfEdgesIsCorrect);
 	for (int edge = 0; edge < numberOfEdges; ++edge)
 	{
 		int row;
