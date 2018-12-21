@@ -83,7 +83,6 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 		{
 			cout << i << endl;
 		}
-		cout << i << endl;
 	}
 
 	for (int i = 0; i < numberOfVertexes; ++i)
