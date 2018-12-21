@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void toAdgencyMatrix(int numberOfVertexes, int edge, int* arrVertexes, int** adjencyMatrix);
+void toAdgencyMatrix(int numberOfVertexes, int* arrVertexes, int** adjencyMatrix);
 
 void incidenceMatrixToAdjencyMatrix(int numberOfVertexes, int numberOfEdges,
 		int** incidenceMatrix, int** adjencyMatrix)
@@ -16,12 +16,12 @@ void incidenceMatrixToAdjencyMatrix(int numberOfVertexes, int numberOfEdges,
 		{
 			arrVertexes[j] = incidenceMatrix[j][i];
 		}
-		toAdgencyMatrix(numberOfVertexes, i, arrVertexes, adjencyMatrix);
+		toAdgencyMatrix(numberOfVertexes, arrVertexes, adjencyMatrix);
 	}
 	delete[] arrVertexes;
 }
 
-void toAdgencyMatrix(int numberOfVertexes, int edge, int* arrVertexes, int** adjencyMatrix)
+void toAdgencyMatrix(int numberOfVertexes, int* arrVertexes, int** adjencyMatrix)
 {
 	for (int i = 0; i < numberOfVertexes; ++i)
 	{
