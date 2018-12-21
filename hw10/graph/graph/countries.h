@@ -1,6 +1,6 @@
 #pragma once
-#include <set>
+#include <string>
 #include <vector>
-#include "graph.h"
+#include <set>
 
-std::vector<std::set<int>> countriesDivider(Graph const & graph);
+std::vector<std::set<int>> mainFunc(std::string const filename);

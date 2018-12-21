@@ -4,27 +4,33 @@
 
 struct Graph
 {
-	explicit Graph(int const numberOfVertexes);
+	explicit Graph(int const numberOfVertexes = 0);
 	
 	~Graph();
 
+	void resize(int const numberOfVertexes);
+
 	int const & edgeWeight(int const vertex1, int const vertex2) const;
+
+	int & edgeWeight(int const vertex1, int const vertex2);
 
 	int getNumberOfVertexes() const;
 
 	void printVertexes() const;
 
+	std::set<int> getSetOfVertexes() const;
+
 	friend std::ostream & operator<<(std::ostream & os, Graph const & graph);
 
 	friend std::istream & operator>>(std::istream & is, Graph & graph);
 
-	std::set<int> subGraphFrontier(std::set<int> const & subGraph) const;
-
-	std::set<int> subGraph
+	void symmetricAdjacencyMatrix() const;
 
 private:
-	int & edgeWeight(int const vertex1, int const vertex2);
 	int numberOfVertexes;
 	std::set<int> vertexes;
 	int** adjacencyMatrix;
+	void init(int const numberOfVertexes = 0);
+	void clear();
+	void correctEdge(int const vertex1, int const vertex2) const;
 };

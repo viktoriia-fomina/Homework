@@ -1,96 +1,194 @@
 #include "countries.h"
+#include <set>
+#include <vector>
+#include "graph.h"
 #include <iostream>
+#include <fstream>
+#include <limits>
+#include <cassert>
 
 using namespace std;
 
-void initializeCapitals(vector<set<int>> & countries);
+void getDataFromFile(Graph & graph, vector<set<int>> & countries,
+						set<int> & unvisitedCities, string const filename);
 
-void initializeFrontiers(Graph const & graph,
-		vector<set<int>> const & countries, vector<set<int>> & countriesFrontiers);
+void getDataFromConsole(Graph & graph, vector<set<int>> & countries, set<int> & unvisitedCities);
 
-void deleteForeignCitiesFromFrontiers(vector<set<int>> const & countries, 
-		vector<set<int>> & countriesFrontiers);
+void initializeCountriesFromConsole(vector<set<int>> & countries, set<int> & unvisitedCities);
 
-bool allFrontiersAreEmpty(vector<set<int>> const & countriesFrontiers);
+void initializeCountriesFromFile(vector<set<int>> & countries,
+									set<int> & unvisitedCities, ifstream & file);
 
-vector<set<int>> countriesDivider(Graph const & graph)
+void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int> & unvisitedCities);
+
+void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph const & graph);
+
+void printCountries(vector<set<int>> countries);
+
+vector<set<int>> mainFunc(string const filename)
 {
-	int numberOfCountries;
-	cout << "Input number of countries : ";
-	cin >> numberOfCountries;
-	vector<set<int>> countries(numberOfCountries);
-	initializeCapitals(countries);
+	//создаём пустые контейнеры для данных
+	Graph graph;
+	vector<set<int>> countries;
+	set<int> unvisitedCities;
 
-	vector<set<int>> countriesFrontiers(numberOfCountries);
-	initializeFrontiers(graph, countries, countriesFrontiers);
-	
-	bool exit = allFrontiersAreEmpty(countriesFrontiers);
+	//инициализация данных
+	//getDataFromConsole(graph, countries, unvisitedCities);
+	getDataFromFile(graph, countries, unvisitedCities, filename);
 
-	while (!exit)
-	{
-		/*for (int country = 0; country < countries.size(); ++country)
-		{
-			int distance = graph.edgeWeight(*countriesFrontiers[country].begin(), countries[country].begin());
-			for (set<int>::iterator frontierCity = countriesFrontiers[country].begin();
-					frontierCity != countriesFrontiers[country].end(); ++frontierCity)
-			{
+	// основной алгоритм, добавление городов в страны
+	countriesDivider(graph, countries, unvisitedCities);
 
-			}
-		}*/
-		exit = allFrontiersAreEmpty(countriesFrontiers);
-	}
-
+	// вывод результата
+	printCountries(countries);
 	return countries;
 }
 
-void initializeCapitals(vector<set<int>> & countries)
+void getDataFromFile(Graph & graph, vector<set<int>> & countries,
+	set<int> & unvisitedCities, string const filename)
 {
-	int const numberOfCountries = countries.size();
-	for (int country = 0; country < numberOfCountries; ++country)
+	ifstream file(filename);
+	bool fileIsOpen = file.is_open();
+	assert(fileIsOpen);
+
+	// ввод городов и расстояний между ними
+	int numberOfCities;
+	file >> numberOfCities;
+	assert(numberOfCities > 0);
+	graph.resize(numberOfCities);
+	int numberOfEdges;
+	file >> numberOfEdges;
+	bool numberOfEdgesIsCorrect =
+		(numberOfEdges == ((numberOfCities * numberOfCities - numberOfCities) / 2));
+	assert(numberOfEdgesIsCorrect);
+	for (int edge = 0; edge < numberOfEdges; ++edge)
+	{
+		int row;
+		file >> row;
+		int column;
+		file >> column;
+		file >> graph.edgeWeight(row, column);
+		graph.edgeWeight(column, row) = graph.edgeWeight(row, column);
+	}
+	graph.symmetricAdjacencyMatrix();
+
+	// ввод количества стран и их столиц, инициализация стран и непосещённых городов
+	int numberOfCountries;
+	file >> numberOfCountries;
+	assert(numberOfCountries > 0 && numberOfCountries <= numberOfCities);
+	countries.resize(numberOfCountries);
+	unvisitedCities = graph.getSetOfVertexes();
+
+	// пихаем столицы в страны и удаляем столицы из непосещённых
+	initializeCountriesFromFile(countries, unvisitedCities, file);
+	file.close();
+}
+
+void initializeCountriesFromFile(vector<set<int>> & countries,
+									set<int> & unvisitedCities, ifstream & file)
+{
+	for (int country = 0; country < countries.size(); ++country)
+	{
+		int capital;
+		file >> capital;
+		bool capitalIsInUnvisited = true;
+		if (unvisitedCities.count(capital) == 0)
+		{
+			capitalIsInUnvisited = false;
+		}
+		assert(capitalIsInUnvisited);
+		countries[country].insert(capital);
+		unvisitedCities.erase(capital);
+	}
+}
+
+void getDataFromConsole(Graph & graph, vector<set<int>> & countries, set<int> & unvisitedCities)
+{
+	// ввод городов и расстояний между ними
+	int numberOfCities;
+	cout << "Input number of cities : ";
+	cin >> numberOfCities;
+	assert(numberOfCities > 0);
+	graph.resize(numberOfCities);
+	cout << "Input distances between cities as adjacency matrix :" << endl;
+	cin >> graph;
+
+	// ввод количества стран и их столиц, инициализация стран и непосещённых городов
+	int numberOfCountries;
+	cout << "Input number of countries : ";
+	cin >> numberOfCountries;
+	assert(numberOfCountries > 0 && numberOfCountries <= numberOfCities);
+	countries.resize(numberOfCountries);
+	unvisitedCities = graph.getSetOfVertexes();
+
+	// пихаем столицы в страны и удаляем столицы из непосещённых
+	initializeCountriesFromConsole(countries, unvisitedCities);
+}
+
+void initializeCountriesFromConsole(vector<set<int>> & countries, set<int> & unvisitedCities)
+{
+	for (int country = 0; country < countries.size(); ++country)
 	{
 		cout << "Input the capital of the country " << country << endl;
 		int capital;
 		cin >> capital;
-		countries[country].insert(capital);
-	}
-}
-
-void initializeFrontiers(Graph const & graph,
-		vector<set<int>> const & countries, vector<set<int>> & countriesFrontiers)
-{
-	for (int country = 0; country < countries.size(); ++country)
-	{
-		countriesFrontiers[country] = graph.subGraphFrontier(countries[country]);
-	}
-	deleteForeignCitiesFromFrontiers(countries, countriesFrontiers);
-}
-
-void deleteForeignCitiesFromFrontiers(vector<set<int>> const & countries,
-		vector<set<int>> & countriesFrontiers)
-{
-	// бежим по странам, потом бежим по границам стран, затем проверяем, есть ли город из границы в какой-либо стране
-	for (int country = 0; country < countries.size(); ++country)
-	{
-		for (set<int>::iterator frontierCity = countriesFrontiers[country].begin();
-				frontierCity != countriesFrontiers[country].end(); ++frontierCity)
+		bool capitalIsInUnvisited = true;
+		if (unvisitedCities.count(capital) == 0)
 		{
-			for (int i = 0; i < countries.size(); ++i)
+			capitalIsInUnvisited = false;
+		}
+		assert(capitalIsInUnvisited);
+		countries[country].insert(capital);
+		unvisitedCities.erase(capital);
+	}
+}
+
+void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int> & unvisitedCities)
+{
+	int country = 0;
+	while (!unvisitedCities.empty())
+	{
+		addCityToCountry(countries[country], unvisitedCities, graph);
+		++country;
+		country %= countries.size();
+	}
+}
+
+void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph const & graph)
+{
+	int minDistance = INT_MAX;
+	int cityToAdd = -1;
+	for (set<int>::iterator cityInCountry = country.begin();
+			cityInCountry != country.end(); ++cityInCountry)
+	{
+		for (set<int>::iterator unvisitedCity = unvisitedCities.begin();
+				unvisitedCity != unvisitedCities.end(); ++unvisitedCity)
+		{
+			int const currentDistance = graph.edgeWeight(*cityInCountry, *unvisitedCity);
+			if (currentDistance != 0 && currentDistance <= minDistance)
 			{
-				if (countries[i].find(*frontierCity) != countries[i].end())
-				{
-					countriesFrontiers[country].erase(frontierCity);
-				}
+				minDistance = currentDistance;
+				cityToAdd = *unvisitedCity;
 			}
 		}
 	}
+	if (cityToAdd != -1)
+	{
+		country.insert(cityToAdd);
+		unvisitedCities.erase(cityToAdd);
+	}
 }
 
-bool allFrontiersAreEmpty(vector<set<int>> const & countriesFrontiers)
+void printCountries(vector<set<int>> countries)
 {
-	bool exit = true;
-	for (int country = 0; country < countriesFrontiers.size(); ++country)
+	for (int country = 0; country < countries.size(); ++country)
 	{
-		exit = exit && countriesFrontiers[country].empty();
+		cout << "Country : " << country << endl;
+		for (set<int>::iterator city = countries[country].begin();
+			city != countries[country].end(); ++city)
+		{
+			cout << *city << " ";
+		}
+		cout << endl;
 	}
-	return exit;
 }

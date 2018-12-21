@@ -1,13 +1,10 @@
 #include <iostream>
-#include "graph.h"
-#include <set>
+#include "countries.h"
 
 using namespace std;
 
 int main()
 {
-	int const x = 3;
-	int y = x;
-
+	mainFunc("data.txt");
 	return 0;
 }
