@@ -47,6 +47,7 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 	{
 		reachable[i] = new int[numberOfVertexes] {};
 	}
+
 	for (int i = 0; i < numberOfVertexes; ++i)
 	{
 		for (int j = 0; j < numberOfVertexes; ++j)
@@ -57,6 +58,7 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 			}
 		}
 	}
+
 	for (int i = 0; i < numberOfVertexes; ++i)
 	{
 		for (int j = 0; j < numberOfVertexes; ++j)
@@ -65,14 +67,10 @@ void reachableVertexes(int numberOfVertexes, int** adjencyMatrix)
 		}
 		cout << endl;
 	}
+
 	for (int i = 0; i < numberOfVertexes; ++i)
 	{
 		delete[] reachable[i];
 	}
 	delete[] reachable;
 }
-
-//for k = 1 to n
-//for i = 1 to n
-//for j = 1 to n
-//W[i][j] = min(W[i][j], W[i][k] + W[k][j])
