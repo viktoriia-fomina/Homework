@@ -14,6 +14,5 @@ int main()
 	cout << "Result is\n";
 	cout << postfix << endl;
 
-	system("pause");
 	return 0;
 }
