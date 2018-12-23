@@ -1,42 +1,20 @@
 #pragma once
-#include <iostream>
-#include <set>
 
-struct Graph
+class Graph
 {
-	explicit Graph(int const numberOfVertexes = 0);
-	
+public:
+	Graph(int const vertexesNumber, int** adjacencyMatrix);
+	Graph(int const vertexesNumber, int const edgesNumber, int** incidenceMatrix);
 	~Graph();
-
-	// изменяет размер графа
-	void resize(int const numberOfVertexes);
-
-	// возвращает вес ребра
-	int edgeWeight(int const vertex1, int const vertex2) const;
-
-	// изменение веса ребра
-	int & edgeWeight(int const vertex1, int const vertex2);
-
-	// получить количество вершин
-	int getNumberOfVertexes() const;
-
-	// получить множество вершин
-	std::set<int> getSetOfVertexes() const;
-
-	// проверка матрицы на симметричность
-	void symmetricAdjacencyMatrix() const;
+	
 
 private:
-	// инициализация графа (переиспользуется в конструкторе и тд)
-	void initialize(int const numberOfVertexes = 0);
+	int** adjancencyMatrixToIncidence(int const vertexes, int & edgesNumber, int** adjancencyMatrix) const;
+	int** incidenceMatrixToAdjancency(int const vertexes, int const edgesNumber, int** adjancencyMatrix) const;
+	bool matrixIsSymmetric(int const rawsOrColumnsNumber, int const * const * const matrix) const;
 
-	// очищает память (переиспользуется в деструкторе и тд)
-	void clear();
-
-	// проверка на то, что значение ребра корректно
-	void correctEdge(int const vertex1, int const vertex2) const;
-
-	int numberOfVertexes;
-	std::set<int> vertexes;
+	int vertexesNumber;
+	int edgesNumber;
 	int** adjacencyMatrix;
+	int**incidenceMatrix;
 };

@@ -21,15 +21,9 @@
     <ClCompile Include="graph.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="countries.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graph.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="countries.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
