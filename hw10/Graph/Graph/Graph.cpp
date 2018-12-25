@@ -9,17 +9,18 @@ using namespace std;
 
 Graph::Graph(int const numberOfVertexes)
 {
-
+	init(numberOfVertexes);
 }
 
 Graph::~Graph()
 {
-
+	clear();
 }
 
 void Graph::resize(int const numberOfVertexes)
 {
-
+	clear();
+	init(numberOfVertexes);
 }
 
 int const & Graph::edgeWeight(int const vertex1, int const vertex2) const
