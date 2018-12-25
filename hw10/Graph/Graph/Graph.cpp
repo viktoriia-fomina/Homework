@@ -62,12 +62,35 @@ void Graph::symmetricAndNoLoopsAdjacencyMatrix() const
 
 void Graph::init(int const numberOfVertexes)
 {
-
+	assert(numberOfVertexes >= 0);
+	if (numberOfVertexes == 0)
+	{
+		this->numberOfVertexes = 0;
+		this->adjacencyMatrix = nullptr;
+	}
+	else
+	{
+		this->numberOfVertexes = numberOfVertexes;
+		adjacencyMatrix = new int*[numberOfVertexes];
+		for (int i = 0; i < numberOfVertexes; ++i)
+		{
+			adjacencyMatrix[i] = new int[numberOfVertexes] {};
+			vertexes.insert(i);
+		}
+	}
 }
 
 void Graph::clear()
 {
-
+	if (numberOfVertexes != 0)
+	{
+		for (int i = 0; i < numberOfVertexes; ++i)
+		{
+			delete[] adjacencyMatrix[i];
+		}
+		delete[] adjacencyMatrix;
+		numberOfVertexes = 0;
+	}
 }
 
 void Graph::correctEdge(int const vertex1, int const vertex2) const
