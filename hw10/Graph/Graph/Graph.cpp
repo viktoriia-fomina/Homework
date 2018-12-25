@@ -25,12 +25,14 @@ void Graph::resize(int const numberOfVertexes)
 
 int const & Graph::edgeWeight(int const vertex1, int const vertex2) const
 {
-
+	correctEdge(vertex1, vertex2);
+	return adjacencyMatrix[vertex1][vertex2];
 }
 
 int & Graph::edgeWeight(int const vertex1, int const vertex2)
 {
-
+	correctEdge(vertex1, vertex2);
+	return adjacencyMatrix[vertex1][vertex2];
 }
 
 int Graph::getNumberOfVertexes() const
