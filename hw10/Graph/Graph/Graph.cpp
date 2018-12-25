@@ -37,12 +37,12 @@ int & Graph::edgeWeight(int const vertex1, int const vertex2)
 
 int Graph::getNumberOfVertexes() const
 {
-
+	return numberOfVertexes;
 }
 
 set<int> Graph::getSetOfVertexes() const
 {
-
+	return vertexes;
 }
 
 ostream & operator<<(std::ostream & os, Graph const & graph)
