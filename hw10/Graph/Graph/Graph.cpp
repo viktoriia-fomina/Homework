@@ -95,5 +95,7 @@ void Graph::clear()
 
 void Graph::correctEdge(int const vertex1, int const vertex2) const
 {
-
+	assert(numberOfVertexes > 0);
+	assert(vertex1 >= 0 && vertex2 >= 0);
+	assert(vertex1 < numberOfVertexes && vertex2 < numberOfVertexes);
 }
