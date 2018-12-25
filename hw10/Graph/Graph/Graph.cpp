@@ -47,12 +47,34 @@ set<int> Graph::getSetOfVertexes() const
 
 ostream & operator<<(std::ostream & os, Graph const & graph)
 {
-
+	if (graph.getNumberOfVertexes() == 0)
+	{
+		os << "Graph is empty." << endl;
+		return os;
+	}
+	for (int vertex1 = 0; vertex1 < graph.getNumberOfVertexes(); ++vertex1)
+	{
+		for (int vertex2 = 0; vertex2 < graph.getNumberOfVertexes(); ++vertex2)
+		{
+			os << graph.edgeWeight(vertex1, vertex2) << " ";
+		}
+		os << endl;
+	}
+	return os;
 }
 
 istream & operator>>(std::istream & is, Graph & graph)
 {
-
+	assert(graph.numberOfVertexes > 0);
+	for (int vertex1 = 0; vertex1 < graph.getNumberOfVertexes(); ++vertex1)
+	{
+		for (int vertex2 = 0; vertex2 < graph.getNumberOfVertexes(); ++vertex2)
+		{
+			is >> graph.edgeWeight(vertex1, vertex2);
+		}
+	}
+	graph.symmetricAndNoLoopsAdjacencyMatrix();
+	return is;
 }
 
 void Graph::symmetricAndNoLoopsAdjacencyMatrix() const
