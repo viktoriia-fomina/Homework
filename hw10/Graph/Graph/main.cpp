@@ -1,10 +1,11 @@
 #include <iostream>
 #include "countries.h"
+#include "test.h"
 
 using namespace std;
 
 int main()
 {
-	countriesSeparator("data.txt");
+	tests();
 	return 0;
 }
