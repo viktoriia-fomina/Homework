@@ -12,17 +12,27 @@ Graph::Graph(int const vertexesNumber, int const edgesNumber, int** incidenceMat
 
 Graph::~Graph()
 {
+	for (int vertNumber = 0; vertNumber < vertexesNumber; ++vertNumber)
+	{
+		delete adjacencyMatrix[vertNumber];
+	}
+	delete[] adjacencyMatrix;
 
+	for (int vertNumber = 0; vertNumber < vertexesNumber; ++vertNumber)
+	{
+		delete incidenceMatrix[vertNumber];
+	}
+	delete[] incidenceMatrix;
 }
 
 int** Graph::adjancencyMatrixToIncidence(int const vertexesNumber, int & edgesNumber, 
 		int** adjancencyMatrix) const
 {
-
+	
 }
 
 int** Graph::incidenceMatrixToAdjancency(int const vertexesNumber, int const edgesNumber,
-	int** adjancencyMatrix) const
+		int** adjancencyMatrix) const
 {
 
 }
