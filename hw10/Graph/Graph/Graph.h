@@ -10,7 +10,7 @@ struct Graph
 
 	void resize(int const numberOfVertexes);
 
-	int const & edgeWeight(int const vertex1, int const vertex2) const;
+	int edgeWeight(int const vertex1, int const vertex2) const;
 
 	int & edgeWeight(int const vertex1, int const vertex2);
 

@@ -23,7 +23,7 @@ void Graph::resize(int const numberOfVertexes)
 	init(numberOfVertexes);
 }
 
-int const & Graph::edgeWeight(int const vertex1, int const vertex2) const
+int Graph::edgeWeight(int const vertex1, int const vertex2) const
 {
 	correctEdge(vertex1, vertex2);
 	return adjacencyMatrix[vertex1][vertex2];
