@@ -3,4 +3,4 @@
 #include <vector>
 #include <set>
 
-std::vector<std::set<int>> countriesSeparator(std::string const filename);
+std::vector<std::set<int>> countriesSeparator(std::string const & filename);

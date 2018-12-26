@@ -10,7 +10,7 @@
 using namespace std;
 
 bool getDataFromFile(Graph & graph, vector<set<int>> & countries,
-	set<int> & unvisitedCities, string const filename);
+	set<int> & unvisitedCities, string const & filename);
 
 void initializeCountriesFromFile(vector<set<int>> & countries,
 	set<int> & unvisitedCities, ifstream & file);
@@ -21,7 +21,7 @@ void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph cons
 
 void printCountries(vector<set<int>> const & countries);
 
-vector<set<int>> countriesSeparator(string const filename)
+vector<set<int>> countriesSeparator(string const & filename)
 {
 	//создаём пустые контейнеры для данных
 	Graph graph;
@@ -45,7 +45,7 @@ vector<set<int>> countriesSeparator(string const filename)
 }
 
 bool getDataFromFile(Graph & graph, vector<set<int>> & countries,
-	set<int> & unvisitedCities, string const filename)
+	set<int> & unvisitedCities, string const & filename)
 {
 	ifstream file(filename);
 	if (!file.is_open())
