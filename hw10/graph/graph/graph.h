@@ -1,20 +1,35 @@
 #pragma once
+#include <iostream>
+#include <set>
 
-class Graph
+struct Graph
 {
-public:
-	Graph(int const vertexesNumber, int** adjacencyMatrix);
-	Graph(int const vertexesNumber, int const edgesNumber, int** incidenceMatrix);
+	explicit Graph(int const numberOfVertexes = 0);
+
 	~Graph();
-	
+
+	void resize(int const numberOfVertexes);
+
+	int const & edgeWeight(int const vertex1, int const vertex2) const;
+
+	int & edgeWeight(int const vertex1, int const vertex2);
+
+	int getNumberOfVertexes() const;
+
+	std::set<int> getSetOfVertexes() const;
+
+	friend std::ostream & operator<<(std::ostream & os, Graph const & graph);
+
+	friend std::istream & operator>>(std::istream & is, Graph & graph);
+
+	void symmetricAndNoLoopsAdjacencyMatrix() const;
 
 private:
-	int** adjancencyMatrixToIncidence(int const vertexes, int & edgesNumber, int** adjancencyMatrix) const;
-	int** incidenceMatrixToAdjancency(int const vertexes, int const edgesNumber, int** adjancencyMatrix) const;
-	bool matrixIsSymmetric(int const rawsOrColumnsNumber, int const * const * const matrix) const;
+	void init(int const numberOfVertexes = 0);
+	void clear();
+	void correctEdge(int const vertex1, int const vertex2) const;
 
-	int vertexesNumber;
-	int edgesNumber;
+	int numberOfVertexes;
+	std::set<int> vertexes;
 	int** adjacencyMatrix;
-	int**incidenceMatrix;
 };
