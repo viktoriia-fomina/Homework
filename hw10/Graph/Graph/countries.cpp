@@ -83,3 +83,21 @@ bool getDataFromFile(Graph & graph, vector<set<int>> & countries,
 	file.close();
 	return true;
 }
+
+void initializeCountriesFromFile(vector<set<int>> & countries,
+	set<int> & unvisitedCities, ifstream & file)
+{
+	for (int country = 0; country < countries.size(); ++country)
+	{
+		int capital;
+		file >> capital;
+		bool capitalIsInUnvisited = true;
+		if (unvisitedCities.count(capital) == 0)
+		{
+			capitalIsInUnvisited = false;
+		}
+		assert(capitalIsInUnvisited);
+		countries[country].insert(capital);
+		unvisitedCities.erase(capital);
+	}
+}
