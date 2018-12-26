@@ -79,7 +79,28 @@ istream & operator>>(std::istream & is, Graph & graph)
 
 void Graph::symmetricAndNoLoopsAdjacencyMatrix() const
 {
-
+	bool symmetric = true;
+	for (int diag = 1; diag < numberOfVertexes; ++diag)
+	{
+		for (int posOnDiag = 0; posOnDiag < numberOfVertexes - diag; posOnDiag++)
+		{
+			int const row = posOnDiag;
+			int const column = diag + posOnDiag;
+			if (edgeWeight(row, column) != edgeWeight(column, row))
+			{
+				symmetric = false;
+				assert(symmetric);
+			}
+		}
+	}
+	for (int i = 0; i < numberOfVertexes; ++i)
+	{
+		if (edgeWeight(i, i) != 0)
+		{
+			symmetric = false;
+			assert(symmetric);
+		}
+	}
 }
 
 void Graph::init(int const numberOfVertexes)
