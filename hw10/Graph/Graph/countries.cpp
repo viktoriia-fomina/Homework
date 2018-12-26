@@ -112,3 +112,28 @@ void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int
 		country %= countries.size();
 	}
 }
+
+void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph const & graph)
+{
+	int minDistance = INT_MAX;
+	int cityToAdd = -1;
+	for (set<int>::iterator cityInCountry = country.begin();
+		cityInCountry != country.end(); ++cityInCountry)
+	{
+		for (set<int>::iterator unvisitedCity = unvisitedCities.begin();
+			unvisitedCity != unvisitedCities.end(); ++unvisitedCity)
+		{
+			int const currentDistance = graph.edgeWeight(*cityInCountry, *unvisitedCity);
+			if (currentDistance != 0 && currentDistance <= minDistance)
+			{
+				minDistance = currentDistance;
+				cityToAdd = *unvisitedCity;
+			}
+		}
+	}
+	if (cityToAdd != -1)
+	{
+		country.insert(cityToAdd);
+		unvisitedCities.erase(cityToAdd);
+	}
+}
