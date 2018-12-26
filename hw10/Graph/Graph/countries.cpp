@@ -101,3 +101,14 @@ void initializeCountriesFromFile(vector<set<int>> & countries,
 		unvisitedCities.erase(capital);
 	}
 }
+
+void countriesDivider(Graph const & graph, vector<set<int>> & countries, set<int> & unvisitedCities)
+{
+	int country = 0;
+	while (!unvisitedCities.empty())
+	{
+		addCityToCountry(countries[country], unvisitedCities, graph);
+		++country;
+		country %= countries.size();
+	}
+}
