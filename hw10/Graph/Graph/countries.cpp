@@ -137,3 +137,17 @@ void addCityToCountry(set<int> & country, set<int> & unvisitedCities, Graph cons
 		unvisitedCities.erase(cityToAdd);
 	}
 }
+
+void printCountries(vector<set<int>> const & countries)
+{
+	for (int country = 0; country < countries.size(); ++country)
+	{
+		cout << "Country : " << country << endl;
+		for (set<int>::iterator city = countries[country].begin();
+			city != countries[country].end(); ++city)
+		{
+			cout << *city << " ";
+		}
+		cout << endl;
+	}
+}
