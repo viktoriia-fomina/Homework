@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Problem.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ using namespace std;
 
 int main()
 {
+	problemAboutVisitors();
 
 	
 

@@ -4,6 +4,10 @@
 
 using namespace std;
 
+int calculateMax(List const & start, List const & end);
+
+void findMaxInter(List const & start, List const & end, int maxVisitors);
+
 void problemAboutVisitors()
 {
 	List start;
@@ -23,9 +27,11 @@ void problemAboutVisitors()
 		minute += hour * 60;
 		start.addElement(minute);
 		cin >> hour;
+		cin >> minute;
 		minute += hour * 60;
 		end.addElement(minute);
 	}
+	findMaxInter(start, end, calculateMax(start, end));
 }
 
 int calculateMax(List const & start, List const & end)
@@ -34,9 +40,9 @@ int calculateMax(List const & start, List const & end)
 	int currentNumOfVisitors = 0;
 	int startIterator = 0;
 	int endIterator = 0;
-	while (startIterator != start.size() - 1 || endIterator != end.size() - 1)
+	while (startIterator != start.size() || endIterator != end.size())
 	{
-		if (start.getData(startIterator) < start.getData(endIterator))
+		if (start.getData(startIterator) < end.getData(endIterator))
 		{
 			++currentNumOfVisitors;
 			if (currentNumOfVisitors > maxVisitors)
@@ -45,7 +51,7 @@ int calculateMax(List const & start, List const & end)
 			}
 			++startIterator;
 		}
-		else if (start.getData(startIterator) < start.getData(endIterator))
+		else if (start.getData(startIterator) < end.getData(endIterator))
 		{
 			--currentNumOfVisitors;
 			++endIterator;
@@ -54,17 +60,16 @@ int calculateMax(List const & start, List const & end)
 	return maxVisitors;
 }
 
-void findMaxInter(List const & start, List const & end, int maxVis)
+void findMaxInter(List const & start, List const & end, int maxVisitors)
 {
-	int maxVisitors = maxVis;
 	int currentNumOfVisitors = 0;
 	int startIterator = 0;
 	int endIterator = 0;
 	int timeBeg = 0;
 	int timeEnd = 0;
-	while (startIterator != start.size() - 1 || endIterator != end.size() - 1)
+	while (startIterator != start.size() || endIterator != end.size())
 	{
-		if (start.getData(startIterator) < start.getData(endIterator))
+		if (start.getData(startIterator) < end.getData(endIterator))
 		{
 			++currentNumOfVisitors;
 			if (currentNumOfVisitors == maxVisitors)
@@ -74,8 +79,9 @@ void findMaxInter(List const & start, List const & end, int maxVis)
 			}
 			++startIterator;
 		}
-		else if (start.getData(startIterator) < start.getData(endIterator))
+		else if (start.getData(startIterator) < end.getData(endIterator))
 		{
+			if (currentNumOfVisitors == maxVisitors)
 			--currentNumOfVisitors;
 			++endIterator;
 		}
@@ -84,4 +90,9 @@ void findMaxInter(List const & start, List const & end, int maxVis)
 	{
 		timeEnd = end.getData(end.size() - 1);
 	}
+	int minBeg = timeBeg % 60;
+	int hourBeg = timeBeg / 60;
+	int minEnd = timeEnd % 60;
+	int hourEnd = timeEnd / 60;
+	cout << hourBeg << ":" << minBeg << " - " << hourEnd << ":" << minEnd << endl;
 }
