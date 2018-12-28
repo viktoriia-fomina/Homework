@@ -30,29 +30,15 @@ void List::addElement(int const data)
 	if (!isEmpty())
 	{
 		auto* temp = head;
-		if (exists(data))
-		{
-			while (temp->data != data)
-			{
-				temp = temp->next;
-			}
-			++temp->number;
-		}
-		else
-		{
-			temp = head;
-			head = new Node(data);
-			head->next = temp;
-			head->previous = nullptr;
-			head->next->previous = head;
-			++sizeOfList;
-			++head->number;
-		}
+		head = new Node(data);
+		head->next = temp;
+		head->previous = nullptr;
+		head->next->previous = head;
+		++sizeOfList;
 	}
 	else
 	{
 		head = new Node(data);
-		++head->number;
 		++sizeOfList;
 	}
 }
@@ -89,17 +75,10 @@ void List::deleteHead(int const data, Node* temp)
 {
 	if (head->next != nullptr)
 	{
-		if (head->number == 1)
-		{
-			head = head->next;
-			head->previous = nullptr;
-			delete temp;
-			--sizeOfList;
-		}
-		else
-		{
-			--head->number;
-		}
+		head = head->next;
+		head->previous = nullptr;
+		delete temp;
+		--sizeOfList;
 	}
 	else
 	{
@@ -109,20 +88,13 @@ void List::deleteHead(int const data, Node* temp)
 
 void List::deleteElementThatIsNotHead(int const data, Node* temp)
 {
-	if (temp->number == 1)
+	temp->previous->next = temp->next;
+	if (temp->next != nullptr)
 	{
-		temp->previous->next = temp->next;
-		if (temp->next != nullptr)
-		{
-			temp->next->previous = temp->previous;
-		}
-		delete temp;
-		--sizeOfList;
+		temp->next->previous = temp->previous;
 	}
-	else
-	{
-		--temp->number;
-	}
+	delete temp;
+	--sizeOfList;
 }
 
 Node & List::operator[](int const index) const
@@ -142,7 +114,7 @@ ostream & operator<<(ostream & os, List const & list)
 	auto* temp = list.head;
 	while (temp != nullptr)
 	{
-		os << temp->data << " " << temp->number << " time(s)" << endl;
+		os << temp->data << " " << endl;
 		temp = temp->next;
 	}
 	return os;
@@ -183,9 +155,7 @@ void List::sort()
 			{
 				Node temp = (*this)[j];
 				(*this)[j].data = (*this)[j + 1].data;
-				(*this)[j].number = (*this)[j + 1].number;
 				(*this)[j + 1].data = temp.data;
-				(*this)[j + 1].number = temp.number;
 			}
 		}
 	}
@@ -194,9 +164,4 @@ void List::sort()
 int List::getData(int const index) const
 {
 	return (*this)[index].data;
-}
-
-int List::getNumOfNodes(int const index) const
-{
-	return (*this)[index].number;
 }

@@ -19,6 +19,8 @@ void problemAboutVisitors()
 	{
 		return;
 	}
+	start.sort();
+	end.sort();
 	findMaxInter(start, end, calculateMax(start, end));
 }
 
@@ -39,7 +41,7 @@ int calculateMax(List const & start, List const & end)
 			}
 			++startIterator;
 		}
-		else if (start.getData(startIterator) < end.getData(endIterator))
+		else if (start.getData(startIterator) > end.getData(endIterator))
 		{
 			--currentNumOfVisitors;
 			++endIterator;
@@ -62,12 +64,11 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 			++currentNumOfVisitors;
 			if (currentNumOfVisitors == maxVisitors)
 			{
-				maxVisitors = currentNumOfVisitors;
 				timeBeg = start.getData(startIterator);
 			}
 			++startIterator;
 		}
-		else if (start.getData(startIterator) < end.getData(endIterator))
+		else if (start.getData(startIterator) > end.getData(endIterator))
 		{
 			if (currentNumOfVisitors == maxVisitors)
 			--currentNumOfVisitors;
