@@ -71,6 +71,9 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 		else if (start.getData(startIterator) > end.getData(endIterator))
 		{
 			if (currentNumOfVisitors == maxVisitors)
+			{
+				timeEnd = end.getData(endIterator);
+			}
 			--currentNumOfVisitors;
 			++endIterator;
 		}
@@ -83,7 +86,8 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 	int hourBeg = timeBeg / 60;
 	int minEnd = timeEnd % 60;
 	int hourEnd = timeEnd / 60;
-	cout << hourBeg << ":" << minBeg << " - " << hourEnd << ":" << minEnd << endl;
+	//cout << hourBeg << ":" << minBeg << " - " << hourEnd << ":" << minEnd << endl;
+	cout << hourBeg << " - " << hourBeg + 1 << endl;
 }
 
 bool readFromFile(string const & fileName, List & start, List & end)
