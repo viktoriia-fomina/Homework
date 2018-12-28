@@ -1,54 +1,44 @@
-#include "Problem.h"
+#include "List.h"
 #include <iostream>
-#include "Pair.h"
 #include <vector>
 
 using namespace std;
 
-void solution(vector<Pair> const & baseOfVisitors);
-
 void problemAboutVisitors()
 {
-	cout << "Input information about visitors: hourStart, minuteStart, hourFinish, minuteFinish" << endl;
-	cout << "When visitors are finished input -1" << endl;
-
-	int hourStart = 0;
-	int minuteStart = 0;
-	int hourFinish = 0;
-	int minuteFinish = 0;
-
-	Pair* visitor = nullptr;
-	vector<Pair> baseOfVisitors;
-
+	List start;
+	List end;
+	int hour = 0;
+	int minute = 0;
+	cout << "Input hourStart minuteStart hourFinish minuteFinish" << endl;
+	cout << "-1 to finish input" << endl;
 	while (true)
 	{
-		cin >> hourStart;
-		if (hourStart == -1)
+		cin >> hour;
+		if (hour == -1)
 		{
 			break;
 		}
-		visitor = new Pair;
-		visitor->hourStart = hourStart;
-		cin >> minuteStart;
-		visitor->minuteStart = minuteStart;
-		cin >> hourFinish;
-		visitor->hourFinish = hourFinish;
-		cin >> minuteFinish;
-		visitor->minuteFinish = minuteFinish;
-		baseOfVisitors.push_back(*visitor);
+		cin >> minute;
+		minute += hour * 60;
+		start.addElement(minute);
+		cin >> hour;
+		minute += hour * 60;
+		end.addElement(minute);
 	}
 }
 
-void solution(vector<Pair> const & baseOfVisitors)
+void calculateMax(List const & start, List const & end)
 {
-	int currentNumberOfVisitors = 0;
-	int hourBeg = 0;
-	int minuteBeg = 0;
-	int hourFin = 0;
-	int minuteFin = 0;
-	int maxNumberOfVisitors;
-	for (int i = 0; i < baseOfVisitors.size(); ++i)
+	int maxVisitors = 0;
+	int currentNumOfVisitors = 0;
+	int startIterator = 0;
+	int endIterator = 0;
+	while (startIterator != start.size() - 1 || endIterator != end.size() - 1)
 	{
+		if (start[startIterator] > end[endIterator])
+		{
 
+		}
 	}
 }
