@@ -1,9 +1,11 @@
 #include "Problem.h"
 #include <iostream>
-#include "DataBase.h"
 #include "Pair.h"
+#include <vector>
 
 using namespace std;
+
+void solution(vector<Pair> const & baseOfVisitors);
 
 void problemAboutVisitors()
 {
@@ -16,7 +18,7 @@ void problemAboutVisitors()
 	int minuteFinish = 0;
 
 	Pair* visitor = nullptr;
-	DataBase baseOfVisitors;
+	vector<Pair> baseOfVisitors;
 
 	while (true)
 	{
@@ -33,6 +35,20 @@ void problemAboutVisitors()
 		visitor->hourFinish = hourFinish;
 		cin >> minuteFinish;
 		visitor->minuteFinish = minuteFinish;
-		baseOfVisitors.addVisitior(*visitor);
+		baseOfVisitors.push_back(*visitor);
+	}
+}
+
+void solution(vector<Pair> const & baseOfVisitors)
+{
+	int currentNumberOfVisitors = 0;
+	int hourBeg = 0;
+	int minuteBeg = 0;
+	int hourFin = 0;
+	int minuteFin = 0;
+	int maxNumberOfVisitors;
+	for (int i = 0; i < baseOfVisitors.size(); ++i)
+	{
+
 	}
 }
