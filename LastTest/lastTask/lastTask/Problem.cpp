@@ -40,7 +40,7 @@ int calculateMax(List const & start, List const & end)
 	int currentNumOfVisitors = 0;
 	int startIterator = 0;
 	int endIterator = 0;
-	while (startIterator != start.size() || endIterator != end.size())
+	while (startIterator < start.size() || endIterator < end.size())
 	{
 		if (start.getData(startIterator) < end.getData(endIterator))
 		{
@@ -67,7 +67,7 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 	int endIterator = 0;
 	int timeBeg = 0;
 	int timeEnd = 0;
-	while (startIterator != start.size() || endIterator != end.size())
+	while (startIterator < start.size() || endIterator < end.size())
 	{
 		if (start.getData(startIterator) < end.getData(endIterator))
 		{
