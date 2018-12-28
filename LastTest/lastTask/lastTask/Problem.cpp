@@ -36,9 +36,19 @@ void calculateMax(List const & start, List const & end)
 	int endIterator = 0;
 	while (startIterator != start.size() - 1 || endIterator != end.size() - 1)
 	{
-		if (start[startIterator] > end[endIterator])
+		if (start.getData(startIterator) < start.getData(endIterator))
 		{
-
+			++currentNumOfVisitors;
+			if (currentNumOfVisitors > maxVisitors)
+			{
+				maxVisitors = currentNumOfVisitors;
+			}
+			++startIterator;
+		}
+		else if (start.getData(startIterator) < start.getData(endIterator))
+		{
+			--currentNumOfVisitors;
+			++endIterator;
 		}
 	}
 }
