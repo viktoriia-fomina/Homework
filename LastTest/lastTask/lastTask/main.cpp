@@ -15,8 +15,7 @@ using namespace std;
 int main()
 {
 	problemAboutVisitors();
-
 	
-
+	system("pause");
 	return 0;
 }

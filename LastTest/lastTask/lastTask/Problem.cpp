@@ -1,6 +1,7 @@
 #include "List.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -8,28 +9,15 @@ int calculateMax(List const & start, List const & end);
 
 void findMaxInter(List const & start, List const & end, int maxVisitors);
 
+bool readFromFile(string const & fileName, List & start, List & end);
+
 void problemAboutVisitors()
 {
 	List start;
 	List end;
-	int hour = 0;
-	int minute = 0;
-	cout << "Input hourStart minuteStart hourFinish minuteFinish" << endl;
-	cout << "-1 to finish input" << endl;
-	while (true)
+	if (!readFromFile("input.txt", start, end))
 	{
-		cin >> hour;
-		if (hour == -1)
-		{
-			break;
-		}
-		cin >> minute;
-		minute += hour * 60;
-		start.addElement(minute);
-		cin >> hour;
-		cin >> minute;
-		minute += hour * 60;
-		end.addElement(minute);
+		return;
 	}
 	findMaxInter(start, end, calculateMax(start, end));
 }
@@ -40,7 +28,7 @@ int calculateMax(List const & start, List const & end)
 	int currentNumOfVisitors = 0;
 	int startIterator = 0;
 	int endIterator = 0;
-	while (startIterator < start.size() || endIterator < end.size())
+	while (startIterator < start.size() && endIterator < end.size())
 	{
 		if (start.getData(startIterator) < end.getData(endIterator))
 		{
@@ -67,7 +55,7 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 	int endIterator = 0;
 	int timeBeg = 0;
 	int timeEnd = 0;
-	while (startIterator < start.size() || endIterator < end.size())
+	while (startIterator < start.size() && endIterator < end.size())
 	{
 		if (start.getData(startIterator) < end.getData(endIterator))
 		{
@@ -95,4 +83,34 @@ void findMaxInter(List const & start, List const & end, int maxVisitors)
 	int minEnd = timeEnd % 60;
 	int hourEnd = timeEnd / 60;
 	cout << hourBeg << ":" << minBeg << " - " << hourEnd << ":" << minEnd << endl;
+}
+
+bool readFromFile(string const & fileName, List & start, List & end)
+{
+	ifstream file;
+	file.open(fileName);
+	if (!file.is_open())
+	{
+		cout << "File not found" << endl;
+		return false;
+	}
+	int hour = 0;
+	int minute = 0;
+	while (!file.eof())
+	{
+		file >> hour;
+		if (hour == -1)
+		{
+			break;
+		}
+		file >> minute;
+		minute += hour * 60;
+		start.addElement(minute);
+		file >> hour;
+		file >> minute;
+		minute += hour * 60;
+		end.addElement(minute);
+	}
+	file.close();
+	return true;
 }
